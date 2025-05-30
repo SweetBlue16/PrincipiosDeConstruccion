@@ -1,7 +1,6 @@
 package practicasprofesionaleslis.utilidades;
 
 import java.io.IOException;
-import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,18 +10,30 @@ import javafx.scene.control.Control;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 
-public class UtilidadesVentanas {
-    public static Optional<ButtonType> mostrarAlertaSimple(Alert.AlertType tipo,
+public class VentanasUtils {
+    public static void mostrarAlertaSimple(Alert.AlertType tipo,
             String titulo, String contenido) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(contenido);
-        return alerta.showAndWait();
+        alerta.showAndWait();
+    }
+    
+    public static boolean mostrarAlertaConfirmacion(String titulo, String contenido) {
+        Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacion.setTitle(titulo);
+        alertaConfirmacion.setHeaderText(null);
+        alertaConfirmacion.setContentText(contenido);
+        return alertaConfirmacion.showAndWait().get() == ButtonType.OK;
     }
     
     public static Stage obtenerEscenarioComponente(Control componente) {
         return (Stage) componente.getScene().getWindow();
+    }
+    
+    public static void cerrarVentana(Control componente) {
+        ((Stage) componente.getScene().getWindow()).close();
     }
     
     public static void irInicioSesion(Control componente) {
@@ -32,17 +43,15 @@ public class UtilidadesVentanas {
             Scene escenaPrincipal = new Scene(vista);
             
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("INICIO DE SESIÓN");
+            escenarioBase.setTitle(ConstantesUtils.TITULO_INICIO_SESION);
             escenarioBase.show();
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error: " + e.getMessage());
+            mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
         }
-    }
-    
-    public static void cerrarVentana(Control componente) {
-        ((Stage) componente.getScene().getWindow()).close();
     }
 }

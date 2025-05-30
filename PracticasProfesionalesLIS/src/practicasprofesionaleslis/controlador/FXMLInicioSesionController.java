@@ -22,8 +22,9 @@ import practicasprofesionaleslis.modelo.pojo.Coordinador;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Evaluador;
 import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
-import practicasprofesionaleslis.utilidades.UtilidadesVentanas;
-import practicasprofesionaleslis.utilidades.ValidadorID;
+import practicasprofesionaleslis.utilidades.VentanasUtils;
+import practicasprofesionaleslis.utilidades.ConstantesUtils;
+import practicasprofesionaleslis.utilidades.ValidacionUtils;
 
 public class FXMLInicioSesionController implements Initializable {
     @FXML
@@ -55,9 +56,9 @@ public class FXMLInicioSesionController implements Initializable {
                 case 2: validarCredencialesCoordinador(usuario, contraseña); break;
                 case 3: validarCredencialesProfesorEE(usuario, contraseña); break;
                 case 4: validarCredencialesEvaluador(usuario, contraseña); break;
-                default: UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "FORMATO DE USUARIO NO VÁLIDO",
-                        "El formato del ID de usuario no es válido.");
+                default: VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_ADVERTENCIA,
+                        ConstantesUtils.ALERTA_FORMATO_USUARIO_INVALIDO);
             }
         }
     }
@@ -68,11 +69,11 @@ public class FXMLInicioSesionController implements Initializable {
         lblErrorPassword.setText("");
         
         if (usuario.isEmpty()) {
-            lblErrorUsuario.setText("Usuario obligatorio");
+            lblErrorUsuario.setText(ConstantesUtils.ALERTA_USUARIO_OBLIGATORIO);
             camposValidos = false;
         }
         if (contraseña.isEmpty()) {
-            lblErrorPassword.setText("Contraseña obligatoria");
+            lblErrorPassword.setText(ConstantesUtils.ALERTA_CONTRASEÑA_OBLIGATORIA);
             camposValidos = false;
         }
         return camposValidos;
@@ -80,32 +81,27 @@ public class FXMLInicioSesionController implements Initializable {
     
     private boolean validarFormatoID(String usuario, int tipoUsuario) {
         boolean formatoValido = false;
-        String mensajeError = "";
         
         switch (tipoUsuario) {
             case 1:
-                formatoValido = ValidadorID.validarIDEstudiante(usuario);
-                mensajeError = "Formato de matrícula del estudiante inválido.";
+                formatoValido = ValidacionUtils.validarIDEstudiante(usuario);
                 break;
             case 2:
-                formatoValido = ValidadorID.validarIDCoordinador(usuario);
-                mensajeError = "Formato de número de personal del coordinador inválido.";
+                formatoValido = ValidacionUtils.validarIDCoordinador(usuario);
                 break;
             case 3:
-                formatoValido = ValidadorID.validarIDProfesor(usuario);
-                mensajeError = "Formato de número de personal del profesor inválido.";
+                formatoValido = ValidacionUtils.validarIDProfesor(usuario);
                 break;
             case 4: 
-                formatoValido = ValidadorID.validarIDEvaluador(usuario);
-                mensajeError = "Formato de número de personal del evaluador inválido.";
+                formatoValido = ValidacionUtils.validarIDEvaluador(usuario);
                 break;
-            default: mensajeError = "Formato de usuario no reconocido.";
+            default: formatoValido = false;
         }
         
         if (!formatoValido) {
-            UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                    "FORMATO INCORRECTO",
-                    mensajeError);
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ADVERTENCIA,
+                    ConstantesUtils.ALERTA_FORMATO_USUARIO_INVALIDO);
         }
         return formatoValido;
     }
@@ -130,20 +126,23 @@ public class FXMLInicioSesionController implements Initializable {
             Estudiante estudiante = InicioSesionDAO.verificarCredencialesEstudiante(usuario, contraseña);
             
             if (estudiante != null) {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
-                        "CREDENCIALES CORRECTAS",
-                        "Bienvenido(a) " + estudiante.toString() + " al sistema.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
+                        ConstantesUtils.TITULO_EXITO,
+                        "Bienvenido(a) " + estudiante.toString() + " al sistema."
+                );
                 String nombreProyecto = ExpedienteDAO.obtenerNombreProyectoPorMatricula(estudiante.getMatricula());
                 irPantallaPrincipalEstudiante(estudiante, nombreProyecto);
             } else {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "CREDENCIALES INCORRECTAS",
-                        "Usuario y/o contraseña incorrectos. Por favor, verifique las credenciales.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_ADVERTENCIA,
+                        ConstantesUtils.ALERTA_CREDENCIALES_INVALIDAS
+                );
             }
         } catch (SQLException e) {
-            UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    "ERROR",
-                    e.getMessage());
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );
         }
     }
     
@@ -152,19 +151,22 @@ public class FXMLInicioSesionController implements Initializable {
             Coordinador coordinador = InicioSesionDAO.verificarCredencialesCoordinador(usuario, contraseña);
             
             if (coordinador != null) {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
-                        "CREDENCIALES CORRECTAS",
-                        "Bienvenido(a) " + coordinador.toString() + " al sistema.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
+                        ConstantesUtils.TITULO_EXITO,
+                        "Bienvenido(a) " + coordinador.toString() + " al sistema."
+                );
                 irPantallaPrincipalCoordinador(coordinador);
             } else {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "CREDENCIALES INCORRECTAS",
-                        "Usuario y/o contraseña incorrectos. Por favor, verifique las credenciales.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_ADVERTENCIA,
+                        ConstantesUtils.ALERTA_CREDENCIALES_INVALIDAS
+                );
             }
         } catch (SQLException e) {
-            UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    "ERROR",
-                    e.getMessage());
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );
         }
     }
     
@@ -173,19 +175,22 @@ public class FXMLInicioSesionController implements Initializable {
             ProfesorEE profesorEE = InicioSesionDAO.verificarCredencialesProfesorEE(usuario, contraseña);
             
             if (profesorEE != null) {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
-                        "CREDENCIALES CORRECTAS",
-                        "Bienvenido(a) " + profesorEE.toString() + " al sistema.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
+                        ConstantesUtils.TITULO_EXITO,
+                        "Bienvenido(a) " + profesorEE.toString() + " al sistema."
+                );
                 irPantallaPrincipalProfesorEE(profesorEE);
             } else {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "CREDENCIALES INCORRECTAS",
-                        "Usuario y/o contraseña incorrectos. Por favor, verifique las credenciales.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_ADVERTENCIA,
+                        ConstantesUtils.ALERTA_CREDENCIALES_INVALIDAS
+                );
             }
         } catch (SQLException e) {
-            UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    "ERROR",
-                    e.getMessage());
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );
         }
     }
     
@@ -194,19 +199,22 @@ public class FXMLInicioSesionController implements Initializable {
             Evaluador evaluador = InicioSesionDAO.verificarCredencialesEvaluador(usuario, contraseña);
             
             if (evaluador != null) {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
-                        "CREDENCIALES CORRECTAS",
-                        "Bienvenido(a) " + evaluador.toString() + " al sistema.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
+                        ConstantesUtils.TITULO_EXITO,
+                        "Bienvenido(a) " + evaluador.toString() + " al sistema."
+                );
                 irPantallaPrincipalEvaluador(evaluador);
             } else {
-                UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "CREDENCIALES INCORRECTAS",
-                        "Usuario y/o contraseña incorrectos. Por favor, verifique las credenciales.");
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_ADVERTENCIA,
+                        ConstantesUtils.ALERTA_CREDENCIALES_INVALIDAS
+                );
             }
         } catch (SQLException e) {
-            UtilidadesVentanas.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    "ERROR",
-                    e.getMessage());
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );
         }
     }
     
@@ -220,13 +228,16 @@ public class FXMLInicioSesionController implements Initializable {
             
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("PANTALLA PRINCIPAL - ESTUDIANTE");
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PANTALLA_PRINCIPAL);
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
             escenarioBase.showAndWait();
         } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
         }
     }
     
@@ -240,13 +251,16 @@ public class FXMLInicioSesionController implements Initializable {
             
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("PANTALLA PRINCIPAL - COORDINADOR");
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PANTALLA_PRINCIPAL);
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
             escenarioBase.showAndWait();
         } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
         }
     }
     
@@ -260,13 +274,16 @@ public class FXMLInicioSesionController implements Initializable {
             
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("PANTALLA PRINCIPAL - PROFESOR EE");
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PANTALLA_PRINCIPAL);
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
             escenarioBase.showAndWait();
         } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
         }
     }
     
@@ -280,13 +297,16 @@ public class FXMLInicioSesionController implements Initializable {
             
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("PANTALLA PRINCIPAL - EVALUADOR");
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PANTALLA_PRINCIPAL);
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
             escenarioBase.showAndWait();
         } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
         }
     }
 }

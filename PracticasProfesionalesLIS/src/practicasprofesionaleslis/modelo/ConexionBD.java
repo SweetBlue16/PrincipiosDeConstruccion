@@ -23,9 +23,9 @@ public class ConexionBD {
             Class.forName(DRIVER);
             conexionBD = DriverManager.getConnection(url, USUARIO, PASSWORD);
         } catch (ClassNotFoundException e) {
-            System.err.println("Error ClassNotFound: " + e.getMessage());
+            e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println("Error de conexión: " + e.getMessage());
+            e.printStackTrace();
         }
         return conexionBD;
     }

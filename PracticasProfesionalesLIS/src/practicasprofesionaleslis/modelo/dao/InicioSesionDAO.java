@@ -9,6 +9,7 @@ import practicasprofesionaleslis.modelo.pojo.Coordinador;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Evaluador;
 import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
+import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class InicioSesionDAO {
 
@@ -37,10 +38,12 @@ public class InicioSesionDAO {
                 estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
                 estudiante.setSemestre(resultado.getInt("semestre"));
             }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
         } else {
-                throw new SQLException("Su solicitud no puede ser procesada en este momento. Intente más tarde.");
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
         }
-        
         return estudiante;
     }
     
@@ -68,10 +71,12 @@ public class InicioSesionDAO {
                         resultado.getString("apellidoMaterno") : "");
                 coordinador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
             }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
         } else {
-                throw new SQLException("Su solicitud no puede ser procesada en este momento. Intente más tarde.");
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
         }
-        
         return coordinador;
     }
     
@@ -99,10 +104,12 @@ public class InicioSesionDAO {
                         resultado.getString("apellidoMaterno") : "");
                 profesorEE.setCorreoInstitucional(resultado.getString("correoInstitucional"));
             }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
         } else {
-                throw new SQLException("Su solicitud no puede ser procesada en este momento. Intente más tarde.");
+             throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
         }
-        
         return profesorEE;
     }
     
@@ -130,10 +137,12 @@ public class InicioSesionDAO {
                         resultado.getString("apellidoMaterno") : "");
                 evaluador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
             }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
         } else {
-                throw new SQLException("Su solicitud no puede ser procesada en este momento. Intente más tarde.");
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
         }
-        
         return evaluador;
     }
 }

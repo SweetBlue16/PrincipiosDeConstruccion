@@ -2,7 +2,7 @@ package practicasprofesionaleslis.utilidades;
 
 import java.util.regex.Pattern;
 
-public class ValidadorID {
+public class ValidacionUtils {
     private static final String REGEX_ESTUDIANTE = "^S\\d{8}$";
     private static final String REGEX_COORDINADOR = "^C\\d{3}$";
     private static final String REGEX_PROFESOR = "^P\\d{3}$";

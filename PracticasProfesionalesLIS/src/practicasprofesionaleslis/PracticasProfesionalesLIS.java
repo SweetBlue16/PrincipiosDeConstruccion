@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class PracticasProfesionalesLIS extends Application {
     
@@ -16,13 +17,12 @@ public class PracticasProfesionalesLIS extends Application {
             Scene escenaInicioSesion = new Scene(vista);
             
             primaryStage.setScene(escenaInicioSesion);
-            primaryStage.setTitle("INICIO DE SESIÓN");
+            primaryStage.setTitle(ConstantesUtils.TITULO_INICIO_SESION);
             primaryStage.show();
             primaryStage.setResizable(false);
             primaryStage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error: " + e.getMessage());
         }
     }
 

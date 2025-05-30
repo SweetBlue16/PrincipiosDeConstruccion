@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import practicasprofesionaleslis.modelo.ConexionBD;
-import practicasprofesionaleslis.modelo.pojo.Proyecto;
+import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class ExpedienteDAO {
     
@@ -26,10 +26,12 @@ public class ExpedienteDAO {
             if (resultado.next()) {
                 nombreProyecto = resultado.getString("nombre");
             }
+            conexionBD.close();
+            sentencia.close();
+            resultado.close();
         } else {
-            throw new SQLException("Su solicitud no puede ser procesada en este momento. Intente más tarde.");
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
         }
-        
         return nombreProyecto;
     }
 }
