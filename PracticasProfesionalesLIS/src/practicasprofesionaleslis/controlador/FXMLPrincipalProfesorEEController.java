@@ -1,12 +1,15 @@
 package practicasprofesionaleslis.controlador;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
@@ -30,6 +33,24 @@ public class FXMLPrincipalProfesorEEController implements Initializable {
         if (profesorEE != null) {
             lblNombreProfesorEE.setText(profesorEE.toString());
             lblCorreoElectronico.setText(profesorEE.getCorreoInstitucional());
+            mostrarFotoPerfilProfesorEE(profesorEE);
+        }
+    }
+    
+    private void mostrarFotoPerfilProfesorEE(ProfesorEE profesorEE) {
+        Image imagen = null;
+        try {
+            byte[] foto = profesorEE.getFotoPerfil();
+            if (foto != null) {
+                ByteArrayInputStream input = new ByteArrayInputStream(foto);
+                imagen = new Image(input);
+            } else {
+                String ruta = "/practicasprofesionaleslis/fotoPerfilDefault.png";
+                imagen = new Image(PracticasProfesionalesLIS.class.getResourceAsStream(ruta));
+            }
+            imgFotoPerfil.setImage(imagen);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 

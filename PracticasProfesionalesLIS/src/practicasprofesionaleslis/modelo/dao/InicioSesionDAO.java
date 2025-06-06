@@ -24,7 +24,7 @@ public class InicioSesionDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "SELECT id, matricula, nombre, apellidoPaterno, "
-                        + "apellidoMaterno, correoInstitucional, semestre "
+                        + "apellidoMaterno, correoInstitucional, semestre, fotoPerfil "
                         + "FROM estudiante "
                         + "WHERE matricula = ? AND contrasena = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
@@ -42,6 +42,7 @@ public class InicioSesionDAO {
                             resultado.getString("apellidoMaterno") : "");
                     estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
                     estudiante.setSemestre(resultado.getInt("semestre"));
+                    estudiante.setFotoPerfil(resultado.getBytes("fotoPerfil"));
                 }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
@@ -62,7 +63,7 @@ public class InicioSesionDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "SELECT id, numeroPersonal, nombre, apellidoPaterno, "
-                        + "apellidoMaterno, correoInstitucional "
+                        + "apellidoMaterno, correoInstitucional, fotoPerfil "
                         + "FROM coordinador "
                         + "WHERE numeroPersonal = ? AND contrasena = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
@@ -79,6 +80,7 @@ public class InicioSesionDAO {
                     coordinador.setApellidoMaterno((resultado.getString("apellidoMaterno") != null) ?
                             resultado.getString("apellidoMaterno") : "");
                     coordinador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    coordinador.setFotoPerfil(resultado.getBytes("fotoPerfil"));
                 }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
@@ -99,7 +101,7 @@ public class InicioSesionDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "SELECT id, numeroPersonal, nombre, apellidoPaterno, "
-                        + "apellidoMaterno, correoInstitucional "
+                        + "apellidoMaterno, correoInstitucional, fotoPerfil "
                         + "FROM profesoree "
                         + "WHERE numeroPersonal = ? AND contrasena = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
@@ -116,6 +118,7 @@ public class InicioSesionDAO {
                     profesorEE.setApellidoMaterno((resultado.getString("apellidoMaterno") != null) ?
                             resultado.getString("apellidoMaterno") : "");
                     profesorEE.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    profesorEE.setFotoPerfil(resultado.getBytes("fotoPerfil"));
                 }
             } else {
                  throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
@@ -136,7 +139,7 @@ public class InicioSesionDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "SELECT id, numeroPersonal, nombre, apellidoPaterno, "
-                        + "apellidoMaterno, correoInstitucional "
+                        + "apellidoMaterno, correoInstitucional, fotoPerfil "
                         + "FROM evaluador "
                         + "WHERE numeroPersonal = ? AND contrasena = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
@@ -153,6 +156,7 @@ public class InicioSesionDAO {
                     evaluador.setApellidoMaterno((resultado.getString("apellidoMaterno") != null) ?
                             resultado.getString("apellidoMaterno") : "");
                     evaluador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    evaluador.setFotoPerfil(resultado.getBytes("fotoPerfil"));
                 }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);

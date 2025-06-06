@@ -19,7 +19,7 @@
       </Label>
       <ImageView fx:id="imgFotoPerfil" fitHeight="134.0" fitWidth="143.0" layoutX="29.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../recursos/oshawott.jpeg" />
+            <Image url="@../recursos/fotoPerfilDefault.png" />
          </image>
       </ImageView>
       <Label fx:id="lblNombreCoordinador" layoutX="191.0" layoutY="90.0" prefHeight="33.0" prefWidth="450.0" text="Ángel Juan Sánchez García">

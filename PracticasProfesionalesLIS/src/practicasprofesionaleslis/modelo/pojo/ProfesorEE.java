@@ -8,11 +8,12 @@ public class ProfesorEE {
     private String apellidoMaterno;
     private String correoInstitucional;
     private String contraseña;
+    private byte[] fotoPerfil;
 
     public ProfesorEE() {
     }
 
-    public ProfesorEE(int id, String numeroPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña) {
+    public ProfesorEE(int id, String numeroPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña, byte[] fotoPerfil) {
         this.id = id;
         this.numeroPersonal = numeroPersonal;
         this.nombre = nombre;
@@ -20,6 +21,7 @@ public class ProfesorEE {
         this.apellidoMaterno = apellidoMaterno;
         this.correoInstitucional = correoInstitucional;
         this.contraseña = contraseña;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public int getId() {
@@ -76,6 +78,14 @@ public class ProfesorEE {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public byte[] getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(byte[] fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     @Override

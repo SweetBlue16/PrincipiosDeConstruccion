@@ -9,11 +9,12 @@ public class Estudiante {
     private String correoInstitucional;
     private String contraseña;
     private int semestre;
+    private byte[] fotoPerfil;
 
     public Estudiante() {
     }
 
-    public Estudiante(int id, String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña, int semestre) {
+    public Estudiante(int id, String matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña, int semestre, byte[] fotoPerfil) {
         this.id = id;
         this.matricula = matricula;
         this.nombre = nombre;
@@ -22,6 +23,7 @@ public class Estudiante {
         this.correoInstitucional = correoInstitucional;
         this.contraseña = contraseña;
         this.semestre = semestre;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public int getId() {
@@ -86,6 +88,14 @@ public class Estudiante {
 
     public void setSemestre(int semestre) {
         this.semestre = semestre;
+    }
+
+    public byte[] getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(byte[] fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     @Override

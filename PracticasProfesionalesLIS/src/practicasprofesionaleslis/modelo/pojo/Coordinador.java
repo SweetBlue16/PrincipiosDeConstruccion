@@ -8,11 +8,12 @@ public class Coordinador {
     private String apellidoMaterno;
     private String correoInstitucional;
     private String contraseña;
+    private byte[] fotoPerfil;
 
     public Coordinador() {
     }
 
-    public Coordinador(int id, String numeroPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña) {
+    public Coordinador(int id, String numeroPersonal, String nombre, String apellidoPaterno, String apellidoMaterno, String correoInstitucional, String contraseña, byte[] fotoPerfil) {
         this.id = id;
         this.numeroPersonal = numeroPersonal;
         this.nombre = nombre;
@@ -20,6 +21,7 @@ public class Coordinador {
         this.apellidoMaterno = apellidoMaterno;
         this.correoInstitucional = correoInstitucional;
         this.contraseña = contraseña;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public int getId() {
@@ -78,10 +80,16 @@ public class Coordinador {
         this.contraseña = contraseña;
     }
 
+    public byte[] getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(byte[] fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
     @Override
     public String toString() {
         return String.format("%s %s %s", nombre, apellidoPaterno, apellidoMaterno);
     }
-    
-    
 }

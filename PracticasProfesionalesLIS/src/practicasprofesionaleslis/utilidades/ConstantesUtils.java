@@ -17,6 +17,7 @@ public class ConstantesUtils {
     public static final String ALERTA_FORMATO_USUARIO_INVALIDO = "El formato de la matrícula o número de personal ingresado no es válido. Por favor, verifique.";
     public static final String ALERTA_ERROR_CARGAR_VENTANA = "No se pudo cargar la ventana, intente más tarde.";
     public static final String ALERTA_ERROR_CARGAR_INFORMACION = "No se pudo cargar la información, intente más tarde.";
+    public static final String ALERTA_ERROR_CARGAR_IMAGEN = "No se pudo cargar la imagen, intente más tarde.";
     public static final String ALERTA_REGISTRO_EXITOSO = "Registro guardado con éxito.";
     public static final String ALERTA_REGISTRO_FALLIDO = "Error al guardar el registro. Intente más tarde.";
     public static final String ALERTA_ACTUALIZACION_EXITOSA = "Registro actualizado con éxito.";
