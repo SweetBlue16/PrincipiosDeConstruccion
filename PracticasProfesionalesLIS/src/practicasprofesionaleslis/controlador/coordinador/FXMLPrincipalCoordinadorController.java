@@ -6,12 +6,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.modelo.pojo.Coordinador;
-import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
@@ -45,12 +45,16 @@ public class FXMLPrincipalCoordinadorController implements Initializable {
                 ByteArrayInputStream input = new ByteArrayInputStream(foto);
                 imagen = new Image(input);
             } else {
-                String ruta = "/practicasprofesionaleslis/fotoPerfilDefault.png";
+                String ruta = "/practicasprofesionaleslis/recursos/fotoPerfilDefault.png";
                 imagen = new Image(PracticasProfesionalesLIS.class.getResourceAsStream(ruta));
             }
             imgFotoPerfil.setImage(imagen);
         } catch (NullPointerException e) {
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_IMAGEN
+            );
         }
     }
 

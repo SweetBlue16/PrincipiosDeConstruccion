@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.FXMLPrincipalEvaluadorController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.evaluador.FXMLPrincipalEvaluadorController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="62.0" stroke="#18529d" strokeType="INSIDE" width="1280.0" />
       <Label fx:id="lblCorreoInstitucional" layoutX="190.0" layoutY="140.0" text="lizhernandez@uv.mx">

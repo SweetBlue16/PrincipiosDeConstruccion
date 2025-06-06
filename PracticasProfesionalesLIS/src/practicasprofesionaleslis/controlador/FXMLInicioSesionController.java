@@ -225,7 +225,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void irPantallaPrincipalEstudiante(Estudiante estudiante, String nombreProyecto) {
         try {
             Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLPrincipalEstudiante.fxml"));
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/estudiante/FXMLPrincipalEstudiante.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalEstudianteController controlador = cargador.getController();
             controlador.inicializarDatosEstudiante(estudiante, nombreProyecto);
@@ -248,7 +248,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void irPantallaPrincipalCoordinador(Coordinador coordinador) {
         try {
             Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLPrincipalCoordinador.fxml"));
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/coordinador/FXMLPrincipalCoordinador.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalCoordinadorController controlador = cargador.getController();
             controlador.inicializarDatosCoordinador(coordinador);
@@ -271,7 +271,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void irPantallaPrincipalProfesorEE(ProfesorEE profesorEE) {
         try {
             Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLPrincipalProfesorEE.fxml"));
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/profesoree/FXMLPrincipalProfesorEE.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalProfesorEEController controlador = cargador.getController();
             controlador.inicializarDatosProfesorEE(profesorEE);
@@ -294,7 +294,7 @@ public class FXMLInicioSesionController implements Initializable {
     private void irPantallaPrincipalEvaluador(Evaluador evaluador) {
         try {
             Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLPrincipalEvaluador.fxml"));
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/evaluador/FXMLPrincipalEvaluador.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalEvaluadorController controlador = cargador.getController();
             controlador.inicializarDatosEvaluador(evaluador);
