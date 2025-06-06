@@ -3,22 +3,25 @@ package practicasprofesionaleslis.modelo.pojo;
 import java.time.LocalDate;
 
 public class DocumentoInicial extends Entregable {
-    private String tipoDocumentoInicial;
+    
+    public enum TipoDocumentoInicial { CARTA_ACEPTACION, CONSTANCIA_SEGURO, CRONOGRAMA, HORARIO, OFICIO_ASIGNACION }
+    
+    private TipoDocumentoInicial tipoDocumentoInicial;
 
     public DocumentoInicial() {
     }
 
     public DocumentoInicial(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
-                          String tipoDocumentoInicial, int puntajeObtenido, String comentario) {
+                          TipoDocumentoInicial tipoDocumentoInicial, int puntajeObtenido, String comentario) {
         super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario);
         this.tipoDocumentoInicial = tipoDocumentoInicial;
     }
 
-    public String getTipoDocumentoInicial() {
+    public TipoDocumentoInicial getTipoDocumentoInicial() {
         return tipoDocumentoInicial;
     }
 
-    public void setTipoDocumentoInicial(String tipoDocumentoInicial) {
+    public void setTipoDocumentoInicial(TipoDocumentoInicial tipoDocumentoInicial) {
         this.tipoDocumentoInicial = tipoDocumentoInicial;
     }
 }

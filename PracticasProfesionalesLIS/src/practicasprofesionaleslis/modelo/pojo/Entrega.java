@@ -19,7 +19,6 @@ public abstract class Entrega {
         this.puntaje = puntaje;
     }
 
-    // Getters y Setters comunes
     public int getId() {
         return id;
     }

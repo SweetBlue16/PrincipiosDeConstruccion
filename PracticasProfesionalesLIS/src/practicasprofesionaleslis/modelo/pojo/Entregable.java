@@ -21,7 +21,6 @@ public abstract class Entregable {
         this.comentario = comentario;
     }
 
-    // Getters y Setters comunes
     public String getNombreArchivo() {
         return nombreArchivo;
     }

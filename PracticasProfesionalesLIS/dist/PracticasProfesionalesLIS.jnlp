@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PracticasProfesionalesLIS.jar" size="200537" download="eager" />
+    <jar href="PracticasProfesionalesLIS.jar" size="203381" download="eager" />
     <jar href="lib\jakarta.jakartaee-api-8.0.0.jar" size="1973406" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.20.jar" size="2385601" download="eager" />
   </resources>

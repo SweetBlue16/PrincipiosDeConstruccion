@@ -3,23 +3,25 @@ package practicasprofesionaleslis.modelo.pojo;
 import java.time.LocalDate;
 
 public class DocumentoIntermedio extends Entregable {
-    private String tipoDocumentoIntermedio;
-
+    
+    public enum TipoDocumentoIntermedio { REPORTE_PARCIAL, PRESENTACION_210_HORAS, EVALUACION_PARCIAL_OV }
+    
+    private TipoDocumentoIntermedio tipoDocumentoIntermedio;
 
     public DocumentoIntermedio() {
     }
 
     public DocumentoIntermedio(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
-                             String tipoDocumentoIntermedio, int puntajeObtenido, String comentario) {
+                             TipoDocumentoIntermedio tipoDocumentoIntermedio, int puntajeObtenido, String comentario) {
         super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario);
         this.tipoDocumentoIntermedio = tipoDocumentoIntermedio;
     }
 
-    public String getTipoDocumentoIntermedio() {
+    public TipoDocumentoIntermedio getTipoDocumentoIntermedio() {
         return tipoDocumentoIntermedio;
     }
 
-    public void setTipoDocumentoIntermedio(String tipoDocumentoIntermedio) {
+    public void setTipoDocumentoIntermedio(TipoDocumentoIntermedio tipoDocumentoIntermedio) {
         this.tipoDocumentoIntermedio = tipoDocumentoIntermedio;
     }
 }
