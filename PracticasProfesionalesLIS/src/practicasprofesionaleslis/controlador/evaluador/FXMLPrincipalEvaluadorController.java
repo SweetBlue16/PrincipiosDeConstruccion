@@ -1,4 +1,4 @@
-package practicasprofesionaleslis.controlador;
+package practicasprofesionaleslis.controlador.evaluador;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
@@ -10,39 +10,36 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
-import practicasprofesionaleslis.modelo.pojo.Estudiante;
+import practicasprofesionaleslis.modelo.pojo.Evaluador;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
-public class FXMLPrincipalEstudianteController implements Initializable {
-    private Estudiante estudiante;
-    
+public class FXMLPrincipalEvaluadorController implements Initializable {
+    private Evaluador evaluador;
+
+    @FXML
+    private Label lblCorreoInstitucional;
+    @FXML
+    private Label lblNombreEvaluador;
     @FXML
     private ImageView imgFotoPerfil;
-    @FXML
-    private Label lblNombreEstudiante;
-    @FXML
-    private Label lblMatricula;
-    @FXML
-    private Label lblProyecto;
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {} 
     
-    public void inicializarDatosEstudiante(Estudiante estudiante, String nombreProyecto) {
-        this.estudiante = estudiante;
-        if (estudiante != null && !nombreProyecto.isEmpty()) {
-            lblNombreEstudiante.setText(estudiante.toString());
-            lblMatricula.setText(estudiante.getMatricula());
-            lblProyecto.setText(nombreProyecto);
-            mostrarFotoPerfilEstudiante(estudiante);
+    public void inicializarDatosEvaluador(Evaluador evaluador) {
+        this.evaluador = evaluador;
+        if (evaluador != null) {
+            lblNombreEvaluador.setText(evaluador.toString());
+            lblCorreoInstitucional.setText(evaluador.getCorreoInstitucional());
+            mostrarFotoPerfilEvaluador(evaluador);
         }
     }
     
-    private void mostrarFotoPerfilEstudiante(Estudiante estudiante) {
+    private void mostrarFotoPerfilEvaluador(Evaluador evaluador) {
         Image imagen = null;
         try {
-            byte[] foto = estudiante.getFotoPerfil();
+            byte[] foto = evaluador.getFotoPerfil();
             if (foto != null) {
                 ByteArrayInputStream input = new ByteArrayInputStream(foto);
                 imagen = new Image(input);
@@ -61,23 +58,11 @@ public class FXMLPrincipalEstudianteController implements Initializable {
         String titulo = ConstantesUtils.TITULO_CIERRE_SESION;
         String contenido = ConstantesUtils.ALERTA_CERRAR_SESION;
         if (VentanasUtils.mostrarAlertaConfirmacion(titulo, contenido)) {
-            VentanasUtils.irInicioSesion(lblNombreEstudiante);
+            VentanasUtils.irInicioSesion(lblNombreEvaluador);
         }
     }
 
     @FXML
-    private void clicBtnConsultarAvance(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnActualizarExpediente(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnEvaluarOrganizacionVinculada(ActionEvent event) {
-    }
-
-    @FXML
-    private void clicBtnGenerarFormatoEvaluacion(ActionEvent event) {
+    private void clicBtnEvaluarPresentacionEstudiante(ActionEvent event) {
     }
 }

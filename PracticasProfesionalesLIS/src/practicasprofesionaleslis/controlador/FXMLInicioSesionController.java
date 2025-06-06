@@ -1,5 +1,9 @@
 package practicasprofesionaleslis.controlador;
 
+import practicasprofesionaleslis.controlador.profesoree.FXMLPrincipalProfesorEEController;
+import practicasprofesionaleslis.controlador.evaluador.FXMLPrincipalEvaluadorController;
+import practicasprofesionaleslis.controlador.estudiante.FXMLPrincipalEstudianteController;
+import practicasprofesionaleslis.controlador.coordinador.FXMLPrincipalCoordinadorController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
