@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 
 public class VentanasUtils {
-    public static void mostrarAlertaSimple(Alert.AlertType tipo,
-            String titulo, String contenido) {
+    public static void mostrarAlertaSimple(Alert.AlertType tipo, String titulo, String contenido) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
