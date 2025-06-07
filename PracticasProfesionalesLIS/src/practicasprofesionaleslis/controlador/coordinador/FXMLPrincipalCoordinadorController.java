@@ -102,5 +102,9 @@ public class FXMLPrincipalCoordinadorController implements Initializable {
     @FXML
     private void clicBtnProgramarEntregasPracticas(ActionEvent event) {
     }
-    
+
+    @FXML
+    private void clicBtnMiPerfil(ActionEvent event) {
+        VentanasUtils.irMiPerfil(lblNombreCoordinador, this.coordinador);
+    }
 }

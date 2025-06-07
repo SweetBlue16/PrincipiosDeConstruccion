@@ -70,4 +70,9 @@ public class FXMLPrincipalEvaluadorController implements Initializable {
     @FXML
     private void clicBtnEvaluarPresentacionEstudiante(ActionEvent event) {
     }
+
+    @FXML
+    private void clicBtnMiPerfil(ActionEvent event) {
+        VentanasUtils.irMiPerfil(lblNombreEvaluador, this.evaluador);
+    }
 }

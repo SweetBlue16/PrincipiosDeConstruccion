@@ -75,5 +75,9 @@ public class FXMLPrincipalProfesorEEController implements Initializable {
     @FXML
     private void clicBtnValidarEntregaDocumentos(ActionEvent event) {
     }
-    
+
+    @FXML
+    private void clicBtnMiPerfil(ActionEvent event) {
+        VentanasUtils.irMiPerfil(lblNombreProfesorEE, this.profesorEE);
+    }
 }

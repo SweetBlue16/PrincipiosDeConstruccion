@@ -11,6 +11,7 @@ public class ConstantesUtils {
     public static final String TITULO_PANTALLA_PRINCIPAL = "MENÚ PRINCIPAL";
     public static final String TITULO_INICIO_SESION = "INICIO DE SESIÓN";
     public static final String TITULO_CIERRE_SESION = "CERRAR SESIÓN";
+    public static final String TITULO_PERFIL = "MI PERFIL";
     
     public static final String ALERTA_ERROR_BD = "Su solicitud no puede ser procesada en este momento. Intente más tarde.";
     public static final String ALERTA_DATOS_INVALIDOS = "Los datos ingresados no son válidos. Por favor, verifique.";

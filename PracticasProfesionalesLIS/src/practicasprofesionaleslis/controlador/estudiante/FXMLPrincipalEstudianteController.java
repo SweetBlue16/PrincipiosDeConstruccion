@@ -85,4 +85,9 @@ public class FXMLPrincipalEstudianteController implements Initializable {
     @FXML
     private void clicBtnGenerarFormatoEvaluacion(ActionEvent event) {
     }
+
+    @FXML
+    private void clicBtnMiPerfil(ActionEvent event) {
+        VentanasUtils.irMiPerfil(lblProyecto, estudiante);
+    }
 }

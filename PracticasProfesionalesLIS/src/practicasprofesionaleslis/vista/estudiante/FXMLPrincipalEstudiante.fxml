@@ -14,7 +14,7 @@
    <children>
       <ImageView fx:id="imgFotoPerfil" fitHeight="134.0" fitWidth="143.0" layoutX="34.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../recursos/fotoPerfilDefault.png" />
+            <Image url="@../../recursos/fotoPerfilDefault.png" />
          </image>
       </ImageView>
       <Label fx:id="lblNombreEstudiante" layoutX="191.0" layoutY="93.0" prefHeight="29.0" prefWidth="429.0">
@@ -38,9 +38,9 @@
             <Font name="Gill Sans MT" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="1031.0" layoutY="95.0" mnemonicParsing="false" onAction="#clicBtnCerrarSesion" prefHeight="38.0" prefWidth="216.0" style="-fx-background-color: #28ad56;" text="Cerrar Sesión" textFill="WHITE">
+      <Button layoutX="1066.0" layoutY="95.0" mnemonicParsing="false" onAction="#clicBtnCerrarSesion" prefHeight="47.0" prefWidth="181.0" style="-fx-background-color: #28ad56;" text="Cerrar Sesión" textFill="WHITE">
          <font>
-            <Font name="Gill Sans MT" size="30.0" />
+            <Font name="Gill Sans MT" size="25.0" />
          </font>
       </Button>
       <Button layoutX="172.0" layoutY="345.0" mnemonicParsing="false" onAction="#clicBtnConsultarAvance" prefHeight="29.0" prefWidth="329.0" style="-fx-background-color: #28ad56;" text="Consultar Avance" textFill="WHITE">
@@ -64,5 +64,10 @@
          </font>
       </Button>
       <Separator layoutX="35.0" layoutY="258.0" prefHeight="7.0" prefWidth="1210.0" style="-fx-border-color: 000000;" />
+      <Button layoutX="1066.0" layoutY="180.0" mnemonicParsing="false" onAction="#clicBtnMiPerfil" prefHeight="47.0" prefWidth="181.0" style="-fx-background-color: #28ad56;" text="Mi Perfil" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

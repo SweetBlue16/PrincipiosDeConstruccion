@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="490.0" maxWidth="700.0" minHeight="490.0" minWidth="700.0" prefHeight="490.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.FXMLFormularioPerfilController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="60.0" stroke="#18529d" strokeType="INSIDE" width="728.0" />
+      <Label layoutX="14.0" layoutY="7.0" prefHeight="46.0" prefWidth="264.0" text="Datos del perfil" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgFotoPerfil" fitHeight="111.0" fitWidth="119.0" layoutX="47.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../recursos/fotoPerfilDefault.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="38.0" layoutY="201.0" mnemonicParsing="false" onAction="#clicBtnCargarFoto" style="-fx-background-color: #28ad56;" text="Cargar Foto" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtfNombre" layoutX="390.0" layoutY="272.0" prefHeight="39.0" prefWidth="280.0" promptText="Nombre">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtfApellidoPaterno" layoutX="38.0" layoutY="349.0" prefHeight="39.0" prefWidth="290.0" promptText="Apellido Paterno">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtfApellidoMaterno" layoutX="390.0" layoutY="349.0" prefHeight="39.0" prefWidth="280.0" promptText="Apellido Materno">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtfCorreoInstitucional" layoutX="38.0" layoutY="426.0" prefHeight="39.0" prefWidth="290.0" promptText="Correo Institucional">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtfMatricula" layoutX="38.0" layoutY="272.0" prefHeight="39.0" prefWidth="290.0" promptText="Matrícula">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <Button layoutX="551.0" layoutY="98.0" mnemonicParsing="false" onAction="#clicBtnGuardar" style="-fx-background-color: #28ad56;" text="Guardar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <PasswordField fx:id="pwdfContraseña" layoutX="390.0" layoutY="426.0" prefHeight="39.0" prefWidth="280.0" promptText="Contraseña">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </PasswordField>
+   </children>
+</AnchorPane>
