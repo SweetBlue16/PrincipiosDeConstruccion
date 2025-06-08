@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.controlador.FXMLFormularioPerfilController;
+import practicasprofesionaleslis.interfaz.IObservador;
 
 public class VentanasUtils {
     public static void mostrarAlertaSimple(Alert.AlertType tipo, String titulo, String contenido) {
@@ -56,12 +57,13 @@ public class VentanasUtils {
         }
     }
     
-    public static void irMiPerfil(Control componente, Object usuario) {
+    public static void irMiPerfil(Control componente, Object usuario, IObservador observador) {
         try {
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLFormularioPerfil.fxml"));
             Parent vista = cargador.load();
             FXMLFormularioPerfilController controlador = cargador.getController();
             controlador.inicializarInformacionPerfil(usuario);
+            controlador.setObservador(observador);
             
             Stage escenarioPerfil = new Stage();
             Scene escenaPrincipal = new Scene(vista);

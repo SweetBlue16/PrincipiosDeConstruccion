@@ -11,11 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
+import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Coordinador;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
-public class FXMLPrincipalCoordinadorController implements Initializable {
+public class FXMLPrincipalCoordinadorController implements Initializable, IObservador {
     private Coordinador coordinador;
 
     @FXML
@@ -27,6 +28,11 @@ public class FXMLPrincipalCoordinadorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {}
+    
+    @Override
+    public void operacionExitosa() {
+        inicializarDatosCoordinador(coordinador);
+    }
 
     public void inicializarDatosCoordinador(Coordinador coordinador) {
         this.coordinador = coordinador;
@@ -105,6 +111,6 @@ public class FXMLPrincipalCoordinadorController implements Initializable {
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {
-        VentanasUtils.irMiPerfil(lblNombreCoordinador, this.coordinador);
+        VentanasUtils.irMiPerfil(lblNombreCoordinador, coordinador, this);
     }
 }

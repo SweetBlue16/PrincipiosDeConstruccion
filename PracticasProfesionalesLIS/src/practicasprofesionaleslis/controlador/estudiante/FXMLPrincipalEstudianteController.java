@@ -11,11 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
+import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
-public class FXMLPrincipalEstudianteController implements Initializable {
+public class FXMLPrincipalEstudianteController implements Initializable, IObservador {
     private Estudiante estudiante;
     
     @FXML
@@ -29,6 +30,11 @@ public class FXMLPrincipalEstudianteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {}
+    
+    @Override
+    public void operacionExitosa() {
+        inicializarDatosEstudiante(estudiante, lblProyecto.getText());
+    }
     
     public void inicializarDatosEstudiante(Estudiante estudiante, String nombreProyecto) {
         this.estudiante = estudiante;
@@ -88,6 +94,6 @@ public class FXMLPrincipalEstudianteController implements Initializable {
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {
-        VentanasUtils.irMiPerfil(lblProyecto, estudiante);
+        VentanasUtils.irMiPerfil(lblProyecto, estudiante, this);
     }
 }

@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.dao.CoordinadorDAO;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
 import practicasprofesionaleslis.modelo.dao.EvaluadorDAO;
@@ -38,6 +39,7 @@ public class FXMLFormularioPerfilController implements Initializable {
     private char modoEdicion;
     private boolean operacionExitosa;
     private File archivoFoto;
+    private IObservador observador;
 
     @FXML
     private ImageView imgFotoPerfil;
@@ -118,6 +120,10 @@ public class FXMLFormularioPerfilController implements Initializable {
         configurarFotoEvaluador(evaluador.getId());
         this.modoEdicion = 'E';
     }
+    
+    public void setObservador(IObservador observador) {
+        this.observador = observador;
+    }
 
     @FXML
     private void clicBtnCargarFoto(ActionEvent event) {
@@ -171,6 +177,7 @@ public class FXMLFormularioPerfilController implements Initializable {
                             ConstantesUtils.ALERTA_ACTUALIZACION_EXITOSA
                     );
                     VentanasUtils.cerrarVentana(txtfNombre);
+                    observador.operacionExitosa();
                 } else {
                     VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
                             ConstantesUtils.TITULO_ERROR,
