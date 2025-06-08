@@ -19,7 +19,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import practicasprofesionaleslis.modelo.dao.CoordinadorDAO;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
+import practicasprofesionaleslis.modelo.dao.EvaluadorDAO;
+import practicasprofesionaleslis.modelo.dao.ProfesorEEDAO;
 import practicasprofesionaleslis.modelo.pojo.Coordinador;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Evaluador;
@@ -56,45 +59,64 @@ public class FXMLFormularioPerfilController implements Initializable {
     
     public void inicializarInformacionPerfil(Object usuario) {
         if (usuario instanceof Coordinador) {
-            this.coordinador = (Coordinador) usuario;
-            txtfNombre.setText(coordinador.getNombre());
-            txtfApellidoPaterno.setText(coordinador.getApellidoPaterno());
-            txtfApellidoMaterno.setText(coordinador.getApellidoMaterno());
-            txtfCorreoInstitucional.setText(coordinador.getCorreoInstitucional());
-            txtfMatricula.setText(coordinador.getNumeroPersonal());
-            pwdfContraseña.setText("");
-            this.modoEdicion = 'C';
+            inicializarCoordinador(usuario);
         } else if (usuario instanceof Estudiante) {
-            this.estudiante = (Estudiante) usuario;
-            txtfNombre.setText(estudiante.getNombre());
-            txtfApellidoPaterno.setText(estudiante.getApellidoPaterno());
-            txtfApellidoMaterno.setText(estudiante.getApellidoMaterno());
-            txtfCorreoInstitucional.setText(estudiante.getCorreoInstitucional());
-            txtfMatricula.setText(estudiante.getMatricula());
-            pwdfContraseña.setText("");
-            configurarFotoEstudiante(estudiante.getId());
-            this.modoEdicion = 'S';
+            inicializarEstudiante(usuario);
         } else if (usuario instanceof ProfesorEE) {
-            this.profesorEE = (ProfesorEE) usuario;
-            txtfNombre.setText(profesorEE.getNombre());
-            txtfApellidoPaterno.setText(profesorEE.getApellidoPaterno());
-            txtfApellidoMaterno.setText(profesorEE.getApellidoMaterno());
-            txtfCorreoInstitucional.setText(profesorEE.getCorreoInstitucional());
-            txtfMatricula.setText(profesorEE.getNumeroPersonal());
-            pwdfContraseña.setText("");
-            this.modoEdicion = 'P';
+            inicializarProfesorEE(usuario);
         } else if (usuario instanceof Evaluador) {
-            this.evaluador = (Evaluador) usuario;
-            txtfNombre.setText(evaluador.getNombre());
-            txtfApellidoPaterno.setText(evaluador.getApellidoPaterno());
-            txtfApellidoMaterno.setText(evaluador.getApellidoMaterno());
-            txtfCorreoInstitucional.setText(evaluador.getCorreoInstitucional());
-            txtfMatricula.setText(evaluador.getNumeroPersonal());
-            pwdfContraseña.setText("");
-            this.modoEdicion = 'E';
+            inicializarEvaluador(usuario);
         }
         txtfMatricula.setDisable(true);
         txtfCorreoInstitucional.setDisable(true);
+    }
+    
+    public void inicializarCoordinador(Object usuario) {
+        this.coordinador = (Coordinador) usuario;
+        txtfNombre.setText(coordinador.getNombre());
+        txtfApellidoPaterno.setText(coordinador.getApellidoPaterno());
+        txtfApellidoMaterno.setText(coordinador.getApellidoMaterno());
+        txtfCorreoInstitucional.setText(coordinador.getCorreoInstitucional());
+        txtfMatricula.setText(coordinador.getNumeroPersonal());
+        pwdfContraseña.setText("");
+        configurarFotoCoordinador(coordinador.getId());
+        this.modoEdicion = 'C';
+    }
+    
+    public void inicializarEstudiante(Object usuario) {
+        this.estudiante = (Estudiante) usuario;
+        txtfNombre.setText(estudiante.getNombre());
+        txtfApellidoPaterno.setText(estudiante.getApellidoPaterno());
+        txtfApellidoMaterno.setText(estudiante.getApellidoMaterno());
+        txtfCorreoInstitucional.setText(estudiante.getCorreoInstitucional());
+        txtfMatricula.setText(estudiante.getMatricula());
+        pwdfContraseña.setText("");
+        configurarFotoEstudiante(estudiante.getId());
+        this.modoEdicion = 'S';
+    }
+    
+    public void inicializarProfesorEE(Object usuario) {
+        this.profesorEE = (ProfesorEE) usuario;
+        txtfNombre.setText(profesorEE.getNombre());
+        txtfApellidoPaterno.setText(profesorEE.getApellidoPaterno());
+        txtfApellidoMaterno.setText(profesorEE.getApellidoMaterno());
+        txtfCorreoInstitucional.setText(profesorEE.getCorreoInstitucional());
+        txtfMatricula.setText(profesorEE.getNumeroPersonal());
+        pwdfContraseña.setText("");
+        configurarFotoProfesorEE(profesorEE.getId());
+        this.modoEdicion = 'P';
+    }
+    
+    public void inicializarEvaluador(Object usuario) {
+        this.evaluador = (Evaluador) usuario;
+        txtfNombre.setText(evaluador.getNombre());
+        txtfApellidoPaterno.setText(evaluador.getApellidoPaterno());
+        txtfApellidoMaterno.setText(evaluador.getApellidoMaterno());
+        txtfCorreoInstitucional.setText(evaluador.getCorreoInstitucional());
+        txtfMatricula.setText(evaluador.getNumeroPersonal());
+        pwdfContraseña.setText("");
+        configurarFotoEvaluador(evaluador.getId());
+        this.modoEdicion = 'E';
     }
 
     @FXML
@@ -128,12 +150,19 @@ public class FXMLFormularioPerfilController implements Initializable {
                     case 'S':
                         obtenerEstudianteEdicion();
                         operacionExitosa = EstudianteDAO.editarEstudiante(estudiante);
+                        break;
                     case 'C':
-                        // TODO
+                        obtenerCoordinadorEdicion();
+                        operacionExitosa = CoordinadorDAO.editarCoordinador(coordinador);
+                        break;
                     case 'P':
-                        // TODO
+                        obtenerProfesorEEEdicion();
+                        operacionExitosa = ProfesorEEDAO.editarProfesorEE(profesorEE);
+                        break;
                     case 'E':
-                        // TODO
+                        obtenerEvaluadorEdicion();
+                        operacionExitosa = EvaluadorDAO.editarEvaluador(evaluador);
+                        break;
                 }
                 
                 if (operacionExitosa) {
@@ -148,11 +177,22 @@ public class FXMLFormularioPerfilController implements Initializable {
                             ConstantesUtils.ALERTA_ACTUALIZACION_FALLIDA
                     );
                 }
-            } catch (SQLException | IOException e) {
+            } catch (SQLException e) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                         ConstantesUtils.TITULO_ERROR,
-                        e.getMessage());
+                        e.getMessage()
+                );
+            } catch (IOException e) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                        ConstantesUtils.TITULO_ERROR,
+                        ConstantesUtils.ALERTA_ERROR_CARGAR_IMAGEN
+                );
             }
+        } else {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ADVERTENCIA,
+                    ConstantesUtils.ALERTA_DATOS_INVALIDOS
+            );
         }
     }
     
@@ -166,6 +206,14 @@ public class FXMLFormularioPerfilController implements Initializable {
         
         return camposValidos;
     }
+      
+    private void obtenerCoordinadorEdicion() throws IOException {
+        this.coordinador.setNombre(txtfNombre.getText().trim());
+        this.coordinador.setApellidoPaterno(txtfApellidoPaterno.getText().trim());
+        this.coordinador.setApellidoMaterno(txtfApellidoMaterno.getText().trim());
+        this.coordinador.setContraseña(pwdfContraseña.getText().trim());
+        this.coordinador.setFotoPerfil(Files.readAllBytes(archivoFoto.toPath()));
+    }
     
     private void obtenerEstudianteEdicion() throws IOException {
         this.estudiante.setNombre(txtfNombre.getText().trim());
@@ -173,14 +221,6 @@ public class FXMLFormularioPerfilController implements Initializable {
         this.estudiante.setApellidoMaterno(txtfApellidoMaterno.getText().trim());
         this.estudiante.setContraseña(pwdfContraseña.getText().trim());
         this.estudiante.setFotoPerfil(Files.readAllBytes(archivoFoto.toPath()));
-    }
-    
-    private void obtenerCoordinadorEdicion() throws IOException {
-        this.coordinador.setNombre(txtfNombre.getText().trim());
-        this.coordinador.setApellidoPaterno(txtfApellidoPaterno.getText().trim());
-        this.coordinador.setApellidoMaterno(txtfApellidoMaterno.getText().trim());
-        this.coordinador.setContraseña(pwdfContraseña.getText().trim());
-        this.coordinador.setFotoPerfil(Files.readAllBytes(archivoFoto.toPath()));
     }
     
     private void obtenerProfesorEEEdicion() throws IOException {
@@ -198,11 +238,47 @@ public class FXMLFormularioPerfilController implements Initializable {
         this.evaluador.setContraseña(pwdfContraseña.getText().trim());
         this.evaluador.setFotoPerfil(Files.readAllBytes(archivoFoto.toPath()));
     }
+        
+    private void configurarFotoCoordinador(int idCoordinador) {
+        try {
+            byte[] foto = CoordinadorDAO.obtenerFotoCoordinador(idCoordinador);
+            coordinador.setFotoPerfil(foto);
+            ByteArrayInputStream input = new ByteArrayInputStream(foto);
+            Image imagen = new Image(input);
+            imgFotoPerfil.setImage(imagen);
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
     
     private void configurarFotoEstudiante(int idEstudiante) {
         try {
             byte[] foto = EstudianteDAO.obtenerFotoEstudiante(idEstudiante);
             estudiante.setFotoPerfil(foto);
+            ByteArrayInputStream input = new ByteArrayInputStream(foto);
+            Image imagen = new Image(input);
+            imgFotoPerfil.setImage(imagen);
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void configurarFotoProfesorEE(int idProfesorEE) {
+        try {
+            byte[] foto = ProfesorEEDAO.obtenerFotoProfesorEE(idProfesorEE);
+            profesorEE.setFotoPerfil(foto);
+            ByteArrayInputStream input = new ByteArrayInputStream(foto);
+            Image imagen = new Image(input);
+            imgFotoPerfil.setImage(imagen);
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void configurarFotoEvaluador(int idEvaluador) {
+        try {
+            byte[] foto = EvaluadorDAO.obtenerFotoEvaluador(idEvaluador);
+            evaluador.setFotoPerfil(foto);
             ByteArrayInputStream input = new ByteArrayInputStream(foto);
             Image imagen = new Image(input);
             imgFotoPerfil.setImage(imagen);

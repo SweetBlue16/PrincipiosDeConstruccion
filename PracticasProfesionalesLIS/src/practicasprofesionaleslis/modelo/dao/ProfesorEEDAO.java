@@ -5,29 +5,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import practicasprofesionaleslis.modelo.ConexionBD;
-import practicasprofesionaleslis.modelo.pojo.Estudiante;
+import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
-public class EstudianteDAO {
+public class ProfesorEEDAO {
     
-    public static boolean editarEstudiante(Estudiante estudiante) throws SQLException {
+    public static boolean editarProfesorEE(ProfesorEE profesorEE) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "UPDATE estudiante SET nombre = ?, apellidoPaterno = ?, "
+                String consulta = "UPDATE profesoree SET nombre = ?, apellidoPaterno = ?, "
                         + "apellidoMaterno = ?, contrasena = ?, fotoPerfil = ? "
-                        + "WHERE matricula = ?";
+                        + "WHERE numeroPersonal = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
-                sentencia.setString(1, estudiante.getNombre());
-                sentencia.setString(2, estudiante.getApellidoPaterno());
-                sentencia.setString(3, estudiante.getApellidoMaterno());
-                sentencia.setString(4, estudiante.getContraseña());
-                sentencia.setBytes(5, estudiante.getFotoPerfil());
-                sentencia.setString(6, estudiante.getMatricula());
+                sentencia.setString(1, profesorEE.getNombre());
+                sentencia.setString(2, profesorEE.getApellidoPaterno());
+                sentencia.setString(3, profesorEE.getApellidoMaterno());
+                sentencia.setString(4, profesorEE.getContraseña());
+                sentencia.setBytes(5, profesorEE.getFotoPerfil());
+                sentencia.setString(6, profesorEE.getNumeroPersonal());
                 
                 int filasAfectadas = sentencia.executeUpdate();
                 return filasAfectadas > 0;
@@ -39,7 +39,7 @@ public class EstudianteDAO {
         }
     }
     
-    public static byte[] obtenerFotoEstudiante(int id) throws SQLException {
+    public static byte[] obtenerFotoProfesorEE(int id) throws SQLException {
         byte[] foto = null;
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -48,7 +48,7 @@ public class EstudianteDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT fotoPerfil FROM estudiante "
+                String consulta = "SELECT fotoPerfil FROM profesoree "
                         + "WHERE id = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, id);
