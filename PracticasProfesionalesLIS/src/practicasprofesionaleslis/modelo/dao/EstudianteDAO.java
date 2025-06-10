@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
@@ -64,5 +65,9 @@ public class EstudianteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return foto;
+    }
+    
+    public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
+        // TODO
     }
 }
