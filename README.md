@@ -15,5 +15,11 @@ en una sola plataforma digital, evitando tener que controlar una basta cantidad 
 - MySQL + JDBC
 - Git + GitHub
 
+## 👥 Integrantes del Equipo
+- Rodrigo Ivan
+- Abraham
+- Yael Antonio
+- Mauricio
+
 ## 🗓️ Estado del Proyecto
 En desarrollo.
