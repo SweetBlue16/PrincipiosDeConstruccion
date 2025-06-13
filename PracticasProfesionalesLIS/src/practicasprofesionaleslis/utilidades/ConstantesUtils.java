@@ -25,6 +25,7 @@ public class ConstantesUtils {
     public static final String ALERTA_REGISTRO_FALLIDO = "Error al guardar el registro. Intente más tarde.";
     public static final String ALERTA_ACTUALIZACION_EXITOSA = "Registro actualizado con éxito.";
     public static final String ALERTA_ACTUALIZACION_FALLIDA = "Error al actualizar el registro. Intente más tarde.";
+    public static final String ALERTA_BUSQUEDA_FALLIDA = "No se encontró el registro proporcionado. Por favor, verifique.";
     public static final String ALERTA_CREDENCIALES_INVALIDAS = "Usuario o contraseña incorrectos. Por favor, verifique.";
     public static final String ALERTA_USUARIO_OBLIGATORIO = "Usuario obligatorio";
     public static final String ALERTA_CONTRASEÑA_OBLIGATORIA = "Contraseña obligatoria";

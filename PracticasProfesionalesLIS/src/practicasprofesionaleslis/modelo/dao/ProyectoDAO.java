@@ -112,9 +112,9 @@ public class ProyectoDAO {
                     proyecto.setDescripcion(resultado.getString("descripcion"));
                     proyecto.setResponsableProyecto(responsableProyecto);
                     proyecto.setOrganizacionVinculada(organizacionVinculada);
-                } else {
-                    throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
                 }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);

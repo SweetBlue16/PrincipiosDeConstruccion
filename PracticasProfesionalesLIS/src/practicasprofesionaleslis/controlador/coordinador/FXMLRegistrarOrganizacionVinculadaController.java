@@ -79,7 +79,7 @@ public class FXMLRegistrarOrganizacionVinculadaController implements Initializab
         if (txtfDomicilioFiscal.getText().trim().isEmpty()) throw new IllegalArgumentException();
     }
     
-    private void validarFormatoCampos() throws IllegalArgumentException {
+    private void validarFormatoCampos() {
         String razonSocial = txtfRazonSocial.getText().trim();
         String domicilioFiscal = txtfDomicilioFiscal.getText().trim();
         String correoElectronico = txtfCorreoElectronico.getText().trim();
