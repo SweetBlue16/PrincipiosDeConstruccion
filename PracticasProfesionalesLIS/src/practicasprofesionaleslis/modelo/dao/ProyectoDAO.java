@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
@@ -15,13 +14,58 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 public class ProyectoDAO {
     
     public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "INSERT INTO proyecto (nombre, numIntegrantes, "
+                        + "descripcion, idResponsable, idOrganizacion) "
+                        + "VALUES (?, ?, ?, ?, ?);";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, proyecto.getNombre());
+                sentencia.setInt(2, proyecto.getNumIntegrantes());
+                sentencia.setString(3, proyecto.getDescripcion());
+                sentencia.setInt(4, proyecto.getResponsableProyecto().getId());
+                sentencia.setInt(5, proyecto.getOrganizacionVinculada().getId());
+                
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
     }
     
     public static boolean editarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE proyecto SET nombre = ? "
+                        + "numIntegrantes = ?, descripcion = ? "
+                        + "WHERE id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, proyecto.getNombre());
+                sentencia.setInt(2, proyecto.getNumIntegrantes());
+                sentencia.setString(3, proyecto.getDescripcion());
+                sentencia.setInt(4, proyecto.getId());
+                
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
     }
-    
+
     public static Proyecto obtenerResponsablePorProyecto(String nombreProyecto) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
