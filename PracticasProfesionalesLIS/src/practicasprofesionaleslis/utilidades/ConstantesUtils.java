@@ -8,6 +8,7 @@ public class ConstantesUtils {
     public static final String TITULO_REGISTRAR = "AÑADIR REGISTRO";
     public static final String TITULO_ACTUALIZAR = "ACTUALIZAR REGISTRO";
     public static final String TITULO_ELIMINAR = "ELIMINAR REGISTRO";
+    public static final String TITULO_BUSCAR = "BUSCAR REGISTRO";
     public static final String TITULO_PANTALLA_PRINCIPAL = "MENÚ PRINCIPAL";
     public static final String TITULO_INICIO_SESION = "INICIO DE SESIÓN";
     public static final String TITULO_CIERRE_SESION = "CERRAR SESIÓN";
@@ -19,6 +20,7 @@ public class ConstantesUtils {
     public static final String ALERTA_ERROR_CARGAR_VENTANA = "No se pudo cargar la ventana, intente más tarde.";
     public static final String ALERTA_ERROR_CARGAR_INFORMACION = "No se pudo cargar la información, intente más tarde.";
     public static final String ALERTA_ERROR_CARGAR_IMAGEN = "No se pudo cargar la imagen, intente más tarde.";
+    public static final String ALERTA_ERROR_CARGAR_DOCUMENTO = "No se pudo cargar el documento, intente más tarde.";
     public static final String ALERTA_REGISTRO_EXITOSO = "Registro guardado con éxito.";
     public static final String ALERTA_REGISTRO_FALLIDO = "Error al guardar el registro. Intente más tarde.";
     public static final String ALERTA_ACTUALIZACION_EXITOSA = "Registro actualizado con éxito.";

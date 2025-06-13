@@ -1,15 +1,21 @@
 package practicasprofesionaleslis.controlador.coordinador;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Coordinador;
@@ -75,42 +81,80 @@ public class FXMLPrincipalCoordinadorController implements Initializable, IObser
 
     @FXML
     private void clicBtnRegistrarResponsableProyecto(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLRegistrarResponsableProyecto.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_REGISTRAR);
     }
 
     @FXML
     private void clicBtnRegistrarOrganizacionVinculada(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLRegistrarOrganizacionVinculada.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_REGISTRAR);
     }
 
     @FXML
     private void clicBtnGenerarDoctosAsignacion(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLBuscarEstudiante.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnRegistrarProyecto(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLRegistrarProyecto.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_REGISTRAR);
     }
 
     @FXML
     private void clicBtnActualizarProyecto(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLBuscarProyecto.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnAsignarProyecto(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLBuscarEstudianteSinProyecto.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnActualizarOrganizacionVinculada(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLListaOrganizacionesVinculadas.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnActualizarResponsableProyecto(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLBuscarProyecto.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnProgramarEntregasPracticas(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLEntregasDocumentos.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {
         VentanasUtils.irMiPerfil(lblNombreCoordinador, coordinador, this);
+    }
+    
+    private void irVentanaDesdeBoton(String rutaRecurso, String tituloVentana) {
+        try {
+            Stage escenarioBase = new Stage();
+            Parent vista = FXMLLoader.load(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            Scene escenaBuscarProyecto = new Scene(vista);
+            
+            escenarioBase.setScene(escenaBuscarProyecto);
+            escenarioBase.setTitle(tituloVentana);
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.show();
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
     }
 }

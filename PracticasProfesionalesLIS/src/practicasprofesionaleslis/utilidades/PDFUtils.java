@@ -8,6 +8,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import javafx.scene.control.Alert;
 
 public class PDFUtils {
     private static PDDocument documentoPDF;
@@ -46,6 +47,10 @@ public class PDFUtils {
 
         } catch (IOException e) {
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
         }
     }
 
@@ -57,6 +62,10 @@ public class PDFUtils {
             visorImagen.setImage(imagenFX);
         } catch (IOException e) {
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
         }
     }
 
@@ -81,6 +90,10 @@ public class PDFUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
         }
     }
 
