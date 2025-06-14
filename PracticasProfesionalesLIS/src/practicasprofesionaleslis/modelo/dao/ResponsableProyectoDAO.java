@@ -5,7 +5,7 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 
 public class ResponsableProyectoDAO {
     
-    public static boolean registrarResponsableProyecto(ResponsableProyecto responsableProyecto) throws SQLException {
+    /*public static boolean registrarResponsableProyecto(ResponsableProyecto responsableProyecto) throws SQLException {
         // TODO
     }
     
@@ -15,5 +15,5 @@ public class ResponsableProyectoDAO {
     
     public static ResponsableProyecto obtenerResponsablePorProyecto(String nombreProyecto) throws SQLException {
         // TODO
-    }
+    }*/
 }

@@ -1,15 +1,21 @@
 package practicasprofesionaleslis.controlador.evaluador;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Evaluador;
@@ -17,8 +23,8 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLPrincipalEvaluadorController implements Initializable, IObservador {
+    
     private Evaluador evaluador;
-
     @FXML
     private Label lblCorreoInstitucional;
     @FXML
@@ -75,10 +81,28 @@ public class FXMLPrincipalEvaluadorController implements Initializable, IObserva
 
     @FXML
     private void clicBtnEvaluarPresentacionEstudiante(ActionEvent event) {
+        try {
+            Stage escenarioEvaluador = new Stage();
+            Parent vista = FXMLLoader.load(getClass().getResource("/practicasprofesionaleslis/vista/evaluador/FXMLSeleccionEstudiante.fxml"));
+            Scene escena = new Scene(vista);
+            
+            escenarioEvaluador.setScene(escena);
+            escenarioEvaluador.setTitle("SELECCIÓN DE ESTUDIANTE");
+            escenarioEvaluador.initModality(Modality.APPLICATION_MODAL);
+            escenarioEvaluador.showAndWait();
+            escenarioEvaluador.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );;
+        }
     }
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {
         VentanasUtils.irMiPerfil(lblNombreEvaluador, evaluador, this);
     }
+    
 }

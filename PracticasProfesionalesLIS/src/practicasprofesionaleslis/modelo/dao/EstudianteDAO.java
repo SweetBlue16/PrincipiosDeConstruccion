@@ -1,9 +1,11 @@
 package practicasprofesionaleslis.modelo.dao;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
@@ -67,7 +69,48 @@ public class EstudianteDAO {
         return foto;
     }
     
-    public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
+    /*public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
         // TODO
+    }*/
+    
+    public static List<Estudiante> obtenerEstudiantesSinPresentacion(int numeroEvaluacion) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Estudiante> estudiantes = new ArrayList<>();
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT e.id, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.matricula "
+                        + "FROM estudiante e "
+                        + "JOIN expediente ex ON e.id = ex.idEstudiante "
+                        + "WHERE ex.id NOT IN ( "
+                        + "SELECT ep.idExpediente FROM evaluacionpresentacion ep WHERE ep.numeroEvaluacion = ? "
+                        + ")";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, numeroEvaluacion);
+                resultado = sentencia.executeQuery();
+                
+                while (resultado.next()) {
+                    Estudiante estudiante = new Estudiante();
+                    estudiante.setId(resultado.getInt("id"));
+                    estudiante.setNombre(resultado.getString("nombre"));
+                    estudiante.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    estudiante.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    estudiante.setMatricula(resultado.getString("matricula"));
+                    estudiantes.add(estudiante);
+            }
+
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+        
+        return estudiantes;
+        
     }
+    
 }
