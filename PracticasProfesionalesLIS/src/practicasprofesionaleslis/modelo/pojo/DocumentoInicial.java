@@ -12,8 +12,8 @@ public class DocumentoInicial extends Entregable {
     }
 
     public DocumentoInicial(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
-                          TipoDocumentoInicial tipoDocumentoInicial, int puntajeObtenido, String comentario) {
-        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario);
+                          TipoDocumentoInicial tipoDocumentoInicial, int puntajeObtenido, String comentario, byte[] archivo) {
+        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
         this.tipoDocumentoInicial = tipoDocumentoInicial;
     }
 

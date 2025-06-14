@@ -8,17 +8,19 @@ public abstract class Entregable {
     protected LocalDate fechaRevisado;
     protected int puntajeObtenido;
     protected String comentario;
+    protected byte[] archivo;
 
     public Entregable() {
     }
 
     public Entregable(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
-                     int puntajeObtenido, String comentario) {
+                     int puntajeObtenido, String comentario, byte[] archivo) {
         this.nombreArchivo = nombreArchivo;
         this.fechaEntregado = fechaEntregado;
         this.fechaRevisado = fechaRevisado;
         this.puntajeObtenido = puntajeObtenido;
         this.comentario = comentario;
+        this.archivo = archivo;
     }
 
     public String getNombreArchivo() {
@@ -59,6 +61,14 @@ public abstract class Entregable {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public byte[] getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
 
     @Override
