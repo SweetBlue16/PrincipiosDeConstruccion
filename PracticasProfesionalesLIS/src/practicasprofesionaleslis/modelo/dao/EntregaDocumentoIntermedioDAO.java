@@ -132,4 +132,46 @@ public class EntregaDocumentoIntermedioDAO {
         }
         return entregas;
     }
+    
+    public static List<EntregaDocumentoIntermedio> obtenerEntregasDisponibles(int idExpediente, int idExperienciaEducativa) throws SQLException {
+        List<EntregaDocumentoIntermedio> entregasDisponibles = new ArrayList<>();
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT edi.id, edi.fechaInicio, edi.fechaFin, "
+                        + "edi.tipoDoctoIntermedio, edi.puntaje "
+                        + "FROM entregadoctointermedio edi "
+                        + "WHERE edi.idExperienciaEducativa = ? "
+                        + "AND CURDATE() BETWEEN edi.fechaInicio AND edi.fechaFin "
+                        + "AND edi.id NOT IN ("
+                        + "SELECT di.idEntregaDoctoIntermedio "
+                        + "FROM documentointermedio di "
+                        + "WHERE idExpediente = ?"
+                        + ")";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idExperienciaEducativa);
+                
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    int id = resultado.getInt("id");
+                    LocalDate fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
+                    LocalDate fechaFin = resultado.getDate("fechaFin").toLocalDate();
+                    String tipoDocumentoIntermedio = resultado.getString("tipoDoctoInicial");
+                    int puntaje = resultado.getInt("puntaje");
+                    EntregaDocumentoIntermedio entregaDocumentoIntermedio = new EntregaDocumentoIntermedio(id, fechaInicio, fechaFin, puntaje, tipoDocumentoIntermedio);
+                    entregasDisponibles.add(entregaDocumentoIntermedio);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return entregasDisponibles;
+    }
 }

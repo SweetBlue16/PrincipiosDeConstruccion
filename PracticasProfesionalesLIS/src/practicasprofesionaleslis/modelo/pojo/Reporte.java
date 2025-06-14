@@ -10,8 +10,8 @@ public class Reporte extends Entregable {
     }
 
     public Reporte(String nombreArchivo, int horasCubiertas, LocalDate fechaEntregado, LocalDate fechaRevisado,
-                 int numeroReporte, int puntajeObtenido, String comentario) {
-        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario);
+                 int numeroReporte, int puntajeObtenido, String comentario, byte[] archivo) {
+        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
         this.horasCubiertas = horasCubiertas;
         this.numeroReporte = numeroReporte;
     }
