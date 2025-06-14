@@ -30,6 +30,7 @@ public class ConstantesUtils {
     public static final String ALERTA_USUARIO_OBLIGATORIO = "Usuario obligatorio";
     public static final String ALERTA_CONTRASEÑA_OBLIGATORIA = "Contraseña obligatoria";
     public static final String ALERTA_CERRAR_SESION = "¿Estás seguro(a) que deseas cerrar sesión?";
+    public static final String ALERTA_CONFIRMAR_OPERACION = "¿Estás seguro(a) que deseas guardar los cambios?";
     
     public static final String REGEX_TELEFONO = "^\\d{10}$";
     public static final String REGEX_EMAIL = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";

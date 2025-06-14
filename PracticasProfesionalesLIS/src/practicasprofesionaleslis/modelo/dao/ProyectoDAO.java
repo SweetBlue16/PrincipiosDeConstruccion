@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
@@ -120,5 +122,36 @@ public class ProyectoDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return proyecto;
+    }
+    
+    public static List<Proyecto> obtenerProyectos() throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Proyecto> proyectos = new ArrayList<>();
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, nombre, numIntegrantes, "
+                        + "FROM proyecto "
+                        + "WHERE idResponsable IS NULL;";
+                sentencia = conexionBD.prepareStatement(consulta);
+                
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    Proyecto proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("id"));
+                    proyecto.setNombre(resultado.getString("nombre"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyectos.add(proyecto);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return proyectos;
     }
 }

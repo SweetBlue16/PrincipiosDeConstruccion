@@ -85,6 +85,7 @@ public class OrganizacionVinculadaDAO {
                 while (resultado.next()) {
                     OrganizacionVinculada organizacionVinculada = new OrganizacionVinculada();
                     organizacionVinculada.setId(resultado.getInt("id"));
+                    organizacionVinculada.setRazonSocial(resultado.getString("razonSocial"));
                     organizacionVinculada.setNumProyectos(resultado.getInt("numProyectos"));
                     organizacionVinculada.setCorreoElectronico(resultado.getString("correoElectronico"));
                     organizacionVinculada.setTelefono(resultado.getString("telefono"));

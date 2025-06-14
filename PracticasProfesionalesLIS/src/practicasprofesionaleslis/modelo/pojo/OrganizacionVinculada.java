@@ -67,4 +67,9 @@ public class OrganizacionVinculada {
     public void setDomicilioFiscal(String domicilioFiscal) {
         this.domicilioFiscal = domicilioFiscal;
     }
+
+    @Override
+    public String toString() {
+        return razonSocial;
+    }
 }
