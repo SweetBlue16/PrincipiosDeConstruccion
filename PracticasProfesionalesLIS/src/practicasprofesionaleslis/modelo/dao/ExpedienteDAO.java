@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
+import practicasprofesionaleslis.modelo.pojo.Expediente;
+import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
+import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
@@ -43,6 +46,33 @@ public class ExpedienteDAO {
         return nombreProyecto;
     }
     
+    public static int obtenerIdExpedientePorIdEstudiante(int idEstudiante) throws SQLException {
+        int idExpediente = -1; 
+
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id FROM expediente WHERE idEstudiante = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idEstudiante);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    idExpediente = resultado.getInt("id");
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return idExpediente;
+    }
+    
     public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -69,7 +99,7 @@ public class ExpedienteDAO {
                     estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
                     estudiante.setSemestre(resultado.getInt("semestre"));
                     estudiantes.add(estudiante);
-                }
+                    }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
