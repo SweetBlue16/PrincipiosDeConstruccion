@@ -2,7 +2,10 @@ package practicasprofesionaleslis.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
@@ -75,6 +78,39 @@ public class ResponsableProyectoDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
+    }
+    
+    public static List<ResponsableProyecto> obtenerResponsablesPorIdOrganizacion(int idOrganizacion) throws SQLException {
+        List<ResponsableProyecto> responsables = new ArrayList<>();
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexion = ConexionBD.abrirConexion();
+            if (conexion != null) {
+                String consulta = "SELECT id, nombre, apellidoPaterno, apellidoMaterno, puesto, correoElectronico "
+                                + "FROM responsableproyecto WHERE idOrganizacion = ?";
+                sentencia = conexion.prepareStatement(consulta);
+                sentencia.setInt(1, idOrganizacion);
+                resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    ResponsableProyecto responsable = new ResponsableProyecto();
+                    responsable.setId(resultado.getInt("id"));
+                    responsable.setNombre(resultado.getString("nombre"));
+                    responsable.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    responsable.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    responsable.setApellidoMaterno(resultado.getString("puesto"));
+                    responsable.setCorreoElectronico(resultado.getString("correoElectronico"));
+                    responsables.add(responsable);
+                }
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
+        }
+
+        return responsables;
     }
     
 }

@@ -63,7 +63,7 @@ public class FXMLSeleccionEstudianteController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                    ConstantesUtils.TITULO_ERROR_BD,
+                    ConstantesUtils.TITULO_ERROR,
                     ConstantesUtils.ALERTA_ERROR_BD
             );
         }
@@ -87,7 +87,7 @@ public class FXMLSeleccionEstudianteController implements Initializable {
         } catch (SQLException e){
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                    ConstantesUtils.TITULO_ERROR_BD,
+                    ConstantesUtils.TITULO_ERROR,
                     ConstantesUtils.ALERTA_ERROR_BD
             );
         }    

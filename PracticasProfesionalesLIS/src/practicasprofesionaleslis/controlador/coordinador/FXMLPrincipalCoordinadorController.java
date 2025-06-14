@@ -99,8 +99,8 @@ public class FXMLPrincipalCoordinadorController implements Initializable, IObser
 
     @FXML
     private void clicBtnRegistrarProyecto(ActionEvent event) {
-        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLRegistrarProyecto.fxml";
-        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_REGISTRAR);
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLBuscarOrganizacionYResponsable.fxml";
+        irVentanaDesdeBoton(rutaRecurso, "BUSCAR OV Y RESPONSABLE");
     }
 
     @FXML

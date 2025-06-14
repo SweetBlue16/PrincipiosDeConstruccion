@@ -74,7 +74,7 @@ public class FXMLCalificarPresentacionController implements Initializable {
         } catch(SQLException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                ConstantesUtils.TITULO_ERROR_BD,
+                ConstantesUtils.TITULO_ERROR,
                 ConstantesUtils.ALERTA_ERROR_BD);
         }
             
@@ -93,7 +93,7 @@ public class FXMLCalificarPresentacionController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                    ConstantesUtils.TITULO_ERROR_BD,
+                    ConstantesUtils.TITULO_ERROR,
                     ConstantesUtils.ALERTA_ERROR_BD
                 );        
             }
@@ -146,7 +146,7 @@ public class FXMLCalificarPresentacionController implements Initializable {
         try {
             boolean exito = practicasprofesionaleslis.modelo.dao.EvaluacionPresentacionDAO.registrarEvaluacionPresentacion(evaluacion);
             if (exito) {
-                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, ConstantesUtils.TITULO_GUARDADO_CORRECTO, 
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, ConstantesUtils.TITULO_EXITO, 
                         "Calificacion final: " + calificacionFinal + "\nCalificación asignada correctamente.");
                 VentanasUtils.cerrarVentana(lbNombreEstudiante);
             } else {

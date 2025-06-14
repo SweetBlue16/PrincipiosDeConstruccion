@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.coordinador.FXMLBuscarOrganizacionYResponsableController">
-    
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.coordinador.FXMLBuscarOrganizacionYResponsableController">
+   <children>
+      <Rectangle fill="#18529d" height="65.0" stroke="BLACK" strokeType="INSIDE" width="1280.0" />
+      <Button layoutX="217.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnCancelar" prefHeight="58.0" prefWidth="158.0" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="944.0" layoutY="552.0" mnemonicParsing="false" onAction="#clicBtnAceptar" prefHeight="58.0" prefWidth="158.0" style="-fx-background-color: #28ad56;" text="Aceptar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Label layoutX="220.0" layoutY="183.0" text="Nombre Organización Vinculada: ">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="10.0" prefHeight="46.0" prefWidth="996.0" text="BÚSQUEDA DE ORGANIZACIÓN VINCULADA Y RESPONSABLE DE PROYECTO" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="208.0" layoutY="281.0" text="Nombre responsable del proyecto:">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbResponsableProyecto" layoutX="579.0" layoutY="280.0" prefHeight="31.0" prefWidth="349.0" />
+      <TextField fx:id="tfNombreOV" layoutX="579.0" layoutY="182.0" onAction="#validarOV" prefHeight="31.0" prefWidth="349.0" promptText="Razon social" />
+      <Label fx:id="lbOVNoEncontrada" layoutX="579.0" layoutY="222.0" textFill="#18529d">
+         <font>
+            <Font name="Gill Sans MT" size="15.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
