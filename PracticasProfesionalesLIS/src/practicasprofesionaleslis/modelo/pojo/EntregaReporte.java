@@ -1,10 +1,8 @@
 package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
-import javax.validation.constraints.*;
 
 public class EntregaReporte extends Entrega {
-    @NotBlank(message = "Nombre no puede estar vacío")
     private int numeroReporte;
 
     public EntregaReporte() {

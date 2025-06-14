@@ -1,0 +1,139 @@
+package practicasprofesionaleslis.utilidades;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
+
+import java.awt.image.BufferedImage;
+import java.io.*;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+
+public class PDFUtils {
+    private static PDDocument documentoPDF;
+    private static PDFRenderer renderizadorPDF;
+    private static int paginaActual = 0;
+    private static int totalPaginas = 0;
+    private static ImageView visorImagen;
+
+    public static void cargarPDFDesdeRecursos(String rutaRelativa, ImageView visor) {
+        InputStream entrada = PDFUtils.class.getResourceAsStream(rutaRelativa);
+        if (entrada == null) {
+            return;
+        }
+        cargarPDFDesdeStream(entrada, visor);
+    }
+
+    public static void cargarPDFDesdeStream(InputStream entrada, ImageView visor) {
+        try {
+            File archivoTemporal = File.createTempFile("pdf_temporal", ".pdf");
+            try (FileOutputStream salida = new FileOutputStream(archivoTemporal)) {
+                byte[] buffer = new byte[1024];
+                int bytesLeidos;
+                while ((bytesLeidos = entrada.read(buffer)) != -1) {
+                    salida.write(buffer, 0, bytesLeidos);
+                }
+            }
+
+            documentoPDF = PDDocument.load(archivoTemporal);
+            renderizadorPDF = new PDFRenderer(documentoPDF);
+            paginaActual = 0;
+            totalPaginas = documentoPDF.getNumberOfPages();
+            visorImagen = visor;
+
+            mostrarPaginaActual();
+            archivoTemporal.deleteOnExit();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
+        }
+    }
+    
+    public static boolean guardarPDFDesdeRecursos(String rutaRelativa, String nombreArchivo) {
+        try (InputStream entrada = PDFUtils.class.getResourceAsStream(rutaRelativa)) {
+            if (entrada == null) {
+                return false;
+            }
+            
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar archivo PDF");
+            fileChooser.setInitialFileName(nombreArchivo + ".pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+            
+            File archivoDestino = fileChooser.showSaveDialog(null);
+            if (archivoDestino == null) {
+                return false;
+            }
+            
+            try (FileOutputStream salida = new FileOutputStream(archivoDestino)) {
+                byte[] buffer = new byte[1024];
+                int bytesLeidos;
+                while ((bytesLeidos = entrada.read(buffer)) != -1) {
+                    salida.write(buffer, 0, bytesLeidos);
+                }
+            }
+
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void mostrarPaginaActual() {
+        if (documentoPDF == null || renderizadorPDF == null || visorImagen == null) return;
+        try {
+            BufferedImage imagen = renderizadorPDF.renderImageWithDPI(paginaActual, 150);
+            Image imagenFX = SwingFXUtils.toFXImage(imagen, null);
+            visorImagen.setImage(imagenFX);
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
+        }
+    }
+
+    public static void mostrarPaginaSiguiente() {
+        if (paginaActual < totalPaginas - 1) {
+            paginaActual++;
+            mostrarPaginaActual();
+        }
+    }
+
+    public static void mostrarPaginaAnterior() {
+        if (paginaActual > 0) {
+            paginaActual--;
+            mostrarPaginaActual();
+        }
+    }
+
+    public static void cerrarDocumento() {
+        try {
+            if (documentoPDF != null) {
+                documentoPDF.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO
+            );
+        }
+    }
+
+    public static int obtenerPaginaActual() {
+        return paginaActual + 1;
+    }
+
+    public static int obtenerTotalPaginas() {
+        return totalPaginas;
+    }
+}

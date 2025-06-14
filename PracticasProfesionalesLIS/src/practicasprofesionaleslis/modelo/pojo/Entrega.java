@@ -1,7 +1,6 @@
 package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
-import javax.validation.constraints.*;
 
 public abstract class Entrega {
     protected int id;

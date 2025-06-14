@@ -23,7 +23,146 @@ public class ProyectoDAO {
         // TODO
     }*/
     
+    public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "INSERT INTO proyecto (nombre, numIntegrantes, "
+                        + "descripcion, idResponsable, idOrganizacion) "
+                        + "VALUES (?, ?, ?, ?, ?);";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, proyecto.getNombre());
+                sentencia.setInt(2, proyecto.getNumIntegrantes());
+                sentencia.setString(3, proyecto.getDescripcion());
+                sentencia.setInt(4, proyecto.getResponsableProyecto().getId());
+                sentencia.setInt(5, proyecto.getOrganizacionVinculada().getId());
+                
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+    }
+    
+    public static boolean editarProyecto(Proyecto proyecto) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE proyecto SET nombre = ? "
+                        + "numIntegrantes = ?, descripcion = ? "
+                        + "WHERE id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, proyecto.getNombre());
+                sentencia.setInt(2, proyecto.getNumIntegrantes());
+                sentencia.setString(3, proyecto.getDescripcion());
+                sentencia.setInt(4, proyecto.getId());
+                
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+    }
+
+    public static Proyecto obtenerResponsablePorProyecto(String nombreProyecto) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        Proyecto proyecto = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT p.id AS idProyecto, p.nombre AS nombreProyecto, p.numIntegrantes, p.descripcion, "
+                        + "r.id AS idResponsable, r.nombre AS nombreResponsable, r.apellidoPaterno, r.apellidoMaterno, "
+                        + "r.puesto, r.correoElectronico AS correoResponsable, "
+                        + "o.id AS idOrganizacion, o.razonSocial, o.numProyectos, o.correoElectronico AS correoOrganizacion, "
+                        + "o.telefono, o.domicilioFiscal "
+                        + "FROM proyecto p "
+                        + "JOIN responsableproyecto r ON p.idResponsable = r.id "
+                        + "JOIN organizacionvinculada o ON p.idOrganizacion = o.id "
+                        + "WHERE p.nombre = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, nombreProyecto);
+                
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    ResponsableProyecto responsableProyecto = new ResponsableProyecto();
+                    responsableProyecto.setId(resultado.getInt("idResponsable"));
+                    responsableProyecto.setNombre(resultado.getString("nombreResponsable"));
+                    responsableProyecto.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    responsableProyecto.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    responsableProyecto.setPuesto(resultado.getString("puesto"));
+                    responsableProyecto.setCorreoElectronico(resultado.getString("correoResponsable"));
+                    
+                    OrganizacionVinculada organizacionVinculada = new OrganizacionVinculada();
+                    organizacionVinculada.setId(resultado.getInt("idOrganizacion"));
+                    organizacionVinculada.setRazonSocial(resultado.getString("razonSocial"));
+                    organizacionVinculada.setNumProyectos(resultado.getInt("numProyectos"));
+                    organizacionVinculada.setCorreoElectronico(resultado.getString("correoOrganizacion"));
+                    organizacionVinculada.setTelefono(resultado.getString("telefono"));
+                    organizacionVinculada.setDomicilioFiscal(resultado.getString("domicilioFiscal"));
+                    
+                    proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("idProyecto"));
+                    proyecto.setNombre(resultado.getString("nombreProyecto"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyecto.setDescripcion(resultado.getString("descripcion"));
+                    proyecto.setResponsableProyecto(responsableProyecto);
+                    proyecto.setOrganizacionVinculada(organizacionVinculada);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return proyecto;
+    }
+
     public static List<Proyecto> obtenerProyecto() throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Proyecto> proyectos = new ArrayList<>();
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, nombre, numIntegrantes, "
+                        + "FROM proyecto "
+                        + "WHERE idResponsable IS NULL;";
+                sentencia = conexionBD.prepareStatement(consulta);
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    Proyecto proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("id"));
+                    proyecto.setNombre(resultado.getString("nombre"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyectos.add(proyecto);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+        return proyectos;    
+    }
+    
+    public static List<Proyecto> obtenerProyectos() throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
@@ -35,12 +174,12 @@ public class ProyectoDAO {
                 String consulta = "SELECT id, nombre, numIntegrantes, descripcion, idResponsable, idOrganizacion FROM proyecto ";
                 sentencia = conexionBD.prepareStatement(consulta);
                 resultado = sentencia.executeQuery();
-                
                 while (resultado.next()) {
                     Proyecto proyecto = new Proyecto();
                     proyecto.setId(resultado.getInt("id"));
                     proyecto.setNombre(resultado.getString("nombre"));
                     proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                
                     proyecto.setDescripcion(resultado.getString("descripcion"));
                     
                     ResponsableProyecto responsable = new ResponsableProyecto();
@@ -53,16 +192,13 @@ public class ProyectoDAO {
                     
                     proyectos.add(proyecto);
             }
-
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
         } finally {
-            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-        
         return proyectos;
-        
     }
     
     public static Proyecto obtenerProyectoPorIdEstudiante(int idEstudiante) throws SQLException {
@@ -103,7 +239,6 @@ public class ProyectoDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
-
         return proyecto;
     }
     

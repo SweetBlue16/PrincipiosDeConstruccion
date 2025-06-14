@@ -1,0 +1,320 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/PracticasProfesionalesLIS/nbproject/private/\n/PracticasProfesionalesLIS/dist/\n/PracticasProfesionalesLIS/build/\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision 4bc4c1df3a5fbf0316465984a1d256b1a6c50496)
++++ b/.gitignore	(date 1749883298994)
+@@ -1,3 +1,8 @@
+ /PracticasProfesionalesLIS/nbproject/private/
+ /PracticasProfesionalesLIS/dist/
+ /PracticasProfesionalesLIS/build/
++PracticasProfesionalesLIS/nbproject/private/private.xml
++PracticasProfesionalesLIS/nbproject/private/private.xml
++PracticasProfesionalesLIS/nbproject/private/private.xml
++/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/ConexionBD.java
++
+Index: PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java b/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java	(date 1749671097452)
+@@ -0,0 +1,9 @@
++/*
++ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
++ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
++ */
++package practicasprofesionaleslis.modelo.dao;
++
++public class ExperienciaEducativaDAO {
++    
++}
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/modules.xml	(date 1749671097452)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/PrincipiosDeConstruccio.iml" filepath="$PROJECT_DIR$/PrincipiosDeConstruccio.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: PrincipiosDeConstruccio.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PrincipiosDeConstruccio.iml b/PrincipiosDeConstruccio.iml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/PrincipiosDeConstruccio.iml	(date 1749671097452)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/PracticasProfesionalesLIS/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/misc.xml	(date 1749671097452)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+new file mode 100644
+--- /dev/null	(date 1749883302634)
++++ b/.idea/workspace.xml	(date 1749883302634)
+@@ -0,0 +1,81 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
++  <component name="ChangeListManager">
++    <list default="true" id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/PracticasProfesionalesLIS.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_20.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_21.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/PrincipiosDeConstruccio.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.xml" afterDir="false" />
++    </list>
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="Git.Settings">
++    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;YaelCastilloDev&quot;
++  }
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/SweetBlue16/PrincipiosDeConstruccion.git&quot;,
++    &quot;accountId&quot;: &quot;5dd3ae49-d72c-460d-9d2e-20a71461e0cf&quot;
++  }
++}</component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 3
++}</component>
++  <component name="ProjectId" id="2y8uGfWcaz1ooHYo2nuzk0fk2nr" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/home/yael/Escritorio/PrincipiosDeConstruccio&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  }
++}</component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="" />
++      <created>1749228426791</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1749228426791</updated>
++      <workItem from="1749228427824" duration="2084000" />
++      <workItem from="1749274550598" duration="6000" />
++      <workItem from="1749881937847" duration="1044000" />
++    </task>
++    <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/libraries/PracticasProfesionalesLIS.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/PracticasProfesionalesLIS.xml b/.idea/libraries/PracticasProfesionalesLIS.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/libraries/PracticasProfesionalesLIS.xml	(date 1749671097452)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="PracticasProfesionalesLIS">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/PracticasProfesionalesLIS/dist/PracticasProfesionalesLIS.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/vcs.xml	(date 1749671097452)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/libraries/mysql_connector_java_8_0_21.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/mysql_connector_java_8_0_21.xml b/.idea/libraries/mysql_connector_java_8_0_21.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/libraries/mysql_connector_java_8_0_21.xml	(date 1749671097452)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="mysql-connector-java-8.0.21">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/PracticasProfesionalesLIS/dist/lib/mysql-connector-java-8.0.20.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/mysql_connector_java_8_0_20.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/mysql_connector_java_8_0_20.xml b/.idea/libraries/mysql_connector_java_8_0_20.xml
+new file mode 100644
+--- /dev/null	(date 1749671097452)
++++ b/.idea/libraries/mysql_connector_java_8_0_20.xml	(date 1749671097452)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="mysql-connector-java-8.0.20">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/PracticasProfesionalesLIS/lib/mysql-connector-java-8.0.20.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: PracticasProfesionalesLIS/nbproject/private/private.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project-private xmlns=\"http://www.netbeans.org/ns/project-private/1\">\n    <editor-bookmarks xmlns=\"http://www.netbeans.org/ns/editor-bookmarks/2\" lastBookmarkId=\"0\"/>\n    <open-files xmlns=\"http://www.netbeans.org/ns/projectui-open-files/2\">\n        <group/>\n    </open-files>\n</project-private>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PracticasProfesionalesLIS/nbproject/private/private.xml b/PracticasProfesionalesLIS/nbproject/private/private.xml
+--- a/PracticasProfesionalesLIS/nbproject/private/private.xml	(revision 4bc4c1df3a5fbf0316465984a1d256b1a6c50496)
++++ b/PracticasProfesionalesLIS/nbproject/private/private.xml	(date 1749881958717)
+@@ -2,6 +2,25 @@
+ <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+-        <group/>
++        <group>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/DocumentoInicial.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExperienciaEducativaDAO.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaReporte.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ExpedienteDAO.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoInicialDAO.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoIntermedioDAO.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDao.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entregable.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/ExperienciaEducativa.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaDocumentoIntermedio.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoFinalDAO.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/FXMLPrincipalCoordinadorController.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaDocumentoInicial.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/DocumentoFinal.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaDocumentoFinal.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/DocumentoIntermedio.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entrega.java</file>
++            <file>file:/home/yael/Escritorio/PrincipiosDeConstruccio/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Reporte.java</file>
++        </group>
+     </open-files>
+ </project-private>
+Index: PracticasProfesionalesLIS/nbproject/private/private.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>auxiliary.org-netbeans-modules-projectapi.issue214819_5f_fx_5f_enabled=true\n# No need to modify this property unless customizing JavaFX Ant task infrastructure\nendorsed.javafx.ant.classpath=.\njavafx.run.inbrowser=<Default System Browser>\njavafx.run.inbrowser.path=C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\nuser.properties.file=C:\\\\Users\\\\perso\\\\AppData\\\\Roaming\\\\NetBeans\\\\24\\\\build.properties\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/PracticasProfesionalesLIS/nbproject/private/private.properties b/PracticasProfesionalesLIS/nbproject/private/private.properties
+--- a/PracticasProfesionalesLIS/nbproject/private/private.properties	(revision 4bc4c1df3a5fbf0316465984a1d256b1a6c50496)
++++ b/PracticasProfesionalesLIS/nbproject/private/private.properties	(date 1749881882130)
+@@ -3,4 +3,4 @@
+ endorsed.javafx.ant.classpath=.
+ javafx.run.inbrowser=<Default System Browser>
+ javafx.run.inbrowser.path=C:\\Program Files\\Internet Explorer\\iexplore.exe
+-user.properties.file=C:\\Users\\perso\\AppData\\Roaming\\NetBeans\\24\\build.properties
++user.properties.file=/home/yael/.netbeans/23/build.properties
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644

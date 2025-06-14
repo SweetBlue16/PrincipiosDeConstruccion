@@ -1,15 +1,21 @@
 package practicasprofesionaleslis.controlador.estudiante;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
@@ -83,17 +89,39 @@ public class FXMLPrincipalEstudianteController implements Initializable, IObserv
     @FXML
     private void clicBtnActualizarExpediente(ActionEvent event) {
     }
-
+    
     @FXML
-    private void clicBtnEvaluarOrganizacionVinculada(ActionEvent event) {
+    private void clicBtnEvaluacionDeLaOrganizacionVinculada(ActionEvent event) {
     }
 
     @FXML
-    private void clicBtnGenerarFormatoEvaluacion(ActionEvent event) {
+    private void clicBtnGenerarFormatoAutoevaluacion(ActionEvent event) {
+        String rutaRecurso = "/practicasprofesionaleslis/vista/estudiante/FXMLFormatoEvaluacionOV.fxml";
+        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_ARCHIVO);
     }
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {
         VentanasUtils.irMiPerfil(lblProyecto, estudiante, this);
+    }
+    
+    private void irVentanaDesdeBoton(String rutaRecurso, String tituloVentana) {
+        try {
+            Stage escenarioBase = new Stage();
+            Parent vista = FXMLLoader.load(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            Scene escenaBuscarProyecto = new Scene(vista);
+            
+            escenarioBase.setScene(escenaBuscarProyecto);
+            escenarioBase.setTitle(tituloVentana);
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.show();
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
     }
 }

@@ -13,7 +13,14 @@ en una sola plataforma digital, evitando tener que controlar una basta cantidad 
 - Java 1.8
 - JavaFX + SceneBuilder
 - MySQL + JDBC
+- Biblioteca PDFBox
 - Git + GitHub
+
+## 👥 Integrantes del Equipo
+- Rodrigo Ivan
+- Abraham
+- Yael Antonio
+- Mauricio
 
 ## 🗓️ Estado del Proyecto
 En desarrollo.
