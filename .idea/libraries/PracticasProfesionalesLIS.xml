@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PracticasProfesionalesLIS">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/PracticasProfesionalesLIS/dist/PracticasProfesionalesLIS.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

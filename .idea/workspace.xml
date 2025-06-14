@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entrega.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaReporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaReporte.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;YaelCastilloDev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SweetBlue16/PrincipiosDeConstruccion.git&quot;,
+    &quot;accountId&quot;: &quot;5dd3ae49-d72c-460d-9d2e-20a71461e0cf&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2y8uGfWcaz1ooHYo2nuzk0fk2nr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/yael/Escritorio/PrincipiosDeConstruccio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="" />
+      <created>1749228426791</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749228426791</updated>
+      <workItem from="1749228427824" duration="2084000" />
+      <workItem from="1749274550598" duration="6000" />
+      <workItem from="1749881937847" duration="1889000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
