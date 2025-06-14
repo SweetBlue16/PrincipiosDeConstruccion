@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
@@ -50,5 +52,85 @@ public class EntregaReporteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return reporteRegistrado;
+    }
+    
+    public static EntregaReporte obtenerEntregaReportePorId(int idEntregaReporte) throws SQLException {
+        EntregaReporte entrega = null;
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT idEntregaReporte, fechaInicio, fechaFin, numeroReporte, puntaje, idExperienciaEducativa " +
+                                 "FROM entregareporte " +
+                                 "WHERE idEntregaReporte = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idEntregaReporte);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    LocalDate fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
+                    LocalDate fechaFin = resultado.getDate("fechaFin").toLocalDate();
+                    int numeroReporte = resultado.getInt("numeroReporte");
+                    int puntaje = resultado.getInt("puntaje");
+
+                    entrega = new EntregaReporte(
+                        resultado.getInt("idEntregaReporte"),
+                        fechaInicio,
+                        fechaFin,
+                        numeroReporte,
+                        puntaje
+                    );
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return entrega;
+    }
+    
+    
+    public static List<EntregaReporte> obtenerEntregasPorExperienciaEducativa(int idExperienciaEducativa) throws SQLException {
+        List<EntregaReporte> entregas = new ArrayList<>();
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT idEntregaReporte, fechaInicio, fechaFin, numeroReporte, puntaje " +
+                                 "FROM entregareporte " +
+                                 "WHERE idExperienciaEducativa = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExperienciaEducativa);
+
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    LocalDate fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
+                    LocalDate fechaFin = resultado.getDate("fechaFin").toLocalDate();
+                    int numeroReporte = resultado.getInt("numeroReporte");
+                    int puntaje = resultado.getInt("puntaje");
+
+                    EntregaReporte entrega = new EntregaReporte(
+                        resultado.getInt("idEntregaReporte"),
+                        fechaInicio,
+                        fechaFin,
+                        numeroReporte,
+                        puntaje
+                    );
+                    entregas.add(entrega);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return entregas;
     }
 }

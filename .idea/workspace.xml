@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/private/private.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/nbproject/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entrega.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/Entrega.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaReporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/pojo/EntregaReporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoFinalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoFinalDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoInicialDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoInicialDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoIntermedioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoIntermedioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,7 @@
       <updated>1749228426791</updated>
       <workItem from="1749228427824" duration="2084000" />
       <workItem from="1749274550598" duration="6000" />
-      <workItem from="1749881937847" duration="1889000" />
+      <workItem from="1749881937847" duration="5949000" />
     </task>
     <servers />
   </component>
