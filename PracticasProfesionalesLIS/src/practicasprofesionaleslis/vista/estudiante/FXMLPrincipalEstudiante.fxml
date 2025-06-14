@@ -53,12 +53,12 @@
             <Font name="Gill Sans MT" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="670.0" layoutY="488.0" mnemonicParsing="false" onAction="#clicBtnEvaluarOrganizacionVinculada" prefHeight="55.0" prefWidth="429.0" style="-fx-background-color: #28ad56;" text="Evaluar Organización Vinculada" textFill="WHITE">
+      <Button layoutX="620.0" layoutY="488.0" mnemonicParsing="false" onAction="#clicBtnEvaluacionDeLaOrganizacionVinculada" prefHeight="55.0" prefWidth="530.0" style="-fx-background-color: #28ad56;" text="Evaluación de la Organización Vinculada" textFill="WHITE">
          <font>
             <Font name="Gill Sans MT" size="30.0" />
          </font>
       </Button>
-      <Button layoutX="670.0" layoutY="345.0" mnemonicParsing="false" onAction="#clicBtnGenerarFormatoEvaluacion" style="-fx-background-color: #28ad56;" text="Generar Formato de Evaluación" textFill="WHITE">
+      <Button layoutX="620.0" layoutY="345.0" mnemonicParsing="false" onAction="#clicBtnGenerarFormatoAutoevaluacion" prefHeight="55.0" prefWidth="530.0" style="-fx-background-color: #28ad56;" text="Generar Formato de Autoevaluación" textFill="WHITE">
          <font>
             <Font name="Gill Sans MT" size="30.0" />
          </font>
