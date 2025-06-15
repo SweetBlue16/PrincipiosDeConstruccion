@@ -108,4 +108,46 @@ public class ExpedienteDAO {
         }
         return estudiantes;
     }
+    
+    public static Expediente obtenerExpedientePorEstudiante(int idEstudiante) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        Expediente expediente = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, fechaCreacion, estado, calificacion, horasAcumuladas, "
+                        + "idProyecto, idExperienciaEducativa "
+                        + "FROM expediente WHERE idEstudiante = ?;";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idEstudiante);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    Proyecto proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("idProyecto"));
+                    
+                    ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
+                    experienciaEducativa.setId(resultado.getInt("idExperienciaEducativa"));
+                    
+                    expediente = new Expediente();
+                    expediente.setId(resultado.getInt("id"));
+                    expediente.setFechaCreacion(resultado.getString("fechaCreacion"));
+                    String estadoString = resultado.getString("estado").toUpperCase();
+                    expediente.setEstado(Expediente.Estado.valueOf(estadoString));
+                    expediente.setCalificacion(resultado.getInt("calificacion"));
+                    expediente.setHorasAcumuladas(resultado.getInt("horasAcumuladas"));
+                    expediente.setProyecto(proyecto);
+                    expediente.setExperienciaEducativa(experienciaEducativa);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return expediente;
+    }
 }

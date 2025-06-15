@@ -34,6 +34,10 @@ public class ConstantesUtils {
     public static final String ALERTA_CONFIRMAR_OPERACION = "¿Estás seguro(a) que deseas guardar los cambios?";
     public static final String ALERTA_DESCARGA_ARCHIVO_EXITOSA = "El archivo se descargó correctamente.";
     public static final String ALERTA_DESCARGA_ARCHIVO_FALLIDA = "La descarga del archivo no pudo completarse, intente nuevamente.";
+    public static final String ALERTA_SELECCION_ARCHIVO_FALLIDA = "Seleccione un archivo válido.";
+    public static final String ALERTA_ADVERTENCIA_SELECCION_ARCHIVO = "Debe seleccionar un archivo antes de subir la entrega.";
+    public static final String ALERTA_SUBIDA_ARCHIVO_EXITOSA = "Documento subido correctamente.";
+    public static final String ALERTA_SUBIDA_ARCHIVO_FALLIDA = "Hubo un problema al subir el archivo, intente más tarde.";
     
     public static final String REGEX_TELEFONO = "^\\d{10}$";
     public static final String REGEX_EMAIL = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
