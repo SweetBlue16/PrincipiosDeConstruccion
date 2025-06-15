@@ -65,4 +65,40 @@ public class ProfesorEEDAO {
         }
         return foto;
     }
+    
+    public static ProfesorEE obtenerProfesorPorCorreo(String correoInstitucional) throws SQLException {
+        ProfesorEE profesor = null;
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, numeroPersonal, nombre, apellidoPaterno, " +
+                               "apellidoMaterno, correoInstitucional, contrasena " +
+                               "FROM profesoree " +
+                               "WHERE correoInstitucional = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, correoInstitucional);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    profesor = new ProfesorEE();
+                    profesor.setId(resultado.getInt("id"));
+                    profesor.setNumeroPersonal(resultado.getString("numeroPersonal"));
+                    profesor.setNombre(resultado.getString("nombre"));
+                    profesor.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    profesor.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    profesor.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    profesor.setContraseña(resultado.getString("contrasena"));
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return profesor;
+    }
 }

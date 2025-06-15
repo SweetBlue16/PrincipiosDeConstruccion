@@ -6,10 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="0d7db898-6d9f-45dc-855a-e976f7fba1ef" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoFinalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoFinalDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoInicialDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoInicialDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoIntermedioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaDocumentoIntermedioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/EntregaReporteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/built-jar.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/built-jar.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/controlador/FXMLInicioSesionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/controlador/FXMLInicioSesionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/modelo/ConexionBD.class" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/modelo/ConexionBD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/modelo/dao/ExpedienteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/build/classes/practicasprofesionaleslis/modelo/dao/ExpedienteDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLBuscarEstudianteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLBuscarEstudianteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLDocumentosEntregadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLDocumentosEntregadosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLEvaluarDocumentoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLEvaluarDocumentoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLExperienciasEducativasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLExperienciasEducativasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLPrincipalProfesorEEController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/controlador/profesoree/FXMLPrincipalProfesorEEController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/ConexionBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/ConexionBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ProfesorEEDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/modelo/dao/ProfesorEEDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/coordinador/FXMLBuscarProyecto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/coordinador/FXMLBuscarProyecto.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLBuscarEstudiante.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLBuscarEstudiante.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLDocumentosEntregados.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLDocumentosEntregados.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLEvaluarDocumento.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLEvaluarDocumento.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLExperienciasEducativas.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PracticasProfesionalesLIS/src/practicasprofesionaleslis/vista/profesoree/FXMLExperienciasEducativas.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +76,7 @@
       <workItem from="1749228427824" duration="2084000" />
       <workItem from="1749274550598" duration="6000" />
       <workItem from="1749881937847" duration="5949000" />
+      <workItem from="1749967492195" duration="2634000" />
     </task>
     <servers />
   </component>
