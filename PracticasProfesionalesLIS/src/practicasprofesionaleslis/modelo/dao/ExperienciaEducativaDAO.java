@@ -4,6 +4,69 @@
  */
 package practicasprofesionaleslis.modelo.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import practicasprofesionaleslis.modelo.ConexionBD;
+import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
+import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
+import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
+import practicasprofesionaleslis.utilidades.ConstantesUtils;
+
 public class ExperienciaEducativaDAO {
     
+public static List<ExperienciaEducativa> obtenerExperienciasPorProfesorEE(int idProfesorEE) throws SQLException {
+    Connection conexionBD = null;
+    PreparedStatement sentencia = null;
+    ResultSet resultado = null;
+    List<ExperienciaEducativa> experiencias = new ArrayList<>();
+    
+    try {
+        conexionBD = ConexionBD.abrirConexion();
+        if (conexionBD != null) {
+            String consulta = "SELECT ee.id, ee.nrc, ee.nombre, ee.creditos, ee.numeroHoras, "
+                    + "ee.bloque, ee.seccion, "
+                    + "p.id AS idProfesor, p.numeroPersonal, p.nombre AS nombreProfesor, "
+                    + "p.apellidoPaterno AS apellidoPaternoProfesor, p.apellidoMaterno AS apellidoMaternoProfesor, "
+                    + "p.correoInstitucional, p.contrasena "
+                    + "FROM experienciaeducativa ee "
+                    + "JOIN profesoree p ON ee.idProfesorEE = p.id "
+                    + "WHERE ee.idProfesorEE = ?;";
+            sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setInt(1, idProfesorEE);
+            
+            resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                ExperienciaEducativa experiencia = new ExperienciaEducativa();
+                experiencia.setId(resultado.getInt("id"));
+                experiencia.setNrc(resultado.getInt("nrc"));
+                experiencia.setNombre(resultado.getString("nombre"));
+                experiencia.setCreditos(resultado.getInt("creditos"));
+                experiencia.setNumHoras(resultado.getInt("numeroHoras"));
+                experiencia.setBloque(resultado.getString("bloque"));
+                experiencia.setSeccion(resultado.getString("seccion"));
+                
+                // Set ProfesorEE with all fields except fotoPerfil
+                ProfesorEE profesor = new ProfesorEE();
+                profesor.setId(resultado.getInt("idProfesor"));
+                profesor.setNumeroPersonal(resultado.getString("numeroPersonal"));
+                profesor.setNombre(resultado.getString("nombreProfesor"));
+                profesor.setApellidoPaterno(resultado.getString("apellidoPaternoProfesor"));
+                profesor.setApellidoMaterno(resultado.getString("apellidoMaternoProfesor"));
+                profesor.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                experiencia.setProfesorEE(profesor);
+                
+                experiencias.add(experiencia);
+            }
+        } else {
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+        }
+    } finally {
+        BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+    }
+    return experiencias;
+}
 }
