@@ -179,4 +179,21 @@ public class OrganizacionVinculadaDAO {
         return organizacion;
     }
     
+    public static boolean existeAlMenosUnaOV() throws SQLException {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        
+        try {
+            conexion = ConexionBD.abrirConexion();
+            String consulta = "SELECT COUNT(*) AS total FROM organizacionvinculada";
+            sentencia = conexion.prepareStatement(consulta);
+            resultado = sentencia.executeQuery();
+            
+            return resultado.next() && resultado.getInt("total") > 0;
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
+        }
+    }
+    
 }

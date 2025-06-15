@@ -242,4 +242,71 @@ public class ProyectoDAO {
         return proyecto;
     }
     
+    public static boolean verificarProyectosDisponibles() throws SQLException {
+        boolean hayDisponibles = false;
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexion = ConexionBD.abrirConexion();
+            if (conexion != null) {
+                String consulta = "SELECT p.id, p.nombre, p.numIntegrantes, p.descripcion " 
+                                  + "FROM proyecto p " 
+                                  + "LEFT JOIN expediente e ON p.id = e.idProyecto " 
+                                  + "GROUP BY p.id, p.numIntegrantes " 
+                                  + "HAVING COUNT(e.id) < p.numIntegrantes";
+                sentencia = conexion.prepareStatement(consulta);
+                resultado = sentencia.executeQuery();
+                hayDisponibles = resultado.next();
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
+        }
+
+        return hayDisponibles;
+    }
+    
+    public static List<Proyecto> obtenerProyectosDisponibles() throws SQLException {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Proyecto> proyectos = new ArrayList<>();
+
+        try {
+            conexion = ConexionBD.abrirConexion();
+            if (conexion != null) {
+                String consulta = "SELECT p.id, p.nombre, p.numIntegrantes, p.descripcion, o.razonSocial AS razonSocial, "
+                                  + "COUNT(e.id) AS cantidadAsignados "
+                                  + "FROM proyecto p "
+                                  + "LEFT JOIN organizacionvinculada o ON p.idOrganizacion = o.id "
+                                  + "LEFT JOIN expediente e ON p.id = e.idProyecto "
+                                  + "GROUP BY p.id, p.nombre, p.numIntegrantes, p.descripcion, o.razonSocial "
+                                  + "HAVING cantidadAsignados < p.numIntegrantes";
+
+                sentencia = conexion.prepareStatement(consulta);
+                resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    Proyecto proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("id"));
+                    proyecto.setNombre(resultado.getString("nombre"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyecto.setDescripcion(resultado.getString("descripcion"));
+                    OrganizacionVinculada ov = new OrganizacionVinculada();
+                    ov.setRazonSocial(resultado.getString("razonSocial"));
+                    proyecto.setOrganizacionVinculada(ov);
+                    proyectos.add(proyecto);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
+        }
+        return proyectos;
+    }
+    
 }

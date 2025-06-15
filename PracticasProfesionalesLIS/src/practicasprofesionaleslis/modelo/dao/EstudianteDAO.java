@@ -113,4 +113,41 @@ public class EstudianteDAO {
         
     }
     
+    public static List<Estudiante> obtenerEstudiantesSinProyecto() throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Estudiante> estudiantes = new ArrayList<>();
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT e.id, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.matricula, e.correoInstitucional, e.semestre "
+                                  + "FROM estudiante e "
+                                  + "JOIN expediente ex ON e.id = ex.idEstudiante "
+                                  + "WHERE ex.idProyecto IS NULL";
+                sentencia = conexionBD.prepareStatement(consulta);
+                resultado = sentencia.executeQuery();
+
+                while (resultado.next()) {
+                    Estudiante estudiante = new Estudiante();
+                    estudiante.setId(resultado.getInt("id"));
+                    estudiante.setNombre(resultado.getString("nombre"));
+                    estudiante.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    estudiante.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    estudiante.setMatricula(resultado.getString("matricula"));
+                    estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    estudiante.setSemestre(resultado.getInt("semestre"));
+                    estudiantes.add(estudiante);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+
+        return estudiantes;
+    }
+    
 }

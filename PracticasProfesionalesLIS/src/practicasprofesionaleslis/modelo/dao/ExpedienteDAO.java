@@ -108,4 +108,22 @@ public class ExpedienteDAO {
         }
         return estudiantes;
     }
+    
+    public static boolean asignarProyectoAExpediente(int idExpediente, int idProyecto) throws SQLException {
+        Connection conexion = null;
+        PreparedStatement sentencia = null;
+
+        try {
+            conexion = ConexionBD.abrirConexion();
+            String consulta = "UPDATE expediente SET idProyecto = ? WHERE id = ?";
+            sentencia = conexion.prepareStatement(consulta);
+            sentencia.setInt(1, idProyecto);
+            sentencia.setInt(2, idExpediente);
+            int filasAfectadas = sentencia.executeUpdate();
+            return filasAfectadas > 0;
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, null);
+        }
+    }
+    
 }
