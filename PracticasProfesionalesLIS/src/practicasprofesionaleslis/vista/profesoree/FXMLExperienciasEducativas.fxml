@@ -31,7 +31,7 @@
                     <TableColumn fx:id="colNrc" prefWidth="122.4" text="nrc" />
                 </columns>
             </TableView>
-            <Button layoutX="82.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnSeleccionar" style="-fx-background-color: #28ad56;" text="Seleccionar" textFill="WHITE">
+            <Button layoutX="82.0" layoutY="334.0" mnemonicParsing="false" onAction="#clicBtnSeleccionar" style="-fx-background-color: #28ad56;" text="Seleccionar" textFill="WHITE">
                <font>
                   <Font name="Gill Sans MT" size="25.0" />
                </font>

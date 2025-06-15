@@ -18,7 +18,7 @@ import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
-public class FXMLActualizacionProyectoController implements Initializable {
+public class FXMLActualizarProyectoController implements Initializable {
 
     @FXML
     private TextField txtfNombreProyecto;

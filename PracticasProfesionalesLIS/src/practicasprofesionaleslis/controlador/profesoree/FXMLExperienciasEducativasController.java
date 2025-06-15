@@ -81,7 +81,8 @@ public class FXMLExperienciasEducativasController implements Initializable {
         );
     }
 
-private void clicBtnSeleccionar(ActionEvent event) {
+    @FXML
+    private void clicBtnSeleccionar(ActionEvent event) {
     ExperienciaEducativa experienciaSeleccionada = tableViewExperiencias.getSelectionModel().getSelectedItem();
     
     if (experienciaSeleccionada == null) {
@@ -126,7 +127,4 @@ private void clicBtnSeleccionar(ActionEvent event) {
         VentanasUtils.cerrarVentana(lblTitulo);
     }
 
-    @FXML
-    private void btnSeleccionar(ActionEvent event) {
-    }
 }

@@ -149,5 +149,38 @@ public class EstudianteDAO {
 
         return estudiantes;
     }
+
+    public static List<Estudiante> obtenerEstudiantesPorExperienciaEducativa(int idExperienciaEducativa) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<Estudiante> estudiantes = new ArrayList<>();
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT e.id, e.matricula, e.nombre, e.apellidoPaterno, " + "e.apellidoMaterno, e.correoInstitucional, e.contrasena, " + "e.semestre " + "FROM estudiante e " + "JOIN expediente ex ON e.id = ex.idEstudiante " + "WHERE ex.idExperienciaEducativa = ?;";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExperienciaEducativa);
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    Estudiante estudiante = new Estudiante();
+                    estudiante.setId(resultado.getInt("id"));
+                    estudiante.setMatricula(resultado.getString("matricula"));
+                    estudiante.setNombre(resultado.getString("nombre"));
+                    estudiante.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    estudiante.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    estudiante.setContraseña(resultado.getString("contrasena"));
+                    estudiante.setSemestre(resultado.getInt("semestre"));
+                    estudiantes.add(estudiante);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return estudiantes;
+    }
     
 }

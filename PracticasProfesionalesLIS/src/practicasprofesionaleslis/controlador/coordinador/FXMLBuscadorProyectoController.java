@@ -63,7 +63,7 @@ public class FXMLBuscadorProyectoController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/practicasprofesionaleslis/vista/coordinador/FXMLActualizarProyecto.fxml"));
             Parent vista = loader.load();
             
-            FXMLActualizacionProyectoController controller = loader.getController();
+            FXMLActualizarProyectoController controller = loader.getController();
             
             boolean integrantesAsignados = false;
             try {
