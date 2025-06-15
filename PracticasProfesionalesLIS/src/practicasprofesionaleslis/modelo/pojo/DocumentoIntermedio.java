@@ -11,9 +11,9 @@ public class DocumentoIntermedio extends Entregable {
     public DocumentoIntermedio() {
     }
 
-    public DocumentoIntermedio(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
+    public DocumentoIntermedio(int id, String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
                              TipoDocumentoIntermedio tipoDocumentoIntermedio, int puntajeObtenido, String comentario, byte[] archivo) {
-        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
+        super(id, nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
         this.tipoDocumentoIntermedio = tipoDocumentoIntermedio;
     }
 

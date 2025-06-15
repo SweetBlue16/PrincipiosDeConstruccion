@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.DocumentoIntermedio;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
@@ -60,5 +62,40 @@ public class DocumentoIntermedioDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return false;
+    }
+    
+    public static List<DocumentoIntermedio> obtenerDocumentosIntermediosPorExpediente(int idExpediente) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<DocumentoIntermedio> documentos = new ArrayList<>();
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT di.id, di.nombreArchivo, di.archivo, edi.tipoDoctoIntermedio "
+                        + "FROM documentointermedio di "
+                        + "JOIN entregadoctointermedio edi ON di.idEntregaDoctoIntermedio = edi.id "
+                        + "WHERE di.idExpediente = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    DocumentoIntermedio documentoIntermedio = new DocumentoIntermedio();
+                    documentoIntermedio.setId(resultado.getInt("id"));
+                    documentoIntermedio.setNombreArchivo(resultado.getString("nombreArchivo"));
+                    documentoIntermedio.setArchivo(resultado.getBytes("archivo"));
+                    String tipoDocumentoIntermedioString = resultado.getString("tipoDoctoIntermedio").toUpperCase();
+                    documentoIntermedio.setTipoDocumentoIntermedio(DocumentoIntermedio.TipoDocumentoIntermedio.valueOf(tipoDocumentoIntermedioString));
+                    documentos.add(documentoIntermedio);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return documentos;
     }
 }

@@ -3,6 +3,7 @@ package practicasprofesionaleslis.modelo.pojo;
 import java.time.LocalDate;
 
 public abstract class Entregable {
+    protected int id;
     protected String nombreArchivo;
     protected LocalDate fechaEntregado;
     protected LocalDate fechaRevisado;
@@ -13,14 +14,23 @@ public abstract class Entregable {
     public Entregable() {
     }
 
-    public Entregable(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
+    public Entregable(int id, String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
                      int puntajeObtenido, String comentario, byte[] archivo) {
+        this.id = id;
         this.nombreArchivo = nombreArchivo;
         this.fechaEntregado = fechaEntregado;
         this.fechaRevisado = fechaRevisado;
         this.puntajeObtenido = puntajeObtenido;
         this.comentario = comentario;
         this.archivo = archivo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombreArchivo() {
