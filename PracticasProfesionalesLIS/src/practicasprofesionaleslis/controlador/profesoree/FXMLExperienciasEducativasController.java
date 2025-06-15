@@ -94,29 +94,22 @@ private void clicBtnSeleccionar(ActionEvent event) {
     }
 
     try {
-        // 1. Load the FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
             "/practicasprofesionaleslis/vista/profesoree/FXMLBuscarEstudiante.fxml"));
         
-        // 2. Load the root node (the main container from the FXML)
         Parent root = loader.load();
         
-        // 3. Get the controller instance
         FXMLBuscarEstudianteController buscarEstudianteController = loader.getController();
         
-        // 4. Initialize the controller with the selected experience
         buscarEstudianteController.inicializarDatos(experienciaSeleccionada);
         
-        // 5. Create the new stage (window)
         Stage stage = new Stage();
         stage.setTitle("Estudiantes de " + experienciaSeleccionada.getNombre());
         stage.setScene(new Scene(root));
         
-        // 6. Set modality if you want it to block the parent window
         stage.initModality(Modality.APPLICATION_MODAL);
         
-        // 7. Show the window
-        stage.showAndWait(); // or stage.show() if you don't want to wait
+        stage.showAndWait(); 
         
     } catch (IOException e) {
         e.printStackTrace();

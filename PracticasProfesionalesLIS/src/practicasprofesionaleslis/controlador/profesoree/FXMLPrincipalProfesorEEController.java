@@ -105,11 +105,9 @@ private void clicBtnValidarEntregaDocumentos(ActionEvent event) {
         FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
         Parent vista = cargador.load();
         
-        // Obtener el controlador y pasarle los datos necesarios
         FXMLExperienciasEducativasController controlador = cargador.getController();
         controlador.inicializarDatos(this.profesorEE);
 
-        // Mostrar la ventana
         Stage escenarioBase = new Stage();
         Scene escena = new Scene(vista);
         escenarioBase.setScene(escena);
