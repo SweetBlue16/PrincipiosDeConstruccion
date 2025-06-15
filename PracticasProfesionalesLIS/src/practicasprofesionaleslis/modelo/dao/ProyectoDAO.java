@@ -57,9 +57,8 @@ public class ProyectoDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "UPDATE proyecto SET nombre = ? "
-                        + "numIntegrantes = ?, descripcion = ? "
-                        + "WHERE id = ?";
+                String consulta = "UPDATE proyecto SET nombre = ?, numIntegrantes = ?, descripcion = ? "
+                                  + "WHERE id = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setString(1, proyecto.getNombre());
                 sentencia.setInt(2, proyecto.getNumIntegrantes());
@@ -307,6 +306,72 @@ public class ProyectoDAO {
             BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
         }
         return proyectos;
+    }
+    
+    public static Proyecto obtenerProyectoPorNombre(String nombreProyecto) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        Proyecto proyecto = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, nombre, numIntegrantes, descripcion, idResponsable, idOrganizacion " 
+                                  + "FROM proyecto " 
+                                  + "WHERE nombre LIKE ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, "%" + nombreProyecto + "%");
+                resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("id"));
+                    proyecto.setNombre(resultado.getString("nombre"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyecto.setDescripcion(resultado.getString("descripcion"));
+
+                    ResponsableProyecto responsable = new ResponsableProyecto();
+                    responsable.setId(resultado.getInt("idResponsable"));
+                    proyecto.setResponsableProyecto(responsable);  
+
+                    OrganizacionVinculada organizacion = new OrganizacionVinculada();
+                    organizacion.setId(resultado.getInt("idOrganizacion"));
+                    proyecto.setOrganizacionVinculada(organizacion);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return proyecto;
+    }
+    
+    public static boolean tieneIntegrantesAsignados(int idProyecto) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        boolean tieneIntegrantes = false;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT COUNT(*) AS total FROM expediente WHERE idProyecto = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idProyecto);
+                resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    tieneIntegrantes = resultado.getInt("total") > 0;
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return tieneIntegrantes;
     }
     
 }
