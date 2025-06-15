@@ -2,6 +2,7 @@ package practicasprofesionaleslis.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.DocumentoInicial;
@@ -34,5 +35,30 @@ public class DocumentoInicialDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
+    }
+    
+    public static boolean existeDocumentoInicial(int idExpediente) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT COUNT(*) FROM documentoinicial WHERE idExpediente = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    return resultado.getInt(1) > 0;
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return false;
     }
 }

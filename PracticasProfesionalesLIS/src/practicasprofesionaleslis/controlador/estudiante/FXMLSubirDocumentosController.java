@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,6 +28,8 @@ import practicasprofesionaleslis.modelo.dao.EntregaDocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoInicialDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoIntermedioDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaReporteDAO;
+import practicasprofesionaleslis.modelo.dao.ExperienciaEducativaDAO;
+import practicasprofesionaleslis.modelo.dao.PeriodoDAO;
 import practicasprofesionaleslis.modelo.dao.ReporteDAO;
 import practicasprofesionaleslis.modelo.pojo.DocumentoFinal;
 import practicasprofesionaleslis.modelo.pojo.DocumentoInicial;
@@ -36,6 +39,8 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
+import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
+import practicasprofesionaleslis.modelo.pojo.Periodo;
 import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
@@ -65,6 +70,17 @@ public class FXMLSubirDocumentosController implements Initializable {
     
     public void inicializarExpediente(Expediente expediente) {
         this.expediente = expediente;
+        try {
+            ExperienciaEducativa experienciaEducativa = ExperienciaEducativaDAO.obtenerExperienciaEducativaPorId(expediente.getExperienciaEducativa().getId());
+            Periodo periodo = PeriodoDAO.obtenerPeriodoPorId(experienciaEducativa.getPeriodo().getId());
+            experienciaEducativa.setPeriodo(periodo);
+            expediente.setExperienciaEducativa(experienciaEducativa);
+        } catch (SQLException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    e.getMessage()
+            );
+        }
         cargarEntregasDisponibles();
     }
 
@@ -186,6 +202,16 @@ public class FXMLSubirDocumentosController implements Initializable {
         String tipo = cbxTiposEntregas.getValue();
         
         try {
+            if (validarPeriodoEscolar()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                        ConstantesUtils.TITULO_FUERA_RANGO_FECHAS,
+                        ConstantesUtils.ALERTA_FUERA_RANGO_FECHAS
+                );
+                return;
+            }
+            
+            validarExistenciaEntregasPrevias(tipo);
+            
             switch (tipo) {
                 case "Iniciales":
                     List<EntregaDocumentoInicial> entregasInicialesDisponibles = EntregaDocumentoInicialDAO.obtenerEntregasDisponibles(
@@ -216,6 +242,11 @@ public class FXMLSubirDocumentosController implements Initializable {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
                     ConstantesUtils.ALERTA_ERROR_BD
+            );
+        } catch (IllegalStateException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_REQUISITO_NO_CUMPLIDO,
+                    e.getMessage()
             );
         }
     }
@@ -278,5 +309,35 @@ public class FXMLSubirDocumentosController implements Initializable {
 
             btnGuardar.setDisable(!haySeleccion || archivoSeleccionado == null);
         });
+    }
+    
+    private boolean validarPeriodoEscolar() {
+        Periodo periodo = expediente.getExperienciaEducativa().getPeriodo();
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaInicio = LocalDate.parse(periodo.getFechaInicio());
+        LocalDate fechaFin = LocalDate.parse(periodo.getFechaFin());
+        
+        return (hoy.isEqual(fechaInicio) || hoy.isAfter(fechaInicio))
+                && (hoy.isEqual(fechaFin) || hoy.isBefore(fechaFin));
+    }
+    
+    private void validarExistenciaEntregasPrevias(String tipo) throws SQLException {
+        switch (tipo) {
+            case "Intermedios":
+                if (!DocumentoInicialDAO.existeDocumentoInicial(expediente.getId())) {
+                    throw new IllegalStateException(ConstantesUtils.ALERTA_DOCUMENTO_INICIAL_FALTANTE);
+                }
+                break;
+            case "Finales":
+                if (!DocumentoIntermedioDAO.existeDocumentoIntermedio(expediente.getId())) {
+                    throw new IllegalStateException(ConstantesUtils.ALERTA_DOCUMENTO_INTERMEDIO_FALTANTE);
+                }
+                break;
+            case "Reportes":
+                if (!DocumentoInicialDAO.existeDocumentoInicial(expediente.getId())) {
+                    throw new IllegalStateException(ConstantesUtils.ALERTA_DOCUMENTO_INICIAL_FALTANTE);
+                }
+                break;
+        }
     }
 }

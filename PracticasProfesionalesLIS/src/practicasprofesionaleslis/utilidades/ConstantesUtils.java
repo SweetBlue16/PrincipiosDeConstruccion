@@ -14,6 +14,8 @@ public class ConstantesUtils {
     public static final String TITULO_CIERRE_SESION = "CERRAR SESIÓN";
     public static final String TITULO_PERFIL = "MI PERFIL";
     public static final String TITULO_ARCHIVO = "ARCHIVO";
+    public static final String TITULO_FUERA_RANGO_FECHAS = "FUERA DEL PERIODO ESCOLAR";
+    public static final String TITULO_REQUISITO_NO_CUMPLIDO = "REQUISITO NO CUMPLIDO";
     
     public static final String ALERTA_ERROR_BD = "Su solicitud no puede ser procesada en este momento. Intente más tarde.";
     public static final String ALERTA_DATOS_INVALIDOS = "Los datos ingresados no son válidos. Por favor, verifique.";
@@ -38,6 +40,9 @@ public class ConstantesUtils {
     public static final String ALERTA_ADVERTENCIA_SELECCION_ARCHIVO = "Debe seleccionar un archivo antes de subir la entrega.";
     public static final String ALERTA_SUBIDA_ARCHIVO_EXITOSA = "Documento subido correctamente.";
     public static final String ALERTA_SUBIDA_ARCHIVO_FALLIDA = "Hubo un problema al subir el archivo, intente más tarde.";
+    public static final String ALERTA_FUERA_RANGO_FECHAS = "No puedes entregar documentos en este momento, estás fuera del rango de fechas.";
+    public static final String ALERTA_DOCUMENTO_INICIAL_FALTANTE = "Debes haber entregado al menos un documento inicial.";
+    public static final String ALERTA_DOCUMENTO_INTERMEDIO_FALTANTE = "Debes haber entregado al menos un documento intermedio.";
     
     public static final String REGEX_TELEFONO = "^\\d{10}$";
     public static final String REGEX_EMAIL = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
