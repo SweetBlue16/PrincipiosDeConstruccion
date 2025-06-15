@@ -4,25 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import practicasprofesionaleslis.modelo.ConexionBD;
-import practicasprofesionaleslis.modelo.pojo.DocumentoIntermedio;
+import practicasprofesionaleslis.modelo.pojo.DocumentoFinal;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
-public class DocumentoIntermedioDAO {
+public class DocumentoFinalDAO {
     
-    public static boolean subirDocumentoIntermedio(DocumentoIntermedio documento, int idEntregaDocumentoIntermedio, int idExpediente) throws SQLException {
+    public static boolean subirDocumentoFinal(DocumentoFinal documento, int idEntregaDocumentoFinal, int idExpediente) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "INSERT INTO documentointermedio (nombreArchivo, fechaEntregado, "
-                        + "idEntregaDoctoIntermedio, idExpediente, archivo) "
+                String consulta = "INSERT INTO documentofinal (nombreArchivo, fechaEntregado, "
+                        + "idEntregaDoctoFinal, idExpediente, archivo) "
                         + "VALUES (?, CURDATE(), ?, ?, ?)";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setString(1, documento.getNombreArchivo());
-                sentencia.setInt(2, idEntregaDocumentoIntermedio);
+                sentencia.setInt(2, idEntregaDocumentoFinal);
                 sentencia.setInt(3, idExpediente);
                 sentencia.setBytes(4, documento.getArchivo());
                 

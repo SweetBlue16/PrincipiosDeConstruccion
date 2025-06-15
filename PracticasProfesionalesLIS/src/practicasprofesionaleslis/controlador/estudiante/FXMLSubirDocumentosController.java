@@ -20,19 +20,30 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
+import practicasprofesionaleslis.modelo.dao.DocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.DocumentoInicialDAO;
+import practicasprofesionaleslis.modelo.dao.DocumentoIntermedioDAO;
+import practicasprofesionaleslis.modelo.dao.EntregaDocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoInicialDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoIntermedioDAO;
+import practicasprofesionaleslis.modelo.dao.EntregaReporteDAO;
+import practicasprofesionaleslis.modelo.dao.ReporteDAO;
+import practicasprofesionaleslis.modelo.pojo.DocumentoFinal;
 import practicasprofesionaleslis.modelo.pojo.DocumentoInicial;
+import practicasprofesionaleslis.modelo.pojo.DocumentoIntermedio;
+import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoFinal;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
+import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
+import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLSubirDocumentosController implements Initializable {
     private Expediente expediente;
     private File archivoSeleccionado;
+    private static final int HORAS_MENSUALES_CUBIERTAS = 105;
 
     @FXML
     private ComboBox<String> cbxTiposEntregas;
@@ -80,16 +91,42 @@ public class FXMLSubirDocumentosController implements Initializable {
                     DocumentoInicial documentoInicial = new DocumentoInicial();
                     documentoInicial.setArchivo(contenido);
                     documentoInicial.setNombreArchivo(nombreArchivo);
+                    
                     EntregaDocumentoInicial entregaDocumentoInicial = (EntregaDocumentoInicial) entregaSeleccionada;
                     operacionExitosa = DocumentoInicialDAO.subirDocumentoInicial(documentoInicial,
                             entregaDocumentoInicial.getId(),
                             expediente.getId());
                     break;
                 case "Intermedios":
+                    DocumentoIntermedio documentoIntermedio = new DocumentoIntermedio();
+                    documentoIntermedio.setArchivo(contenido);
+                    documentoIntermedio.setNombreArchivo(nombreArchivo);
+                    
+                    EntregaDocumentoIntermedio entregaDocumentoIntermedio = (EntregaDocumentoIntermedio) entregaSeleccionada;
+                    operacionExitosa = DocumentoIntermedioDAO.subirDocumentoIntermedio(documentoIntermedio,
+                            entregaDocumentoIntermedio.getId(),
+                            expediente.getId());
                     break;
                 case "Finales":
+                    DocumentoFinal documentoFinal = new DocumentoFinal();
+                    documentoFinal.setArchivo(contenido);
+                    documentoFinal.setNombreArchivo(nombreArchivo);
+                    
+                    EntregaDocumentoFinal entregaDocumentoFinal = (EntregaDocumentoFinal) entregaSeleccionada;
+                    operacionExitosa = DocumentoFinalDAO.subirDocumentoFinal(documentoFinal,
+                            entregaDocumentoFinal.getId(),
+                            expediente.getId());
                     break;
                 case "Reportes":
+                    Reporte reporte = new Reporte();
+                    reporte.setArchivo(contenido);
+                    reporte.setNombreArchivo(nombreArchivo);
+                    reporte.setHorasCubiertas(HORAS_MENSUALES_CUBIERTAS);
+                    
+                    EntregaReporte entregaReporte = (EntregaReporte) entregaSeleccionada;
+                    operacionExitosa = ReporteDAO.subirReporte(reporte,
+                            entregaReporte.getId(),
+                            expediente.getId());
                     break;
             }
             
@@ -99,15 +136,21 @@ public class FXMLSubirDocumentosController implements Initializable {
                         ConstantesUtils.ALERTA_SUBIDA_ARCHIVO_EXITOSA
                 );
                 cargarEntregasDisponibles();
+                this.archivoSeleccionado = null;
             } else {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                         ConstantesUtils.TITULO_ERROR,
                         ConstantesUtils.ALERTA_SUBIDA_ARCHIVO_FALLIDA);
             }
-        } catch (IOException | SQLException e) {
+        } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
                     e.getMessage()
+            );
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_SUBIDA_ARCHIVO_FALLIDA
             );
         }
     }
@@ -152,13 +195,21 @@ public class FXMLSubirDocumentosController implements Initializable {
                     break;
                 case "Intermedios":
                     List<EntregaDocumentoIntermedio> entregasIntermediasDisponibles = EntregaDocumentoIntermedioDAO.obtenerEntregasDisponibles(
-                            expediente.getId(), expediente.getExperienciaEducativa().getId()
+                            expediente.getExperienciaEducativa().getId(), expediente.getId()
                     );
                     lstEntregasDisponibles.getItems().addAll(entregasIntermediasDisponibles);
                     break;
                 case "Finales":
+                    List<EntregaDocumentoFinal> entregasFinalesDisponibles = EntregaDocumentoFinalDAO.obtenerEntregasDisponibles(
+                            expediente.getExperienciaEducativa().getId(), expediente.getId()
+                    );
+                    lstEntregasDisponibles.getItems().addAll(entregasFinalesDisponibles);
                     break;
                 case "Reportes":
+                    List<EntregaReporte> entregasReportesDisponibles = EntregaReporteDAO.obtenerEntregasDisponibles(
+                            expediente.getExperienciaEducativa().getId(), expediente.getId()
+                    );
+                    lstEntregasDisponibles.getItems().addAll(entregasReportesDisponibles);
                     break;
             }
         } catch (SQLException e) {

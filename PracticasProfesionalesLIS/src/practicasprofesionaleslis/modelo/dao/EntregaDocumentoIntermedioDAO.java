@@ -133,7 +133,7 @@ public class EntregaDocumentoIntermedioDAO {
         return entregas;
     }
     
-    public static List<EntregaDocumentoIntermedio> obtenerEntregasDisponibles(int idExpediente, int idExperienciaEducativa) throws SQLException {
+    public static List<EntregaDocumentoIntermedio> obtenerEntregasDisponibles(int idExperienciaEducativa, int idExpediente) throws SQLException {
         List<EntregaDocumentoIntermedio> entregasDisponibles = new ArrayList<>();
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -142,16 +142,13 @@ public class EntregaDocumentoIntermedioDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT edi.id, edi.fechaInicio, edi.fechaFin, "
-                        + "edi.tipoDoctoIntermedio, edi.puntaje "
+                String consulta = "SELECT edi.id, edi.idExperienciaEducativa, edi.fechaInicio, "
+                        + "edi.fechaFin, edi.tipoDoctoIntermedio, edi.puntaje "
                         + "FROM entregadoctointermedio edi "
+                        + "LEFT JOIN documentointermedio di ON edi.id = di.idEntregaDoctoIntermedio AND di.idExpediente = ? "
                         + "WHERE edi.idExperienciaEducativa = ? "
-                        + "AND CURDATE() BETWEEN edi.fechaInicio AND edi.fechaFin "
-                        + "AND edi.id NOT IN ("
-                        + "SELECT di.idEntregaDoctoIntermedio "
-                        + "FROM documentointermedio di "
-                        + "WHERE idExpediente = ?"
-                        + ")";
+                        + "AND di.id IS NULL "
+                        + "AND CURDATE() BETWEEN edi.fechaInicio AND edi.fechaFin";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, idExpediente);
                 sentencia.setInt(2, idExperienciaEducativa);
@@ -161,7 +158,7 @@ public class EntregaDocumentoIntermedioDAO {
                     int id = resultado.getInt("id");
                     LocalDate fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
                     LocalDate fechaFin = resultado.getDate("fechaFin").toLocalDate();
-                    String tipoDocumentoIntermedio = resultado.getString("tipoDoctoInicial");
+                    String tipoDocumentoIntermedio = resultado.getString("tipoDoctoIntermedio");
                     int puntaje = resultado.getInt("puntaje");
                     EntregaDocumentoIntermedio entregaDocumentoIntermedio = new EntregaDocumentoIntermedio(id, fechaInicio, fechaFin, puntaje, tipoDocumentoIntermedio);
                     entregasDisponibles.add(entregaDocumentoIntermedio);

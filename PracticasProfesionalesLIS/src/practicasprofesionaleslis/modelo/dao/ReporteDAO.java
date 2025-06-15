@@ -4,27 +4,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import practicasprofesionaleslis.modelo.ConexionBD;
-import practicasprofesionaleslis.modelo.pojo.DocumentoIntermedio;
+import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
-public class DocumentoIntermedioDAO {
+public class ReporteDAO {
     
-    public static boolean subirDocumentoIntermedio(DocumentoIntermedio documento, int idEntregaDocumentoIntermedio, int idExpediente) throws SQLException {
+    public static boolean subirReporte(Reporte reporte, int idEntregaReporte, int idExpediente) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "INSERT INTO documentointermedio (nombreArchivo, fechaEntregado, "
-                        + "idEntregaDoctoIntermedio, idExpediente, archivo) "
-                        + "VALUES (?, CURDATE(), ?, ?, ?)";
+                String consulta = "INSERT INTO reporte (nombreArchivo, fechaEntregado, "
+                        + "idEntregaReporte, idExpediente, archivo, horasCubiertas) "
+                        + "VALUES (?, CURDATE(), ?, ?, ?, ?)";
                 sentencia = conexionBD.prepareStatement(consulta);
-                sentencia.setString(1, documento.getNombreArchivo());
-                sentencia.setInt(2, idEntregaDocumentoIntermedio);
+                sentencia.setString(1, reporte.getNombreArchivo());
+                sentencia.setInt(2, idEntregaReporte);
                 sentencia.setInt(3, idExpediente);
-                sentencia.setBytes(4, documento.getArchivo());
+                sentencia.setBytes(4, reporte.getArchivo());
+                sentencia.setInt(5, reporte.getHorasCubiertas());
                 
                 int filasAfectadas = sentencia.executeUpdate();
                 return filasAfectadas > 0;

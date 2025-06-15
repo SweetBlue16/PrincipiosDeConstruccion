@@ -132,5 +132,43 @@ public class EntregaDocumentoFinalDAO {
         }
         return entregas;
     }
-
+    
+    public static List<EntregaDocumentoFinal> obtenerEntregasDisponibles(int idExperienciaEducativa, int idExpediente) throws SQLException {
+        List<EntregaDocumentoFinal> entregasDisponibles = new ArrayList<>();
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT edf.id, edf.idExperienciaEducativa, edf.fechaInicio, "
+                        + "edf.fechaFin, edf.tipoDoctoFinal, edf.puntaje "
+                        + "FROM entregadoctofinal edf "
+                        + "LEFT JOIN documentofinal df ON edf.id = df.idEntregaDoctoFinal AND df.idExpediente = ? "
+                        + "WHERE edf.idExperienciaEducativa = ? "
+                        + "AND df.id IS NULL "
+                        + "AND CURDATE() BETWEEN edf.fechaInicio AND edf.fechaFin";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idExperienciaEducativa);
+                
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    int id = resultado.getInt("id");
+                    LocalDate fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
+                    LocalDate fechaFin = resultado.getDate("fechaFin").toLocalDate();
+                    String tipoDocumentoFinal = resultado.getString("tipoDoctoFinal");
+                    int puntaje = resultado.getInt("puntaje");
+                    EntregaDocumentoFinal entregaDocumentoInicial = new EntregaDocumentoFinal(id, fechaInicio, fechaFin, puntaje, tipoDocumentoFinal);
+                    entregasDisponibles.add(entregaDocumentoInicial);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return entregasDisponibles;
+    }
 }
