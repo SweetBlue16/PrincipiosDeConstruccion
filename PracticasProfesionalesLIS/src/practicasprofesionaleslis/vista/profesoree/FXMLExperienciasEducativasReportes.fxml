@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="practicasprofesionaleslis.controlador.profesoree.FXMLExperienciasEducativasController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="60.0" layoutX="-10.0" layoutY="-10.0" stroke="#18529d" strokeType="INSIDE" width="730.0" />
+            <Label fx:id="lblTitulo" layoutX="6.0" layoutY="-3.0" prefHeight="46.0" prefWidth="661.0" text="Experiencias Educativas" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="26.0" />
+               </font>
+            </Label>
+            <Button layoutX="515.0" layoutY="334.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="25.0" />
+               </font>
+            </Button>
+            <TableView fx:id="tableViewExperiencias" layoutX="25.0" layoutY="76.0" prefHeight="245.0" prefWidth="662.0">
+               <columns>
+                  <TableColumn fx:id="colNombre" prefWidth="302.3999710083008" text="Nombre" />
+                  <TableColumn fx:id="colBloque" prefWidth="130.4000244140625" text="Bloque" />
+                  <TableColumn fx:id="colSeccion" prefWidth="117.59994506835938" text="Seccion" />
+                  <TableColumn fx:id="colNrc" prefWidth="122.40008544921875" text="nrc" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

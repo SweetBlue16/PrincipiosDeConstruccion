@@ -271,22 +271,28 @@ public class FXMLInicioSesionController implements Initializable {
     private void irPantallaPrincipalProfesorEE(ProfesorEE profesorEE) {
         try {
             Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
-            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/profesoree/FXMLPrincipalProfesorEE.fxml"));
+
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(
+                "/practicasprofesionaleslis/vista/profesoree/FXMLPrincipalProfesorEE.fxml"));
             Parent vista = cargador.load();
+
             FXMLPrincipalProfesorEEController controlador = cargador.getController();
             controlador.inicializarDatosProfesorEE(profesorEE);
-            
+
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
             escenarioBase.setTitle(ConstantesUtils.TITULO_PANTALLA_PRINCIPAL);
             escenarioBase.setResizable(false);
             escenarioBase.centerOnScreen();
-            escenarioBase.showAndWait();
+
+            escenarioBase.show();
+
         } catch (IOException e) {
             e.printStackTrace();
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            VentanasUtils.mostrarAlertaSimple(
+                Alert.AlertType.ERROR,
+                ConstantesUtils.TITULO_ERROR,
+                ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
             );
         }
     }
