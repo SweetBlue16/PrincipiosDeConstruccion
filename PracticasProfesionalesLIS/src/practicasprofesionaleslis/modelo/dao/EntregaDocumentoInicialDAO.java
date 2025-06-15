@@ -134,7 +134,7 @@ public class EntregaDocumentoInicialDAO {
         return entregas;
     }
     
-    public List<EntregaDocumentoInicial> obtenerEntregasDisponibles(int idExperienciaEducativa, int idExpediente) throws SQLException {
+    public static List<EntregaDocumentoInicial> obtenerEntregasDisponibles(int idExperienciaEducativa, int idExpediente) throws SQLException {
         List<EntregaDocumentoInicial> entregasDisponibles = new ArrayList<>();
         Connection conexionBD = null;
         PreparedStatement sentencia = null;

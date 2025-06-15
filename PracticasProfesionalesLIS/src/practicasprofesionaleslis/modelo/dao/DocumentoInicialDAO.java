@@ -10,7 +10,7 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class DocumentoInicialDAO {
     
-    public boolean subirDocumentoInicial(DocumentoInicial documento, int idEntregaDocumentoInicial, int idExpediente) throws SQLException {
+    public static boolean subirDocumentoInicial(DocumentoInicial documento, int idEntregaDocumentoInicial, int idExpediente) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         
