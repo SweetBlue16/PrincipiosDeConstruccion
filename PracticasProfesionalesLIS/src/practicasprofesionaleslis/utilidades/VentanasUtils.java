@@ -112,6 +112,7 @@ public class VentanasUtils {
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLDetallePresentacion.fxml"));
             Parent vista = cargador.load();
             FXMLDetallePresentacionController controlador = cargador.getController();
+            controlador.inicializarPresentacion(evaluacionPresentacion);
             
             Stage escenarioDocumento = new Stage();
             Scene escenaPrincipal = new Scene(vista);

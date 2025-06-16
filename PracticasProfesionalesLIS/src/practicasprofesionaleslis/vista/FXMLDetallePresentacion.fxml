@@ -1,11 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.FXMLDetallePresentacionController">
-    
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionaleslis.controlador.FXMLDetallePresentacionController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="60.0" stroke="#18529d" strokeType="INSIDE" width="744.0" />
+      <Label fx:id="lbltitulo" layoutX="14.0" layoutY="8.0" text="Detalle de la Presentación" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="538.0" layoutY="410.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblCalificacionFinal" layoutX="43.0" layoutY="94.0" text="Calificación final:">
+         <font>
+            <Font name="Gill Sans MT" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCriterio1" layoutX="37.0" layoutY="189.0" text="Label">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Separator layoutX="346.0" layoutY="79.0" orientation="VERTICAL" prefHeight="396.0" prefWidth="8.0" />
+      <Label fx:id="lblCriterio2" layoutX="37.0" layoutY="250.0" text="Label">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCriterio3" layoutX="37.0" layoutY="315.0" text="Label">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCriterio4" layoutX="37.0" layoutY="374.0" text="Label">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCriterio5" layoutX="37.0" layoutY="434.0" text="Label">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="372.0" layoutY="94.0" text="Comentarios:">
+         <font>
+            <Font name="Gill Sans MT" size="30.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtaComentarios" editable="false" layoutX="372.0" layoutY="162.0" prefHeight="200.0" prefWidth="288.0">
+         <font>
+            <Font name="Gill Sans MT" size="22.0" />
+         </font>
+      </TextArea>
+   </children>
 </AnchorPane>
