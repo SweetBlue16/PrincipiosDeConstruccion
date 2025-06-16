@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.coordinador.FXMLActualizarProyectoController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="66.0" stroke="#18529d" strokeType="INSIDE" width="700.0" />
+      <Label layoutX="24.0" layoutY="20.0" prefHeight="46.0" prefWidth="505.0" text="ACTUALIZAR PROYECTO" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="77.0" text="Nombre del proyecto">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtfNombreProyecto" layoutX="57.0" layoutY="101.0" prefHeight="39.0" prefWidth="425.0" promptText="Nuevo nombre">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <Button layoutX="108.0" layoutY="414.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="447.0" layoutY="414.0" mnemonicParsing="false" onAction="#clicBtnAceptar" prefHeight="47.0" prefWidth="124.0" style="-fx-background-color: #28ad56;" text="Aceptar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Label layoutX="57.0" layoutY="149.0" text="Número de integrantes">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="244.0" text="Descripción del proyecto">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtfNumeroIntegrantes" layoutX="57.0" layoutY="173.0" prefHeight="39.0" prefWidth="164.0" promptText="Nuevo #1-3">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="txtfDescripcionProy" layoutX="57.0" layoutY="268.0" prefHeight="123.0" prefWidth="568.0" promptText="Nueva descripción" />
+      <Label layoutX="57.0" layoutY="212.0" prefHeight="16.0" prefWidth="543.0" text="(¡No se permite cambiar número de integrantes a proyectos con alumnos ya asignados!)">
+         <font>
+            <Font name="Gill Sans MT" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -61,6 +61,7 @@ public class FXMLActualizarProyectoController implements Initializable {
             return false;
         }
         
+        // Para validar número de integrantes solo si no hay asignados
         if (!integrantesAsignados) {
             try {
                 int numIntegrantes = Integer.parseInt(txtfNumeroIntegrantes.getText().trim());
