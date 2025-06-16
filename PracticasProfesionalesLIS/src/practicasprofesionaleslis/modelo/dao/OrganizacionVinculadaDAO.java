@@ -39,7 +39,16 @@ public class OrganizacionVinculadaDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
     }
-
+    
+   /* public static boolean editarOrganizacionVinculada(OrganizacionVinculada organizacionVinculada) throws SQLException {
+        // TODO
+    }
+    
+    public static List<OrganizacionVinculada> obtenerOrganizacionesVinculadas() throws SQLException {
+        // TODO
+    }*/
+    
+    
     public static OrganizacionVinculada obtenerOrganizacionPorId(int id) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;

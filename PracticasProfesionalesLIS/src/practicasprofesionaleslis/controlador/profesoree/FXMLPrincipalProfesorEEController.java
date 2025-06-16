@@ -46,19 +46,21 @@ public class FXMLPrincipalProfesorEEController implements Initializable, IObserv
         this.profesorEE = profesorEE;
         try {
             this.profesorEE = ProfesorEEDAO.obtenerProfesorPorCorreo(profesorEE.getCorreoInstitucional());
-        } catch (SQLException e){
-            e.printStackTrace();
-            VentanasUtils.mostrarAlertaSimple(
-                Alert.AlertType.ERROR,
-                ConstantesUtils.TITULO_ERROR,
-                ConstantesUtils.ALERTA_ERROR_BD
-            );
+        }catch (SQLException e){
+                    e.printStackTrace();
+        VentanasUtils.mostrarAlertaSimple(
+            Alert.AlertType.ERROR,
+            ConstantesUtils.TITULO_ERROR,
+            ConstantesUtils.ALERTA_ERROR_BD
+        );
         }
 
         if (profesorEE != null) {
             lblNombreProfesorEE.setText(profesorEE.toString());
             lblCorreoElectronico.setText(profesorEE.getCorreoInstitucional());
             mostrarFotoPerfilProfesorEE(profesorEE);
+            
+            
         }
     }
     

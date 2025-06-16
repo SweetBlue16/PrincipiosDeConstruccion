@@ -155,6 +155,7 @@ public class PDFUtils {
             PDDocument documento = PDDocument.load(entrada);
             PDPage pagina = documento.getPage(0);
             
+            // Para plasmar datos en el PDF
             try (PDPageContentStream contenido = new PDPageContentStream(documento, pagina, PDPageContentStream.AppendMode.APPEND, true, true)) {
                 
                 contenido.setFont(PDType1Font.HELVETICA, 10);
@@ -200,7 +201,7 @@ public class PDFUtils {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_CARGAR_DOCUMENTO);
+                    ConstantesUtils.ALERTA_ERROR_BD);
             return false;
         }
     }

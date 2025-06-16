@@ -9,10 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
+import practicasprofesionaleslis.modelo.dao.OrganizacionVinculadaDAO;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
+import practicasprofesionaleslis.modelo.dao.ResponsableProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
+import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
+import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
@@ -28,7 +32,9 @@ public class FXMLFormatoEvaluacionParaOVController implements Initializable {
     private Estudiante estudiante;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}    
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
     
     public void inicializarEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
@@ -63,6 +69,7 @@ public class FXMLFormatoEvaluacionParaOVController implements Initializable {
                 return;
             }
             
+            // Para generar el PDF y los datos
             boolean exito = PDFUtils.guardarPDFConDatos(
                     RUTA_RELATIVA,  
                     NOMBRE_ARCHIVO, 

@@ -19,9 +19,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import practicasprofesionaleslis.controlador.evaluador.FXMLCalificarPresentacionController;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
+import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
@@ -59,6 +61,7 @@ public class FXMLBuscarEstudianteSinProyectoController implements Initializable 
     }    
     
     private boolean validarPrecondiciones() throws SQLException {
+        //PRE-02 Para verificar que hay proyectos disponibles
         if (!ProyectoDAO.verificarProyectosDisponibles()) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ADVERTENCIA,
@@ -82,6 +85,7 @@ public class FXMLBuscarEstudianteSinProyectoController implements Initializable 
             List<Estudiante> estudiantesDAO = EstudianteDAO.obtenerEstudiantesSinProyecto();
             
             
+            //PRE-01 Para verificar que haya estudiantes sin proyecto
             if (estudiantesDAO.isEmpty()) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ADVERTENCIA,

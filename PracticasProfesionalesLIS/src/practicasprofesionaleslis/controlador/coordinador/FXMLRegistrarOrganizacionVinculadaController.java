@@ -63,7 +63,7 @@ public class FXMLRegistrarOrganizacionVinculadaController implements Initializab
         } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                 ConstantesUtils.TITULO_ERROR,
-                ConstantesUtils.ALERTA_ERROR_BD
+                e.getMessage()
             );
         }
     }

@@ -187,7 +187,7 @@ public class FXMLFormularioPerfilController implements Initializable {
             } catch (SQLException e) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                         ConstantesUtils.TITULO_ERROR,
-                        ConstantesUtils.ALERTA_ERROR_BD
+                        e.getMessage()
                 );
             } catch (IOException e) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
@@ -265,12 +265,7 @@ public class FXMLFormularioPerfilController implements Initializable {
             ByteArrayInputStream input = new ByteArrayInputStream(foto);
             Image imagen = new Image(input);
             imgFotoPerfil.setImage(imagen);
-        } catch (SQLException e) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD
-            );
-        } catch (NullPointerException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -282,12 +277,7 @@ public class FXMLFormularioPerfilController implements Initializable {
             ByteArrayInputStream input = new ByteArrayInputStream(foto);
             Image imagen = new Image(input);
             imgFotoPerfil.setImage(imagen);
-        } catch (SQLException e) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD
-            );
-        } catch (NullPointerException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
     }
@@ -299,12 +289,7 @@ public class FXMLFormularioPerfilController implements Initializable {
             ByteArrayInputStream input = new ByteArrayInputStream(foto);
             Image imagen = new Image(input);
             imgFotoPerfil.setImage(imagen);
-        } catch (SQLException e) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD
-            );
-        } catch (NullPointerException e) {
+        } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
     }
