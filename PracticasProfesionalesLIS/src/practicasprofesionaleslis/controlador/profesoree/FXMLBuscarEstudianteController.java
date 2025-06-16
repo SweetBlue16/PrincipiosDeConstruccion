@@ -102,18 +102,14 @@ public class FXMLBuscarEstudianteController implements Initializable {
                     Parent vista = loader.load();
                     FXMLDocumentosEntregadosController controller = loader.getController();
 
-                    // Initialize the controller with data
                     controller.inicializarDatos(experienciaEducativa, estudianteSeleccionado, expediente);
 
-                    // Create and configure the new stage
                     Stage stage = new Stage();
                     stage.setScene(new Scene(vista));
                     stage.setTitle("Documentos Entregados");
                     stage.setResizable(false);
                     stage.show();
 
-                    // Close the current window if needed
-                    // ((Stage) lbltitulo.getScene().getWindow()).close();
                 } else {
                     VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                         "Expediente no encontrado",

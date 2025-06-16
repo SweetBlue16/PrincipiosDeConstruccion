@@ -216,12 +216,10 @@ private void clicBtnSeleccionar(ActionEvent event) throws SQLException {
     
     if (entregaSeleccionada != null) {
         try {
-            // Load the EvaluarDocumento view
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "/practicasprofesionaleslis/vista/profesoree/FXMLEvaluarDocumento.fxml"));
             Parent vista = loader.load();
             
-                        // Create the stage first
             Stage stage = new Stage();
             stage.setScene(new Scene(vista));
             stage.setResizable(false);
@@ -239,10 +237,7 @@ private void clicBtnSeleccionar(ActionEvent event) throws SQLException {
                     
             );
             
-            // Show the new window
-      //      stage.setScene(new Scene(vista));
-     //       stage.setTitle("Evaluar Documento - " + tipoDocumento);
-      //      stage.setResizable(false);
+
             stage.show();
             
         } catch (IOException e) {
