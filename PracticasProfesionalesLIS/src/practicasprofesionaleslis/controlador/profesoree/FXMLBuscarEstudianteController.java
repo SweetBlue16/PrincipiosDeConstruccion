@@ -85,44 +85,50 @@ public class FXMLBuscarEstudianteController implements Initializable {
     private void clicBtnCancelar(ActionEvent event) {
         VentanasUtils.cerrarVentana(lbltitulo);
     }
-
+    
     @FXML
     private void clicBtnSeleccionar(ActionEvent event) {
         Estudiante estudianteSeleccionado = tvEstudiantes.getSelectionModel().getSelectedItem();
+
         if (estudianteSeleccionado != null) {
             try {
-                // Get the expediente for the selected student
+                // Get the active expediente for the selected student
                 Expediente expediente = ExpedienteDAO.obtenerExpedienteActivoPorEstudiante(estudianteSeleccionado.getId());
 
                 if (expediente != null) {
                     // Load the DocumentosEntregados view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "practicasprofesionaleslis/vista/profesoree/FXMLDocumentosEntregados.fxml"));
-                            Parent root = loader.load();
-
-                    // Get the controller and initialize data
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                        "/practicasprofesionaleslis/vista/profesoree/FXMLDocumentosEntregados.fxml"));
+                    Parent vista = loader.load();
                     FXMLDocumentosEntregadosController controller = loader.getController();
+
+                    // Initialize the controller with data
                     controller.inicializarDatos(experienciaEducativa, estudianteSeleccionado, expediente);
 
-                    // Show the new window
+                    // Create and configure the new stage
                     Stage stage = new Stage();
-                    stage.setScene(new Scene(root));
+                    stage.setScene(new Scene(vista));
+                    stage.setTitle("Documentos Entregados");
+                    stage.setResizable(false);
                     stage.show();
+
+                    // Close the current window if needed
+                    // ((Stage) lbltitulo.getScene().getWindow()).close();
                 } else {
                     VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                        "No hay expediente",
-                        "El estudiante seleccionado no tiene un expediente activo");
+                        "Expediente no encontrado",
+                        "El estudiante seleccionado no tiene un expediente activo.");
                 }
             } catch (SQLException | IOException e) {
                 e.printStackTrace();
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     "Error",
-                    "No se pudo cargar la información del estudiante");
+                    "No se pudo cargar la información del estudiante: " + e.getMessage());
             }
         } else {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                 "Selección requerida",
-                "Debe seleccionar un estudiante de la tabla");
+                "Por favor seleccione un estudiante de la tabla.");
         }
     }
 }
