@@ -1,6 +1,7 @@
 package practicasprofesionaleslis.utilidades;
 
 import java.io.IOException;
+import java.io.InputStream;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,8 +11,11 @@ import javafx.scene.control.Control;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.PracticasProfesionalesLIS;
+import practicasprofesionaleslis.controlador.FXMLDetallePresentacionController;
+import practicasprofesionaleslis.controlador.FXMLDocumentoController;
 import practicasprofesionaleslis.controlador.FXMLFormularioPerfilController;
 import practicasprofesionaleslis.interfaz.IObservador;
+import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 
 public class VentanasUtils {
     public static void mostrarAlertaSimple(Alert.AlertType tipo, String titulo, String contenido) {
@@ -74,6 +78,47 @@ public class VentanasUtils {
             escenarioPerfil.initModality(Modality.APPLICATION_MODAL);
             escenarioPerfil.centerOnScreen();
             escenarioPerfil.showAndWait();
+        } catch (IOException e) {
+            mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
+    }
+    
+    public static void abrirVentanaPDF(InputStream streamPDF, String nombreArchivo) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLDocumento.fxml"));
+            Parent vista = cargador.load();
+            FXMLDocumentoController controlador = cargador.getController();
+            controlador.cargarDesdeStream(streamPDF);
+            
+            Stage escenarioDocumento = new Stage();
+            Scene escenaPrincipal = new Scene(vista);
+            escenarioDocumento.setTitle(nombreArchivo);
+            escenarioDocumento.setScene(escenaPrincipal);
+            escenarioDocumento.initModality(Modality.APPLICATION_MODAL);
+            escenarioDocumento.showAndWait();
+        } catch (IOException e) {
+            mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
+    }
+    
+    public static void abrirVentanaDetallePresentacion(EvaluacionPresentacion evaluacionPresentacion) {
+        try {
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/FXMLDetallePresentacion.fxml"));
+            Parent vista = cargador.load();
+            FXMLDetallePresentacionController controlador = cargador.getController();
+            
+            Stage escenarioDocumento = new Stage();
+            Scene escenaPrincipal = new Scene(vista);
+            escenarioDocumento.setTitle("DETALLE PRESENTACIÓN");
+            escenarioDocumento.setScene(escenaPrincipal);
+            escenarioDocumento.initModality(Modality.APPLICATION_MODAL);
+            escenarioDocumento.showAndWait();
         } catch (IOException e) {
             mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,

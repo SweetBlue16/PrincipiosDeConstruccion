@@ -89,7 +89,7 @@ public class PDFUtils {
     public static void mostrarPaginaActual() {
         if (documentoPDF == null || renderizadorPDF == null || visorImagen == null) return;
         try {
-            BufferedImage imagen = renderizadorPDF.renderImageWithDPI(paginaActual, 150);
+            BufferedImage imagen = renderizadorPDF.renderImageWithDPI(paginaActual, 200);
             Image imagenFX = SwingFXUtils.toFXImage(imagen, null);
             visorImagen.setImage(imagenFX);
         } catch (IOException e) {

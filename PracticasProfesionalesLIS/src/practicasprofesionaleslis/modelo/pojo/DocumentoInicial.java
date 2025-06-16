@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class DocumentoInicial extends Entregable {
     
-    public enum TipoDocumentoInicial { CARTA_ACEPTACION, CONSTANCIA_SEGURO, CRONOGRAMA, HORARIO, OFICIO_ASIGNACION }
+    public enum TipoDocumentoInicial { CARTAACEPTACION, CONSTANCIASEGURO, CRONOGRAMA, HORARIOUV, OFICIOASIGNACION }
     
     private TipoDocumentoInicial tipoDocumentoInicial;
 

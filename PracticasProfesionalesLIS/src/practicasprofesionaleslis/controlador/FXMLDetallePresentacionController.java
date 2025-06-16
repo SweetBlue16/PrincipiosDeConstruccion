@@ -1,4 +1,4 @@
-package practicasprofesionaleslis.controlador.profesoree;
+package practicasprofesionaleslis.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;

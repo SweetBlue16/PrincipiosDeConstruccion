@@ -51,7 +51,7 @@ public class ReporteDAO {
             if (conexionBD != null) {
                 String consulta = "SELECT r.id, r.nombreArchivo, r.archivo, er.numeroReporte, r.horasCubiertas "
                         + "FROM reporte r "
-                        + "JOIN entregareporte er ON r.idEntregaReporte = er.id "
+                        + "JOIN entregareporte er ON r.idEntregaReporte = er.idEntregaReporte "
                         + "WHERE r.idExpediente = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, idExpediente);

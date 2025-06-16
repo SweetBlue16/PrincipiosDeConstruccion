@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class DocumentoIntermedio extends Entregable {
     
-    public enum TipoDocumentoIntermedio { REPORTE_PARCIAL, PRESENTACION_210_HORAS, EVALUACION_PARCIAL_OV }
+    public enum TipoDocumentoIntermedio { REPORTEPARCIAL, PRESENTACION210HORAS, EVALUACIONPARCIALOV }
     
     private TipoDocumentoIntermedio tipoDocumentoIntermedio;
 
