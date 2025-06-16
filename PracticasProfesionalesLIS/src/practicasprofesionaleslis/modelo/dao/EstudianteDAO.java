@@ -78,12 +78,12 @@ public class EstudianteDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT e.id, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.matricula "
-                        + "FROM estudiante e "
-                        + "JOIN expediente ex ON e.id = ex.idEstudiante "
-                        + "WHERE ex.id NOT IN ( "
-                        + "SELECT ep.idExpediente FROM evaluacionpresentacion ep WHERE ep.numeroEvaluacion = ? "
-                        + ")";
+                String consulta = "SELECT e.id, e.matricula, e.nombre, e.apellidoPaterno, e.apellidoMaterno, " 
+                                  + "e.correoInstitucional, e.semestre " 
+                                  + "FROM estudiante e " 
+                                  + "JOIN expediente ex ON e.id = ex.idEstudiante " 
+                                  + "LEFT JOIN evaluacionpresentacion ep ON ep.idExpediente = ex.id AND ep.numeroEvaluacion = ? " 
+                                  + "WHERE ep.id IS NULL AND ex.idProyecto IS NOT NULL";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, numeroEvaluacion);
                 resultado = sentencia.executeQuery();
