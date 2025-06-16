@@ -14,15 +14,7 @@ import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class ProyectoDAO {
-    
-    /*public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
-    }
-    
-    public static boolean editarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
-    }*/
-    
+
     public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -190,7 +182,7 @@ public class ProyectoDAO {
                     proyecto.setOrganizacionVinculada(organizacion);
                     
                     proyectos.add(proyecto);
-            }
+                }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
@@ -306,8 +298,7 @@ public class ProyectoDAO {
             BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
         }
         return proyectos;
-    }
-    
+    } 
 
     public static Proyecto obtenerProyectoPorNombre(String nombreProyecto) throws SQLException {
                 Connection conexionBD = null;

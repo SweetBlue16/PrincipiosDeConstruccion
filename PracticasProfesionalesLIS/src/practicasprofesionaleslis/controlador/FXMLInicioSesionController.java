@@ -105,7 +105,8 @@ public class FXMLInicioSesionController implements Initializable {
         if (!formatoValido) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ADVERTENCIA,
-                    ConstantesUtils.ALERTA_FORMATO_USUARIO_INVALIDO);
+                    ConstantesUtils.ALERTA_FORMATO_USUARIO_INVALIDO
+            );
         }
         return formatoValido;
     }
@@ -145,7 +146,7 @@ public class FXMLInicioSesionController implements Initializable {
         } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    e.getMessage()
+                    ConstantesUtils.ALERTA_ERROR_BD
             );
         }
     }
@@ -169,7 +170,7 @@ public class FXMLInicioSesionController implements Initializable {
         } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    e.getMessage()
+                    ConstantesUtils.ALERTA_ERROR_BD
             );
         }
     }
@@ -193,7 +194,7 @@ public class FXMLInicioSesionController implements Initializable {
         } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    e.getMessage()
+                    ConstantesUtils.ALERTA_ERROR_BD
             );
         }
     }
@@ -217,14 +218,14 @@ public class FXMLInicioSesionController implements Initializable {
         } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    e.getMessage()
+                    ConstantesUtils.ALERTA_ERROR_BD
             );
         }
     }
     
     private void irPantallaPrincipalEstudiante(Estudiante estudiante, String nombreProyecto) {
         try {
-            Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
+            Stage escenarioBase = VentanasUtils.obtenerEscenarioComponente(txtfUsuario);
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/estudiante/FXMLPrincipalEstudiante.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalEstudianteController controlador = cargador.getController();
@@ -247,7 +248,7 @@ public class FXMLInicioSesionController implements Initializable {
     
     private void irPantallaPrincipalCoordinador(Coordinador coordinador) {
         try {
-            Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
+            Stage escenarioBase = VentanasUtils.obtenerEscenarioComponente(txtfUsuario);
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/coordinador/FXMLPrincipalCoordinador.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalCoordinadorController controlador = cargador.getController();
@@ -270,7 +271,7 @@ public class FXMLInicioSesionController implements Initializable {
     
     private void irPantallaPrincipalProfesorEE(ProfesorEE profesorEE) {
         try {
-            Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
+            Stage escenarioBase = VentanasUtils.obtenerEscenarioComponente(txtfUsuario);
 
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(
                 "/practicasprofesionaleslis/vista/profesoree/FXMLPrincipalProfesorEE.fxml"));
@@ -299,7 +300,7 @@ public class FXMLInicioSesionController implements Initializable {
     
     private void irPantallaPrincipalEvaluador(Evaluador evaluador) {
         try {
-            Stage escenarioBase = (Stage) txtfUsuario.getScene().getWindow();
+            Stage escenarioBase = VentanasUtils.obtenerEscenarioComponente(txtfUsuario);
             FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource("/practicasprofesionaleslis/vista/evaluador/FXMLPrincipalEvaluador.fxml"));
             Parent vista = cargador.load();
             FXMLPrincipalEvaluadorController controlador = cargador.getController();

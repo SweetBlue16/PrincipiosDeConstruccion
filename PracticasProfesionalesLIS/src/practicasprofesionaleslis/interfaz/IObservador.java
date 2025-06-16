@@ -1,4 +1,3 @@
-
 package practicasprofesionaleslis.interfaz;
 
 public interface IObservador {

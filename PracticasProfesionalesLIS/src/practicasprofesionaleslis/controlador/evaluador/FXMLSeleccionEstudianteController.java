@@ -3,7 +3,6 @@ package practicasprofesionaleslis.controlador.evaluador;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,14 +18,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
 import practicasprofesionaleslis.modelo.dao.EvaluacionPresentacionDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
-import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
@@ -135,7 +132,7 @@ public class FXMLSeleccionEstudianteController implements Initializable {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
             );
         }
     }

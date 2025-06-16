@@ -1,6 +1,7 @@
 package practicasprofesionaleslis.controlador.coordinador;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,13 +24,12 @@ public class FXMLRegistrarProyectoController implements Initializable {
     private TextField tfNombreProyecto;
     @FXML
     private TextField tfNumeroIntegrantes;
+    
     private OrganizacionVinculada organizacion;
     private ResponsableProyecto responsable;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) {}    
 
     public void setOrganizacionYResponsable(OrganizacionVinculada organizacion, ResponsableProyecto responsable) {
         this.organizacion = organizacion;
@@ -80,7 +80,7 @@ public class FXMLRegistrarProyectoController implements Initializable {
                         "Se ha registrado correctamente el proyecto en el sistema.");
                 VentanasUtils.cerrarVentana(tfNombreProyecto);
             } 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
@@ -92,6 +92,5 @@ public class FXMLRegistrarProyectoController implements Initializable {
     private void clicBtnCancelar(ActionEvent event) {
         VentanasUtils.cerrarVentana(tfDescripcion);
     }
-
     
 }
