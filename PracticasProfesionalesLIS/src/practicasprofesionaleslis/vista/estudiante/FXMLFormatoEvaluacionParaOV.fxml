@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.estudiante.FXMLFormatoEvaluacionParaOVController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionaleslis.controlador.estudiante.FXMLFormatoEvaluacionParaOVController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="60.0" stroke="#18529d" strokeType="INSIDE" width="700.0" />
+      <Label fx:id="lblEncabezado" layoutX="14.0" layoutY="7.0" prefHeight="46.0" prefWidth="661.0" text="Formato evaluación OV" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="136.0" layoutY="195.0" mnemonicParsing="false" onAction="#clicBtnDescargar" prefHeight="55.0" prefWidth="429.0" style="-fx-background-color: #28ad56;" text="PDF - Evaluación de la Organización Vinculada" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="451.0" layoutY="409.0" mnemonicParsing="false" onAction="#clicBtnCancelar" prefHeight="27.0" prefWidth="173.0" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="30.0" />
+         </font>
+      </Button>
+      <Label layoutX="222.0" layoutY="141.0" text="Documento para descargar">
+         <font>
+            <Font name="Gill Sans MT" size="24.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

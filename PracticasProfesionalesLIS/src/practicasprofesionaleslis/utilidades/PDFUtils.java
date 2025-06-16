@@ -10,6 +10,13 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import practicasprofesionaleslis.modelo.pojo.Estudiante;
+import practicasprofesionaleslis.modelo.pojo.Expediente;
+import practicasprofesionaleslis.modelo.pojo.Proyecto;
+import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 
 public class PDFUtils {
     private static PDDocument documentoPDF;
@@ -136,4 +143,77 @@ public class PDFUtils {
     public static int obtenerTotalPaginas() {
         return totalPaginas;
     }
+    
+    public static boolean guardarPDFConDatos(String rutaRelativa, String nombreArchivo, 
+            Estudiante estudiante, Proyecto proyecto, Expediente expediente) {
+
+        try (InputStream entrada = PDFUtils.class.getResourceAsStream(rutaRelativa)) {
+            if (entrada == null) {
+                return false;
+            }
+
+            PDDocument documento = PDDocument.load(entrada);
+            PDPage pagina = documento.getPage(0);
+            
+            // Para plasmar datos en el PDF
+            try (PDPageContentStream contenido = new PDPageContentStream(documento, pagina, PDPageContentStream.AppendMode.APPEND, true, true)) {
+                
+                contenido.setFont(PDType1Font.HELVETICA, 10);
+
+                escribirTexto(contenido, 230, 657, 
+                        estudiante.getNombre() + " " + 
+                        estudiante.getApellidoPaterno() + " " + 
+                        estudiante.getApellidoMaterno());
+                escribirTexto(contenido, 230, 643, estudiante.getMatricula());
+                if (proyecto.getOrganizacionVinculada() != null) {
+                    escribirTexto(contenido, 230, 630, proyecto.getOrganizacionVinculada().getRazonSocial());
+                }
+                if (proyecto.getResponsableProyecto() != null) {
+                    ResponsableProyecto responsable = proyecto.getResponsableProyecto();
+                    String nombreResponsable = responsable.getNombre() + " " + 
+                            responsable.getApellidoPaterno() + 
+                            (responsable.getApellidoMaterno() != null ? " " + responsable.getApellidoMaterno() : "");
+                    escribirTexto(contenido, 230, 603, nombreResponsable);
+                }
+                escribirTexto(contenido, 230, 590, proyecto.getNombre());
+                escribirTexto(contenido, 230, 577, 
+                        expediente.getHorasAcumuladas() > 0 ? 
+                        String.valueOf(expediente.getHorasAcumuladas()) : "0");
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar archivo PDF");
+            fileChooser.setInitialFileName(nombreArchivo + ".pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+
+            File archivoDestino = fileChooser.showSaveDialog(null);
+            if (archivoDestino == null) {
+                documento.close();
+                return false;
+            }
+            
+            documento.save(archivoDestino);
+            documento.close();
+
+            return true;
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD);
+            return false;
+        }
+    }
+
+    private static void escribirTexto(PDPageContentStream contenido, float x, float y, String texto) 
+            throws IOException {
+        if (texto != null && !texto.isEmpty()) {
+            contenido.beginText();
+            contenido.newLineAtOffset(x, y);
+            contenido.showText(texto);
+            contenido.endText();
+        }
+    }
+    
 }

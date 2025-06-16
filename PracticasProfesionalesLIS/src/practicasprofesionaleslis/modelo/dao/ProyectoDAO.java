@@ -308,8 +308,9 @@ public class ProyectoDAO {
         return proyectos;
     }
     
+
     public static Proyecto obtenerProyectoPorNombre(String nombreProyecto) throws SQLException {
-        Connection conexionBD = null;
+                Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         Proyecto proyecto = null;
@@ -322,15 +323,14 @@ public class ProyectoDAO {
                                   + "WHERE nombre LIKE ?";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setString(1, "%" + nombreProyecto + "%");
-                resultado = sentencia.executeQuery();
-
+                resultado = sentencia.executeQuery();   
                 if (resultado.next()) {
                     proyecto = new Proyecto();
                     proyecto.setId(resultado.getInt("id"));
                     proyecto.setNombre(resultado.getString("nombre"));
                     proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
                     proyecto.setDescripcion(resultado.getString("descripcion"));
-
+                    
                     ResponsableProyecto responsable = new ResponsableProyecto();
                     responsable.setId(resultado.getInt("idResponsable"));
                     proyecto.setResponsableProyecto(responsable);  
@@ -346,7 +346,63 @@ public class ProyectoDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return proyecto;
+            
     }
+
+    public static Proyecto obtenerProyectoPorId(int idProyecto) throws SQLException {
+
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        Proyecto proyecto = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT p.id, p.nombre, p.numIntegrantes, p.descripcion, "
+                        + "r.id AS idResponsable, r.nombre AS nombreResponsable, "
+                        + "r.apellidoPaterno AS apellidoPResponsable, "
+                        + "r.apellidoMaterno AS apellidoMResponsable, "
+                        + "r.puesto AS puestoResponsable, "
+                        + "ov.id AS idOrganizacion, ov.razonSocial "
+                        + "FROM proyecto p "
+                        + "LEFT JOIN responsableproyecto r ON p.idResponsable = r.id "
+                        + "LEFT JOIN organizacionvinculada ov ON p.idOrganizacion = ov.id "
+                        + "WHERE p.id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idProyecto);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    proyecto = new Proyecto();
+                    proyecto.setId(resultado.getInt("id"));
+                    proyecto.setNombre(resultado.getString("nombre"));
+                    proyecto.setNumIntegrantes(resultado.getInt("numIntegrantes"));
+                    proyecto.setDescripcion(resultado.getString("descripcion"));
+
+                    ResponsableProyecto responsable = new ResponsableProyecto();
+                    responsable.setId(resultado.getInt("idResponsable"));
+                    responsable.setNombre(resultado.getString("nombreResponsable"));
+                    responsable.setApellidoPaterno(resultado.getString("apellidoPResponsable"));
+                    responsable.setApellidoMaterno(resultado.getString("apellidoMResponsable"));
+                    responsable.setPuesto(resultado.getString("puestoResponsable"));
+                    proyecto.setResponsableProyecto(responsable);
+
+                    OrganizacionVinculada organizacion = new OrganizacionVinculada();
+                    organizacion.setId(resultado.getInt("idOrganizacion"));
+                    organizacion.setRazonSocial(resultado.getString("razonSocial"));
+                    
+                    proyecto.setOrganizacionVinculada(organizacion);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return proyecto;
+        
+    }    
     
     public static boolean tieneIntegrantesAsignados(int idProyecto) throws SQLException {
         Connection conexionBD = null;
