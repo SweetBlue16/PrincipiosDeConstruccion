@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.profesoree.FXMLBusquedaEstudianteController">
-    
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionaleslis.controlador.profesoree.FXMLBusquedaEstudianteController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="60.0" stroke="#18529d" strokeType="INSIDE" width="645.0" />
+      <Button layoutX="139.0" layoutY="252.0" mnemonicParsing="false" onAction="#clicBtnBuscar" style="-fx-background-color: #28ad56;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="338.0" layoutY="252.0" mnemonicParsing="false" onAction="#clicBtnCancelar" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Label fx:id="lbltitulo" layoutX="14.0" layoutY="8.0" text="Ingrese la matrícula del estudiante" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtfMatricula" layoutX="44.0" layoutY="135.0" prefHeight="38.0" prefWidth="512.0" promptText="S23000000">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </TextField>
+      <Label fx:id="lblEstudiantes" layoutX="44.0" layoutY="101.0" text="Matrícula:">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

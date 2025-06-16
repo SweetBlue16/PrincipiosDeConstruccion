@@ -1,4 +1,4 @@
-package practicasprofesionaleslis.controlador.estudiante;
+package practicasprofesionaleslis.controlador;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
