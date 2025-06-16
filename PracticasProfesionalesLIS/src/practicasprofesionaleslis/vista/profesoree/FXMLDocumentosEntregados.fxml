@@ -23,10 +23,10 @@
       </Button>
       <TableView layoutX="25.0" layoutY="76.0" prefHeight="245.0" prefWidth="662.0">
         <columns>
-          <TableColumn prefWidth="366.39995193481445" text="Nombre" />
-          <TableColumn prefWidth="104.00006103515625" text="Inicia" />
-          <TableColumn prefWidth="117.5999755859375" text="Termina" />
-          <TableColumn text="Puntaje" />
+          <TableColumn prefWidth="341.60002517700195" text="Nombre" />
+          <TableColumn prefWidth="121.5999755859375" text="Inicia" />
+          <TableColumn prefWidth="111.20001220703125" text="Termina" />
+          <TableColumn prefWidth="94.4000244140625" text="Puntaje" />
         </columns>
       </TableView>
    </children>
