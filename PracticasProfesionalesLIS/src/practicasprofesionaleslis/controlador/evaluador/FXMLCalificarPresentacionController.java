@@ -3,7 +3,6 @@ package practicasprofesionaleslis.controlador.evaluador;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +18,6 @@ import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Criterio;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
-import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
@@ -45,8 +43,10 @@ public class FXMLCalificarPresentacionController implements Initializable {
     private Label lbCalifiCritCuatro;
     @FXML
     private Label lbCalifiCritCinco;
+    
     private Estudiante estudiante;
     private Proyecto proyecto;
+    
     @FXML
     private Slider slCritUno;
     @FXML
@@ -57,6 +57,7 @@ public class FXMLCalificarPresentacionController implements Initializable {
     private Slider slCritCuatro;
     @FXML
     private Slider slCritTres;
+    
     private int numeroEvaluacion;
     private int idExpediente;
 
@@ -104,14 +105,12 @@ public class FXMLCalificarPresentacionController implements Initializable {
     }
     
     private void configurarSlider(Slider slider, Label label) {
-        //Para configurar rangos de incremento en decimal y con valores mínimos y máximos
         slider.setMin(5.0);
         slider.setMax(10.0);
         slider.setBlockIncrement(0.1);
         slider.setValue(5.0);  
         label.setText(String.format("%.1f", slider.getValue()));
         slider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            // Para solo plasmar a un decimal
             label.setText(String.format("%.1f", newVal.doubleValue()));
         });
     } 

@@ -186,24 +186,20 @@ public class ExpedienteDAO {
 
                 resultado = sentencia.executeQuery();
                 if (resultado.next()) {
-                    // Create basic expediente with direct fields
                     expediente = new Expediente();
                     expediente.setId(resultado.getInt("id"));
                     expediente.setFechaCreacion(resultado.getString("fechaCreacion"));
 
-                    // Set estado (converting from String to Enum)
                     String estadoString = resultado.getString("estado");
                     expediente.setEstado(Expediente.Estado.valueOf(estadoString.toUpperCase()));
 
                     expediente.setCalificacion(resultado.getInt("calificacion"));
                     expediente.setHorasAcumuladas(resultado.getInt("horasAcumuladas"));
 
-                    // Create and set estudiante (with just the ID)
                     Estudiante estudiante = new Estudiante();
                     estudiante.setId(idEstudiante);
                     expediente.setEstudiante(estudiante);
 
-                    // Create and set proyecto (if exists)
                     int idProyecto = resultado.getInt("idProyecto");
                     if (!resultado.wasNull()) {
                         Proyecto proyecto = new Proyecto();
@@ -211,7 +207,6 @@ public class ExpedienteDAO {
                         expediente.setProyecto(proyecto);
                     }
 
-                    // Create and set experiencia educativa
                     ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
                     experienciaEducativa.setId(resultado.getInt("idExperienciaEducativa"));
                     expediente.setExperienciaEducativa(experienciaEducativa);

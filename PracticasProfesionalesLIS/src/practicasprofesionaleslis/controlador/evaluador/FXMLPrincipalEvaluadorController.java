@@ -95,7 +95,7 @@ public class FXMLPrincipalEvaluadorController implements Initializable, IObserva
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
             );;
         }
     }

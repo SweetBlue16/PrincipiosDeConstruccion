@@ -102,7 +102,7 @@ public class FXMLAvancePracticasProfesionalesController implements Initializable
             } catch (SQLException e) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                         ConstantesUtils.TITULO_ERROR,
-                        e.getMessage()
+                        ConstantesUtils.ALERTA_ERROR_BD
                 );
             }
         }
@@ -200,7 +200,6 @@ public class FXMLAvancePracticasProfesionalesController implements Initializable
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
-                    return;
                 } else {
                     T elemento = getTableView().getItems().get(getIndex());
                     boolean habilitado = habilitacion.test(elemento);

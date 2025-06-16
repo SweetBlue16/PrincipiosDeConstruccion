@@ -40,6 +40,7 @@ public class FXMLAsignacionProyectoController implements Initializable {
     private TableColumn colNumIntegrantes;
     @FXML
     private TableColumn<Proyecto, String> colNombreOV;
+    
     private Estudiante estudiante;
     ObservableList<Proyecto> proyectosDisponibles;
 
@@ -112,7 +113,6 @@ public class FXMLAsignacionProyectoController implements Initializable {
         }
 
         try {
-            // Para obtener el id del expediente del estudiante al que se insertará el nuevo proyecto
             int idExpediente = ExpedienteDAO.obtenerIdExpedientePorIdEstudiante(estudiante.getId());
             if (idExpediente == -1) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,

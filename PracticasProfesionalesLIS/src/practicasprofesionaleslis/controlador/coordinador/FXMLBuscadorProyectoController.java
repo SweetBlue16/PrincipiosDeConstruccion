@@ -30,9 +30,7 @@ public class FXMLBuscadorProyectoController implements Initializable {
     private Proyecto proyectoEncontrado;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) {}    
 
     @FXML
     private void validarProyecto() {

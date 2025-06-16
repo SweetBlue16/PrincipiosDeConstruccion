@@ -1,6 +1,5 @@
 package practicasprofesionaleslis.modelo.dao;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

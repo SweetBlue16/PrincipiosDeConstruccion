@@ -1,6 +1,5 @@
 package practicasprofesionaleslis.controlador.profesoree;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
-import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
@@ -32,8 +29,10 @@ import practicasprofesionaleslis.utilidades.VentanasUtils;
 public class FXMLBuscarEstudianteController implements Initializable {
 
     private AnchorPane apBuscarEstudiante;
+    
     @FXML
     private TableView<Estudiante> tvEstudiantes;
+    
     private ObservableList<Estudiante> estudiantes;
     private ExperienciaEducativa experienciaEducativa;
     

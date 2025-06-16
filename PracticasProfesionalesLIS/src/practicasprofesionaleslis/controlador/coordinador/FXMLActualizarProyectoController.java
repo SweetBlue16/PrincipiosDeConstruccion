@@ -1,8 +1,6 @@
 package practicasprofesionaleslis.controlador.coordinador;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,10 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
-import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
@@ -26,20 +22,18 @@ public class FXMLActualizarProyectoController implements Initializable {
     private TextField txtfNumeroIntegrantes;
     @FXML
     private TextArea txtfDescripcionProy;
+    
     private Proyecto proyectoSeleccionado;
     private boolean integrantesAsignados;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) {}    
 
     public void inicializarDatosProyecto(Proyecto proyecto, boolean integrantesAsignados) {
         this.proyectoSeleccionado = proyecto;
         this.integrantesAsignados = integrantesAsignados;
         cargarDatosProyecto();
         
-        // Para no permitir ingresar otro número de integrantes 
         if (integrantesAsignados) {
             txtfNumeroIntegrantes.setDisable(true);
         }
@@ -88,7 +82,6 @@ public class FXMLActualizarProyectoController implements Initializable {
             try {
                 proyectoSeleccionado.setNombre(txtfNombreProyecto.getText().trim());
                 
-                // Solo actualizar número de integrantes si no hay asignados
                 if (!integrantesAsignados) {
                     proyectoSeleccionado.setNumIntegrantes(Integer.parseInt(txtfNumeroIntegrantes.getText().trim()));
                 }
