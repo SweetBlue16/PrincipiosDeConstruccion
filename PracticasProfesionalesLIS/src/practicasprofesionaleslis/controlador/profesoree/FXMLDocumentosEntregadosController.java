@@ -189,7 +189,7 @@ public class FXMLDocumentosEntregadosController implements Initializable {
     }
 
 @FXML
-private void clicBtnSeleccionar(ActionEvent event) {
+private void clicBtnSeleccionar(ActionEvent event) throws SQLException {
     // Check which table has selection
     EntregaDocumentoInicial entregaInicial = tblDocumentosIniciales.getSelectionModel().getSelectedItem();
     EntregaDocumentoIntermedio entregaIntermedia = tblDocumentosIntermedios.getSelectionModel().getSelectedItem();
