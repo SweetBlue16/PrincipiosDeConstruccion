@@ -13,11 +13,11 @@ import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class EstudianteDAO {
-    
+
     public static boolean editarEstudiante(Estudiante estudiante) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -31,7 +31,7 @@ public class EstudianteDAO {
                 sentencia.setString(4, estudiante.getContraseña());
                 sentencia.setBytes(5, estudiante.getFotoPerfil());
                 sentencia.setString(6, estudiante.getMatricula());
-                
+
                 int filasAfectadas = sentencia.executeUpdate();
                 return filasAfectadas > 0;
             } else {
@@ -41,13 +41,13 @@ public class EstudianteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
     }
-    
+
     public static byte[] obtenerFotoEstudiante(int id) throws SQLException {
         byte[] foto = null;
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -55,7 +55,7 @@ public class EstudianteDAO {
                         + "WHERE id = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, id);
-                
+
                 resultado = sentencia.executeQuery();
                 if (resultado.next()) {
                     foto = resultado.getBytes("fotoPerfil");
@@ -74,20 +74,20 @@ public class EstudianteDAO {
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         List<Estudiante> estudiantes = new ArrayList<>();
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT e.id, e.matricula, e.nombre, e.apellidoPaterno, e.apellidoMaterno, " 
-                                  + "e.correoInstitucional, e.semestre " 
-                                  + "FROM estudiante e " 
-                                  + "JOIN expediente ex ON e.id = ex.idEstudiante " 
-                                  + "LEFT JOIN evaluacionpresentacion ep ON ep.idExpediente = ex.id AND ep.numeroEvaluacion = ? " 
-                                  + "WHERE ep.id IS NULL AND ex.idProyecto IS NOT NULL";
+                String consulta = "SELECT e.id, e.matricula, e.nombre, e.apellidoPaterno, e.apellidoMaterno, "
+                        + "e.correoInstitucional, e.semestre "
+                        + "FROM estudiante e "
+                        + "JOIN expediente ex ON e.id = ex.idEstudiante "
+                        + "LEFT JOIN evaluacionpresentacion ep ON ep.idExpediente = ex.id AND ep.numeroEvaluacion = ? "
+                        + "WHERE ep.id IS NULL AND ex.idProyecto IS NOT NULL";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, numeroEvaluacion);
                 resultado = sentencia.executeQuery();
-                
+
                 while (resultado.next()) {
                     Estudiante estudiante = new Estudiante();
                     estudiante.setId(resultado.getInt("id"));
@@ -96,7 +96,7 @@ public class EstudianteDAO {
                     estudiante.setApellidoMaterno(resultado.getString("apellidoMaterno"));
                     estudiante.setMatricula(resultado.getString("matricula"));
                     estudiantes.add(estudiante);
-            }
+                }
 
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
@@ -104,11 +104,11 @@ public class EstudianteDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
-        
+
         return estudiantes;
-        
+
     }
-    
+
     public static List<Estudiante> obtenerEstudiantesSinProyecto() throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -119,9 +119,9 @@ public class EstudianteDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "SELECT e.id, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.matricula, e.correoInstitucional, e.semestre "
-                                  + "FROM estudiante e "
-                                  + "JOIN expediente ex ON e.id = ex.idEstudiante "
-                                  + "WHERE ex.idProyecto IS NULL";
+                        + "FROM estudiante e "
+                        + "JOIN expediente ex ON e.id = ex.idEstudiante "
+                        + "WHERE ex.idProyecto IS NULL";
                 sentencia = conexionBD.prepareStatement(consulta);
                 resultado = sentencia.executeQuery();
 
@@ -178,13 +178,13 @@ public class EstudianteDAO {
         }
         return estudiantes;
     }
-    
+
     public static Estudiante obtenerEstudiantePorMatricula(String matricula) throws SQLException {
         Estudiante estudiante = null;
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -215,5 +215,31 @@ public class EstudianteDAO {
         }
         return estudiante;
     }
-    
+
+    public static boolean tieneExpediente(int idEstudiante) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        boolean tieneExpediente = false;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT COUNT(*) AS count FROM expediente WHERE idEstudiante = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idEstudiante);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    tieneExpediente = resultado.getInt("count") > 0;
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return tieneExpediente;
+    }
+
 }

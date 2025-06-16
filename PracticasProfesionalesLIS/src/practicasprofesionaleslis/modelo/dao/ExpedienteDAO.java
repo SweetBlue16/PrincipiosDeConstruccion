@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
@@ -15,13 +16,13 @@ import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class ExpedienteDAO {
-    
+
     public static String obtenerNombreProyectoPorMatricula(String matricula) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         String nombreProyecto = "";
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -45,9 +46,9 @@ public class ExpedienteDAO {
         }
         return nombreProyecto;
     }
-    
+
     public static int obtenerIdExpedientePorIdEstudiante(int idEstudiante) throws SQLException {
-        int idExpediente = -1; 
+        int idExpediente = -1;
 
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -72,13 +73,13 @@ public class ExpedienteDAO {
         }
         return idExpediente;
     }
-    
+
     public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         List<Estudiante> estudiantes = new ArrayList<>();
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -88,7 +89,7 @@ public class ExpedienteDAO {
                         + "JOIN expediente ex ON e.id = ex.idEstudiante "
                         + "WHERE ex.idProyecto IS NULL;";
                 sentencia = conexionBD.prepareStatement(consulta);
-                
+
                 resultado = sentencia.executeQuery();
                 while (resultado.next()) {
                     Estudiante estudiante = new Estudiante();
@@ -99,7 +100,7 @@ public class ExpedienteDAO {
                     estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
                     estudiante.setSemestre(resultado.getInt("semestre"));
                     estudiantes.add(estudiante);
-                    }
+                }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
@@ -108,7 +109,7 @@ public class ExpedienteDAO {
         }
         return estudiantes;
     }
-    
+
     public static boolean asignarProyectoAExpediente(int idExpediente, int idProyecto) throws SQLException {
         Connection conexion = null;
         PreparedStatement sentencia = null;
@@ -125,13 +126,13 @@ public class ExpedienteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, null);
         }
     }
-    
+
     public static Expediente obtenerExpedientePorEstudiante(int idEstudiante) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         Expediente expediente = null;
-        
+
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
@@ -145,10 +146,10 @@ public class ExpedienteDAO {
                 if (resultado.next()) {
                     Proyecto proyecto = new Proyecto();
                     proyecto.setId(resultado.getInt("idProyecto"));
-                    
+
                     ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
                     experienciaEducativa.setId(resultado.getInt("idExperienciaEducativa"));
-                    
+
                     expediente = new Expediente();
                     expediente.setId(resultado.getInt("id"));
                     expediente.setFechaCreacion(resultado.getString("fechaCreacion"));
@@ -167,7 +168,7 @@ public class ExpedienteDAO {
         }
         return expediente;
     }
-    
+
     public static Expediente obtenerExpedienteActivoPorEstudiante(int idEstudiante) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -223,6 +224,34 @@ public class ExpedienteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return expediente;
+    }
+
+    public static boolean registrarExpedienteEstudiante(int idEstudiante) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        boolean registrado = false;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "INSERT INTO expediente " +
+                        "(fechaCreacion, estado, idEstudiante) " +
+                        "VALUES (?, 'Activo', ?)";
+
+                sentencia = conexionBD.prepareStatement(consulta);
+
+                sentencia.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+                sentencia.setInt(2, idEstudiante);
+
+                int filasAfectadas = sentencia.executeUpdate();
+                registrado = filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+        return registrado;
     }
 
 }
