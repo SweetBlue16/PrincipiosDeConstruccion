@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,11 +21,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoInicialDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoIntermedioDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaReporteDAO;
 
+
+import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
@@ -99,6 +103,8 @@ public class FXMLDocumentosEntregadosController implements Initializable {
         configurarTablas();
     }
     
+
+    
     private void configurarTablas() {
         colTipoDoctoInicial.setCellValueFactory(new PropertyValueFactory<>("tipoDocumentoInicial"));
         colIniciaInicial.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
@@ -160,79 +166,79 @@ public class FXMLDocumentosEntregadosController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                ConstantesUtils.TITULO_ERROR,
-                ConstantesUtils.ALERTA_ERROR_BD);
+                "Error al cargar entregas",
+                "No se pudieron cargar las entregas: " + e.getMessage());
         }
     }
+    
+
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
         VentanasUtils.cerrarVentana(lblTitulo);
     }
 
-    @FXML
-    private void clicBtnSeleccionar(ActionEvent event) {
-        EntregaDocumentoInicial entregaInicial = tblDocumentosIniciales.getSelectionModel().getSelectedItem();
-        EntregaDocumentoIntermedio entregaIntermedia = tblDocumentosIntermedios.getSelectionModel().getSelectedItem();
-        EntregaDocumentoFinal entregaFinal = tblDocumentosFinales.getSelectionModel().getSelectedItem();
-        EntregaReporte entregaReporte = tblReportes.getSelectionModel().getSelectedItem();
-
-        Entrega entregaSeleccionada = null;
-        String tipoDocumento = null;
-
-        if (entregaInicial != null) {
-            entregaSeleccionada = entregaInicial;
-            tipoDocumento = "INICIAL";
-        } else if (entregaIntermedia != null) {
-            entregaSeleccionada = entregaIntermedia;
-            tipoDocumento = "INTERMEDIO";
-        } else if (entregaFinal != null) {
-            entregaSeleccionada = entregaFinal;
-            tipoDocumento = "FINAL";
-        } else if (entregaReporte != null) {
-            entregaSeleccionada = entregaReporte;
-            tipoDocumento = "REPORTE";
-        }
-
-        if (entregaSeleccionada != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "/practicasprofesionaleslis/vista/profesoree/FXMLEvaluarDocumento.fxml"));
-                Parent vista = loader.load();
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(vista));
-                stage.setResizable(false);
-
-                FXMLEvaluarDocumentoController controller = loader.getController();
-                controller.inicializarDatos(
-                    experienciaEducativa, 
-                    estudiante, 
-                    expediente, 
-                    entregaInicial,
-                    entregaIntermedia,
-                    entregaFinal,
-                    entregaReporte,
-                    stage
-
-                );
-
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA);
-            } catch (SQLException e) {
-                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                    ConstantesUtils.TITULO_ERROR,
-                    ConstantesUtils.ALERTA_ERROR_BD);
-            }
-        } else {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                "Selección requerida",
-                "Por favor seleccione un documento de las tablas.");
-        }
+@FXML
+private void clicBtnSeleccionar(ActionEvent event) throws SQLException {
+    EntregaDocumentoInicial entregaInicial = tblDocumentosIniciales.getSelectionModel().getSelectedItem();
+    EntregaDocumentoIntermedio entregaIntermedia = tblDocumentosIntermedios.getSelectionModel().getSelectedItem();
+    EntregaDocumentoFinal entregaFinal = tblDocumentosFinales.getSelectionModel().getSelectedItem();
+    EntregaReporte entregaReporte = tblReportes.getSelectionModel().getSelectedItem();
+    
+    Entrega entregaSeleccionada = null;
+    String tipoDocumento = null;
+    
+    if (entregaInicial != null) {
+        entregaSeleccionada = entregaInicial;
+        tipoDocumento = "INICIAL";
+    } else if (entregaIntermedia != null) {
+        entregaSeleccionada = entregaIntermedia;
+        tipoDocumento = "INTERMEDIO";
+    } else if (entregaFinal != null) {
+        entregaSeleccionada = entregaFinal;
+        tipoDocumento = "FINAL";
+    } else if (entregaReporte != null) {
+        entregaSeleccionada = entregaReporte;
+        tipoDocumento = "REPORTE";
     }
+    
+    if (entregaSeleccionada != null) {
+        try {
+            // Load the EvaluarDocumento view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/practicasprofesionaleslis/vista/profesoree/FXMLEvaluarDocumento.fxml"));
+            Parent vista = loader.load();
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(vista));
+            stage.setResizable(false);
+            
+            FXMLEvaluarDocumentoController controller = loader.getController();
+            controller.inicializarDatos(
+                experienciaEducativa, 
+                estudiante, 
+                expediente, 
+                entregaInicial,
+                entregaIntermedia,
+                entregaFinal,
+                entregaReporte,
+                stage
+                    
+            );
+            
+
+            stage.show();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                "Error",
+                "No se pudo abrir la ventana de evaluación: " + e.getMessage());
+        }
+    } else {
+        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+            "Selección requerida",
+            "Por favor seleccione un documento de las tablas.");
+    }
+}
 }

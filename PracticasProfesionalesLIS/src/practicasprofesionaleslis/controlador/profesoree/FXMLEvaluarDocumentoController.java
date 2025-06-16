@@ -74,6 +74,7 @@ public class FXMLEvaluarDocumentoController implements Initializable {
     }
     
     private void configurarValidaciones() {
+        // Only allow numbers in the grade field
         txtfCalificacion.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 txtfCalificacion.setText(newValue.replaceAll("[^\\d]", ""));
@@ -129,18 +130,19 @@ public void inicializarDatos(ExperienciaEducativa experienciaEducativa,
     mostrarDetallesDocumento();
 }
 
-private void mostrarDetallesDocumento() {
-    lblNombreEntrega.setText(lblNombreEntrega.getText() + " " + tipoDocumento);
-    lblInicia.setText(lblInicia.getText() + " " + entrega.getFechaInicio().format(DATE_FORMATTER));
-    lblTermina.setText(lblTermina.getText() + " " + entrega.getFechaFin().format(DATE_FORMATTER));
-    lblValorMaximo.setText(lblValorMaximo.getText() + " " + entrega.getPuntaje());
-}
+    private void mostrarDetallesDocumento() {
+        lblNombreEntrega.setText(tipoDocumento);
+        lblInicia.setText(entrega.getFechaInicio().format(DATE_FORMATTER));
+        lblTermina.setText(entrega.getFechaFin().format(DATE_FORMATTER));
+        lblValorMaximo.setText(String.valueOf(entrega.getPuntaje()));
 
 
+        }
 
 @FXML
 private void btnCalificar(ActionEvent event) {
       try {
+        // Validate input
         if (txtfCalificacion.getText().isEmpty()) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "Debe ingresar una calificación");
             return;
@@ -149,6 +151,7 @@ private void btnCalificar(ActionEvent event) {
         int puntaje = Integer.parseInt(txtfCalificacion.getText());
         String comentario = txtfComentario.getText();
         
+        // Validate the score doesn't exceed maximum
         if (puntaje > entrega.getPuntaje()) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
                 "La calificación no puede ser mayor al valor máximo (" + entrega.getPuntaje() + ")"
@@ -158,6 +161,7 @@ private void btnCalificar(ActionEvent event) {
         
         boolean resultado;
         
+        // Update the appropriate document type
         switch (tipoDocumento) {
             case "INICIAL":
                 resultado = DocumentoInicialDAO.actualizarRevisionDocumentoInicial(
@@ -220,6 +224,7 @@ private void btnCalificar(ActionEvent event) {
 
     @FXML
     private void btnCancelar(ActionEvent event) {
+                VentanasUtils.cerrarVentana(lblInicia);
     }
 }
     
