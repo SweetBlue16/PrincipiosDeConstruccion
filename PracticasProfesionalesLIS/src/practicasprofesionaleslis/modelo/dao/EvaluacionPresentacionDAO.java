@@ -89,7 +89,7 @@ public class EvaluacionPresentacionDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT id, numeroEvaluacion, calificacionFinal "
+                String consulta = "SELECT id, numeroEvaluacion, calificacionFinal, comentario "
                         + "FROM evaluacionpresentacion "
                         + "WHERE idExpediente = ?";
                 sentencia = conexionBD.prepareStatement(consulta);
@@ -101,6 +101,7 @@ public class EvaluacionPresentacionDAO {
                     evaluacionPresentacion.setIdEvaluacionPresentacion(resultado.getInt("id"));
                     evaluacionPresentacion.setNumeroEvaluacion(resultado.getInt("numeroEvaluacion"));
                     evaluacionPresentacion.setCalificacionFinal(resultado.getDouble("calificacionFinal"));
+                    evaluacionPresentacion.setComentario(resultado.getString("comentario"));
                     evaluaciones.add(evaluacionPresentacion);
                 }
             } else {
