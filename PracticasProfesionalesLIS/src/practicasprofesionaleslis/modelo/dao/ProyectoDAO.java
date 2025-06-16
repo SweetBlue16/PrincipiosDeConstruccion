@@ -15,14 +15,6 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class ProyectoDAO {
     
-    /*public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
-    }
-    
-    public static boolean editarProyecto(Proyecto proyecto) throws SQLException {
-        // TODO
-    }*/
-    
     public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;

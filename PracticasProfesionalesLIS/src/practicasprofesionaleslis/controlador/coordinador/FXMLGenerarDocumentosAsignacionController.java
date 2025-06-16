@@ -6,31 +6,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
+import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLGenerarDocumentosAsignacionController implements Initializable {
 
     @FXML
-    private Label lbMensaje;
-    @FXML
-    private CheckBox chkHorarioAlumno;
-    @FXML
-    private CheckBox chkDocOficioAsignacion;
-    @FXML
-    private CheckBox chkPlanTrabajo;
-    @FXML
     private CheckBox chkCartaAsignacion;
+    @FXML
+    private CheckBox chkOficioAsignacion;
 
     private Estudiante estudiante;
     private boolean tieneProyecto;
+    
+    @FXML
+    private Label lbProyectoNoEncontrado;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Initialization code if needed
+        chkCartaAsignacion.setSelected(true);
+        chkOficioAsignacion.setSelected(true);
     }
 
     public void inicializarDatosEstudiante(Estudiante estudiante, boolean tieneProyecto) {
@@ -38,30 +37,25 @@ public class FXMLGenerarDocumentosAsignacionController implements Initializable 
         this.tieneProyecto = tieneProyecto;
 
         if (!tieneProyecto) {
-            mostrarMensajeError("El estudiante no tiene proyecto asignado.");
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ADVERTENCIA,
+                    "El estudiante no tiene proyecto asignado.");
             deshabilitarCheckboxes();
-        } else {
-            lbMensaje.setText("");
         }
     }
 
     private void deshabilitarCheckboxes() {
-        chkHorarioAlumno.setDisable(true);
-        chkDocOficioAsignacion.setDisable(true);
-        chkPlanTrabajo.setDisable(true);
+        chkOficioAsignacion.setDisable(true);
         chkCartaAsignacion.setDisable(true);
     }
 
-    private void mostrarMensajeError(String mensaje) {
-        lbMensaje.setText(mensaje);
-    }
-
-    private void mostrarMensajeExito(String mensaje) {
-        lbMensaje.setText(mensaje);
+    private boolean alMenosUnDocumentoSeleccionado() {
+        return chkCartaAsignacion.isSelected()
+                || chkOficioAsignacion.isSelected();
     }
 
     @FXML
-    private void clicBtnGenerar(ActionEvent event) {
+    private void clicBtnDescargar(ActionEvent event) {
         if (!tieneProyecto) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ADVERTENCIA,
@@ -70,39 +64,63 @@ public class FXMLGenerarDocumentosAsignacionController implements Initializable 
         }
 
         if (!alMenosUnDocumentoSeleccionado()) {
-            mostrarMensajeError("Seleccione al menos un documento.");
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
+                    ConstantesUtils.TITULO_ADVERTENCIA,
+                    "Seleccione al menos un documento.");
             return;
         }
 
         generarDocumentos();
     }
 
-    private boolean alMenosUnDocumentoSeleccionado() {
-        return chkCartaAsignacion.isSelected() ||
-                chkDocOficioAsignacion.isSelected() ||
-                chkHorarioAlumno.isSelected() ||
-                chkPlanTrabajo.isSelected();
+    @FXML
+    private void clicBtnCancelar(ActionEvent event) {
+        VentanasUtils.cerrarVentana(chkCartaAsignacion);
     }
 
     private void generarDocumentos() {
         try {
-            // TODO: Implement actual document generation logic
-            // using this.estudiante for needed data
+            if (!alMenosUnDocumentoSeleccionado()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ADVERTENCIA,
+                    "Seleccione al menos un documento.");
+                return;
+            }
 
-            mostrarMensajeExito("Documentos generados exitosamente.");
+            boolean exito = true;
+            String matricula = estudiante.getMatricula();
 
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
+            if (chkCartaAsignacion.isSelected()) {
+                boolean descargado = PDFUtils.guardarPDFDesdeRecursos(
+                        "/practicasprofesionaleslis/recursos/pdf/PRAIS-02-Aceptacion-1.pdf",
+                        "Carta_Asignacion_" + matricula
+                );
+                if (!descargado) {
+                    exito = false;
+                }
+            }
+
+            if (chkOficioAsignacion.isSelected()) {
+                boolean descargado = PDFUtils.guardarPDFDesdeRecursos(
+                        "/practicasprofesionaleslis/recursos/pdf/F1-Solicitud-Practicas-3.pdf",
+                        "Oficio_Asignacion_" + matricula
+                );
+                if (!descargado) {
+                    exito = false;
+                }
+            }
+
+            if (exito) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION,
                     "Documentos generados",
                     "Los documentos seleccionados se han generado correctamente.");
+                VentanasUtils.cerrarVentana(chkOficioAsignacion);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
                     ConstantesUtils.TITULO_ERROR,
-                    "Error al generar documentos: " + e.getMessage());
+                    ConstantesUtils.ALERTA_DESCARGA_ARCHIVO_FALLIDA);
         }
-    }
-
-    @FXML
-    private void clicBtnCancelar(ActionEvent event) {
-        VentanasUtils.cerrarVentana(lbMensaje);
     }
 }
