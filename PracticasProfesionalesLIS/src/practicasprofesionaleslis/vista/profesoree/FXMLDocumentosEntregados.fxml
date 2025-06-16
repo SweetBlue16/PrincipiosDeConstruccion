@@ -21,12 +21,12 @@
             <Font name="Gill Sans MT" size="25.0" />
          </font>
       </Button>
-      <TableView layoutX="25.0" layoutY="76.0" prefHeight="245.0" prefWidth="662.0">
+      <TableView fx:id="tbldocumentosEntregados" layoutX="25.0" layoutY="76.0" prefHeight="245.0" prefWidth="662.0">
         <columns>
-          <TableColumn prefWidth="341.60002517700195" text="Nombre" />
-          <TableColumn prefWidth="121.5999755859375" text="Inicia" />
-          <TableColumn prefWidth="111.20001220703125" text="Termina" />
-          <TableColumn prefWidth="94.4000244140625" text="Puntaje" />
+          <TableColumn fx:id="colNombre" prefWidth="341.60002517700195" text="Nombre" />
+          <TableColumn fx:id="colInicia" prefWidth="121.5999755859375" text="Inicia" />
+          <TableColumn fx:id="colTermina" prefWidth="111.20001220703125" text="Termina" />
+          <TableColumn fx:id="colPuntaje" prefWidth="94.4000244140625" text="Puntaje" />
         </columns>
       </TableView>
    </children>
