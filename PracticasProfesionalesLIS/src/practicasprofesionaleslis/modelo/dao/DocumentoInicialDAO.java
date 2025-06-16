@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.pojo.DocumentoInicial;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
@@ -60,5 +62,40 @@ public class DocumentoInicialDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return false;
+    }
+    
+    public static List<DocumentoInicial> obtenerDocumentosInicialesPorExpediente(int idExpediente) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<DocumentoInicial> documentos = new ArrayList<>();
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT di.id, di.nombreArchivo, di.archivo, edi.tipoDoctoInicial "
+                        + "FROM documentoinicial di "
+                        + "JOIN entregadoctoinicial edi ON di.idEntregaDoctoInicial = edi.id "
+                        + "WHERE di.idExpediente = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    DocumentoInicial documentoInicial = new DocumentoInicial();
+                    documentoInicial.setId(resultado.getInt("id"));
+                    documentoInicial.setNombreArchivo(resultado.getString("nombreArchivo"));
+                    documentoInicial.setArchivo(resultado.getBytes("archivo"));
+                    String tipoDocumentoInicialString = resultado.getString("tipoDoctoInicial").toUpperCase();
+                    documentoInicial.setTipoDocumentoInicial(DocumentoInicial.TipoDocumentoInicial.valueOf(tipoDocumentoInicialString));
+                    documentos.add(documentoInicial);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return documentos;
     }
 }

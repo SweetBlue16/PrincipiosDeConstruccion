@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class DocumentoFinal extends Entregable {
     
-    public enum TipoDocumentoFinal { CARTA_LIBERACION, REPORTE_FINAL, EVALUACION_OV, AUTOEVALUACION, CONSTANCIA_CUMPLIMIENTO, PRESENTACION_420_HORAS }
+    public enum TipoDocumentoFinal { CARTALIBERACION, REPORTEFINAL, EVALUACIONOV, AUTOEVALUACION, CONSTANCIACUMPLIMIENTO, PRESENTACION420HORAS }
     
     private TipoDocumentoFinal tipoDocumentoFinal;
 
     public DocumentoFinal() {
     }
 
-    public DocumentoFinal(String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
+    public DocumentoFinal(int id, String nombreArchivo, LocalDate fechaEntregado, LocalDate fechaRevisado,
                         TipoDocumentoFinal tipoDocumentoFinal, int puntajeObtenido, String comentario, byte[] archivo) {
-        super(nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
+        super(id, nombreArchivo, fechaEntregado, fechaRevisado, puntajeObtenido, comentario, archivo);
         this.tipoDocumentoFinal = tipoDocumentoFinal;
     }
 

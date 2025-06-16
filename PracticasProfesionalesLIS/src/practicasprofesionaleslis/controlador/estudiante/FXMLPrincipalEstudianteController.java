@@ -1,5 +1,6 @@
 package practicasprofesionaleslis.controlador.estudiante;
 
+import practicasprofesionaleslis.controlador.FXMLAvancePracticasProfesionalesController;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -84,6 +85,27 @@ public class FXMLPrincipalEstudianteController implements Initializable, IObserv
 
     @FXML
     private void clicBtnConsultarAvance(ActionEvent event) {
+        try {
+            String rutaRecurso = "/practicasprofesionaleslis/vista/FXMLAvancePracticasProfesionales.fxml";
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            Parent vista = cargador.load();
+            FXMLAvancePracticasProfesionalesController controlador = cargador.getController();
+            controlador.inicializarEstudianteYExpediente(estudiante);
+            
+            Stage escenarioBase = new Stage();
+            Scene escenaExpediente = new Scene(vista);
+            escenarioBase.setScene(escenaExpediente);
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PERFIL);
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.show();
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
     }
 
     @FXML

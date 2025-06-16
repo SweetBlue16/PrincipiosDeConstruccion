@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.FXMLDocumentoController">
+   <children>
+      <ImageView fx:id="imgPDF" fitHeight="529.0" fitWidth="750.0" layoutX="25.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane layoutX="-3.0" prefHeight="67.0" prefWidth="807.0" style="-fx-background-color: #18529d;">
+         <children>
+            <Button layoutX="478.0" layoutY="15.0" mnemonicParsing="false" onAction="#clicBtnAnterior" style="-fx-background-color: #28ad56;" text="Anterior" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="20.0" />
+               </font></Button>
+            <Button layoutX="592.0" layoutY="15.0" mnemonicParsing="false" onAction="#clicBtnSiguiente" style="-fx-background-color: #28ad56;" text="Siguiente" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="20.0" />
+               </font></Button>
+            <Button layoutX="708.0" layoutY="14.0" mnemonicParsing="false" onAction="#clicBtnCerrar" prefHeight="40.0" prefWidth="85.0" style="-fx-background-color: #28ad56;" text="Cerrar" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="20.0" />
+               </font></Button>
+            <Label fx:id="lblPagina" layoutX="14.0" layoutY="18.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans MT" size="28.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -96,35 +96,51 @@ public class FXMLPrincipalProfesorEEController implements Initializable, IObserv
 
     @FXML
     private void clicBtnConsultarExpedienteEstudiante(ActionEvent event) {
+        try {
+            String rutaRecurso = "/practicasprofesionaleslis/vista/profesoree/FXMLBusquedaEstudiante.fxml";
+            Parent vista = FXMLLoader.load(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            
+            Stage escenarioBase = new Stage();
+            Scene escenaBuscarEstudiante = new Scene(vista);
+            escenarioBase.setScene(escenaBuscarEstudiante);
+            escenarioBase.setTitle(ConstantesUtils.TITULO_PERFIL);
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.show();
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
     }
 
-@FXML
-private void clicBtnValidarEntregaDocumentos(ActionEvent event) {
-    try {
-        String rutaRecurso = "/practicasprofesionaleslis/vista/profesoree/FXMLExperienciasEducativas.fxml";
-        FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
-        Parent vista = cargador.load();
-        
-        FXMLExperienciasEducativasController controlador = cargador.getController();
-        controlador.inicializarDatos(this.profesorEE);
+    @FXML
+    private void clicBtnValidarEntregaDocumentos(ActionEvent event) {
+        try {
+            String rutaRecurso = "/practicasprofesionaleslis/vista/profesoree/FXMLExperienciasEducativas.fxml";
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            Parent vista = cargador.load();
 
-        Stage escenarioBase = new Stage();
-        Scene escena = new Scene(vista);
-        escenarioBase.setScene(escena);
-        escenarioBase.setTitle("Experiencias Educativas");
-        escenarioBase.initModality(Modality.APPLICATION_MODAL);
-        escenarioBase.setResizable(false);
-        escenarioBase.centerOnScreen();
-        escenarioBase.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
-                ConstantesUtils.TITULO_ERROR,
-                ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA);
+            FXMLExperienciasEducativasController controlador = cargador.getController();
+            controlador.inicializarDatos(this.profesorEE);
+
+            Stage escenarioBase = new Stage();
+            Scene escena = new Scene(vista);
+            escenarioBase.setScene(escena);
+            escenarioBase.setTitle("Experiencias Educativas");
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+            escenarioBase.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA);
+        }
     }
-}
-
-
 
     @FXML
     private void clicBtnMiPerfil(ActionEvent event) {

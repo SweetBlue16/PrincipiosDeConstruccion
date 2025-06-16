@@ -68,11 +68,7 @@ public class EstudianteDAO {
         }
         return foto;
     }
-    
-    /*public static List<Estudiante> obtenerEstudianteSinProyecto() throws SQLException {
-        // TODO
-    }*/
-    
+
     public static List<Estudiante> obtenerEstudiantesSinPresentacion(int numeroEvaluacion) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -82,12 +78,12 @@ public class EstudianteDAO {
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "SELECT e.id, e.nombre, e.apellidoPaterno, e.apellidoMaterno, e.matricula "
-                        + "FROM estudiante e "
-                        + "JOIN expediente ex ON e.id = ex.idEstudiante "
-                        + "WHERE ex.id NOT IN ( "
-                        + "SELECT ep.idExpediente FROM evaluacionpresentacion ep WHERE ep.numeroEvaluacion = ? "
-                        + ")";
+                String consulta = "SELECT e.id, e.matricula, e.nombre, e.apellidoPaterno, e.apellidoMaterno, " 
+                                  + "e.correoInstitucional, e.semestre " 
+                                  + "FROM estudiante e " 
+                                  + "JOIN expediente ex ON e.id = ex.idEstudiante " 
+                                  + "LEFT JOIN evaluacionpresentacion ep ON ep.idExpediente = ex.id AND ep.numeroEvaluacion = ? " 
+                                  + "WHERE ep.id IS NULL AND ex.idProyecto IS NOT NULL";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setInt(1, numeroEvaluacion);
                 resultado = sentencia.executeQuery();
@@ -181,6 +177,43 @@ public class EstudianteDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
         return estudiantes;
+    }
+    
+    public static Estudiante obtenerEstudiantePorMatricula(String matricula) throws SQLException {
+        Estudiante estudiante = null;
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, matricula, nombre, apellidoPaterno, "
+                        + "apellidoMaterno, correoInstitucional, semestre "
+                        + "FROM estudiante "
+                        + "WHERE matricula = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, matricula);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    estudiante = new Estudiante();
+                    estudiante.setId(resultado.getInt("id"));
+                    estudiante.setMatricula(resultado.getString("matricula"));
+                    estudiante.setNombre(resultado.getString("nombre"));
+                    estudiante.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    estudiante.setApellidoMaterno((resultado.getString("apellidoMaterno") != null) ?
+                            resultado.getString("apellidoMaterno") : "");
+                    estudiante.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    estudiante.setSemestre(resultado.getInt("semestre"));
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return estudiante;
     }
     
 }

@@ -127,8 +127,10 @@ public class FXMLSeleccionEstudianteController implements Initializable {
             escenarioCalificarPresentacion.setScene(escena);
             escenarioCalificarPresentacion.setTitle("CALIFICAR PRESENTACIÓN");
             escenarioCalificarPresentacion.initModality(Modality.APPLICATION_MODAL);
-            escenarioCalificarPresentacion.showAndWait();
             escenarioCalificarPresentacion.centerOnScreen();
+            escenarioCalificarPresentacion.showAndWait();
+            estudiantes.remove(estudiante); 
+            tvEstudiantes.refresh();
         } catch (IOException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,

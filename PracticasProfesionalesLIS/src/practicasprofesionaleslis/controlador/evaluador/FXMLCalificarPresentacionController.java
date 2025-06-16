@@ -11,9 +11,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import practicasprofesionaleslis.modelo.dao.CriterioDAO;
+import practicasprofesionaleslis.modelo.dao.EvaluacionPresentacionDAO;
 import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
 import practicasprofesionaleslis.modelo.dao.OrganizacionVinculadaDAO;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
+import practicasprofesionaleslis.modelo.pojo.Criterio;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
@@ -121,6 +124,11 @@ public class FXMLCalificarPresentacionController implements Initializable {
     public void setNumeroEvaluacion(int numeroEvaluacion) {
         this.numeroEvaluacion = numeroEvaluacion;
     }
+    
+    private double redondearADecimal(double valor, int decimales) {
+        double factor = Math.pow(10, decimales);
+        return Math.round(valor * factor) / factor;
+    }
 
     @FXML
     private void clicBtnGuardar(ActionEvent event) {
@@ -144,11 +152,33 @@ public class FXMLCalificarPresentacionController implements Initializable {
         evaluacion.setIdExpediente(this.idExpediente);
 
         try {
-            boolean exito = practicasprofesionaleslis.modelo.dao.EvaluacionPresentacionDAO.registrarEvaluacionPresentacion(evaluacion);
-            if (exito) {
-                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, ConstantesUtils.TITULO_EXITO, 
-                        "Calificacion final: " + calificacionFinal + "\nCalificación asignada correctamente.");
-                VentanasUtils.cerrarVentana(lbNombreEstudiante);
+            int idEvaluacionGenerado = EvaluacionPresentacionDAO.registrarEvaluacionPresentacion(evaluacion);
+            
+            if (idEvaluacionGenerado != -1) {
+                boolean todosGuardados = true;
+                
+                Criterio crit1 = new Criterio(idEvaluacionGenerado, "UsoMetodosIS", redondearADecimal(slCritUno.getValue(), 1));
+                Criterio crit2 = new Criterio(idEvaluacionGenerado, "Requisitos", redondearADecimal(slCritDos.getValue(), 1));
+                Criterio crit3 = new Criterio(idEvaluacionGenerado, "SeguridadYDominio", redondearADecimal(slCritTres.getValue(), 1));
+                Criterio crit4 = new Criterio(idEvaluacionGenerado, "Contenido", redondearADecimal(slCritCuatro.getValue(), 1));
+                Criterio crit5 = new Criterio(idEvaluacionGenerado, "OrtografiaYRedaccion", redondearADecimal(slCritCinco.getValue(), 1));
+                
+                todosGuardados &= CriterioDAO.registrarCriterio(crit1);
+                todosGuardados &= CriterioDAO.registrarCriterio(crit2);
+                todosGuardados &= CriterioDAO.registrarCriterio(crit3);
+                todosGuardados &= CriterioDAO.registrarCriterio(crit4);
+                todosGuardados &= CriterioDAO.registrarCriterio(crit5);
+                
+                if(todosGuardados){
+                    VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, 
+                            ConstantesUtils.TITULO_EXITO, 
+                            "Calificacion final: " + calificacionFinal + "\nCalificación asignada correctamente.");
+                    VentanasUtils.cerrarVentana(lbNombreEstudiante);
+                }else{
+                    VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, 
+                            ConstantesUtils.TITULO_ERROR, 
+                            "Error al guardar uno o más criterios.");
+                }
             } else {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, ConstantesUtils.TITULO_ERROR, "No se pudo guardar la evaluación.");
             }

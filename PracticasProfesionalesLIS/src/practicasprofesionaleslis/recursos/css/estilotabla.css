@@ -1,0 +1,27 @@
+.table-view {
+    -fx-font-family: "Gill Sans MT";
+    -fx-font-size: 13px;
+}
+
+.table-view .column-header-background,
+.table-view .column-header {
+    -fx-background-color: #18529d;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-font-family: "Gill Sans MT";
+    -fx-alignment: CENTER;
+}
+
+
+.table-row-cell {
+    -fx-font-family: "Gill Sans MT";
+    -fx-font-size: 12px;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}
