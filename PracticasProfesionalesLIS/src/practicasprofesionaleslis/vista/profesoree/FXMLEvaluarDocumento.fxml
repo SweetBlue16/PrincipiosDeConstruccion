@@ -52,7 +52,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="lblNombreEntrega" layoutX="72.0" layoutY="56.0" prefHeight="46.0" prefWidth="264.0">
+            <Label fx:id="lblNombreEntrega" layoutX="363.0" prefHeight="46.0" prefWidth="264.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

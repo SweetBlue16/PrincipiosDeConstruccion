@@ -129,14 +129,14 @@ public void inicializarDatos(ExperienciaEducativa experienciaEducativa,
     mostrarDetallesDocumento();
 }
 
-    private void mostrarDetallesDocumento() {
-        lblNombreEntrega.setText(tipoDocumento);
-        lblInicia.setText(entrega.getFechaInicio().format(DATE_FORMATTER));
-        lblTermina.setText(entrega.getFechaFin().format(DATE_FORMATTER));
-        lblValorMaximo.setText(String.valueOf(entrega.getPuntaje()));
+private void mostrarDetallesDocumento() {
+    lblNombreEntrega.setText(lblNombreEntrega.getText() + " " + tipoDocumento);
+    lblInicia.setText(lblInicia.getText() + " " + entrega.getFechaInicio().format(DATE_FORMATTER));
+    lblTermina.setText(lblTermina.getText() + " " + entrega.getFechaFin().format(DATE_FORMATTER));
+    lblValorMaximo.setText(lblValorMaximo.getText() + " " + entrega.getPuntaje());
+}
 
 
-        }
 
 @FXML
 private void btnCalificar(ActionEvent event) {
