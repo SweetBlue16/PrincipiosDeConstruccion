@@ -98,4 +98,69 @@ public class DocumentoIntermedioDAO {
         }
         return documentos;
     }
+    
+    public static DocumentoIntermedio obtenerDocumentoIntermedio(int idExpediente, int idEntregaDocumentoIntermedio) throws SQLException {
+    Connection conexionBD = null;
+    PreparedStatement sentencia = null;
+    ResultSet resultado = null;
+    DocumentoIntermedio documentoIntermedio = null;
+    
+    try {
+        conexionBD = ConexionBD.abrirConexion();
+        if (conexionBD != null) {
+            String consulta = "SELECT di.id, di.nombreArchivo, di.fechaEntregado, di.fechaRevisado, "
+                    + "di.puntajeObtenido, di.comentario, di.archivo, edi.tipoDoctoIntermedio "
+                    + "FROM documentointermedio di "
+                    + "JOIN entregadoctointermedio edi ON di.idEntregaDoctoIntermedio = edi.id "
+                    + "WHERE di.idExpediente = ? AND di.idEntregaDoctoIntermedio = ?";
+            sentencia = conexionBD.prepareStatement(consulta);
+            sentencia.setInt(1, idExpediente);
+            sentencia.setInt(2, idEntregaDocumentoIntermedio);
+            
+            resultado = sentencia.executeQuery();
+            if (resultado.next()) {
+                documentoIntermedio = new DocumentoIntermedio();
+                documentoIntermedio.setId(resultado.getInt("id"));
+                documentoIntermedio.setNombreArchivo(resultado.getString("nombreArchivo"));
+                documentoIntermedio.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
+                if (resultado.getDate("fechaRevisado") != null) {
+                    documentoIntermedio.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+                }
+                documentoIntermedio.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
+                documentoIntermedio.setComentario(resultado.getString("comentario"));
+                documentoIntermedio.setArchivo(resultado.getBytes("archivo"));
+                String tipoDocumentoIntermedioString = resultado.getString("tipoDoctoIntermedio").toUpperCase();
+                documentoIntermedio.setTipoDocumentoIntermedio(DocumentoIntermedio.TipoDocumentoIntermedio.valueOf(tipoDocumentoIntermedioString));
+            }
+        } else {
+            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+        }
+    } finally {
+        BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+    }
+    return documentoIntermedio;
+    }
+    
+    public static boolean actualizarRevisionDocumentoIntermedio(int idDocumentoIntermedio, int puntajeObtenido, String comentario) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE documentointermedio SET puntajeObtenido = ?, comentario = ?, fechaRevisado = CURDATE() WHERE id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, puntajeObtenido);
+                sentencia.setString(2, comentario);
+                sentencia.setInt(3, idDocumentoIntermedio);
+
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+        }
+    }
 }

@@ -120,8 +120,8 @@ public class EntregaDocumentoInicialDAO {
                         resultado.getInt("id"),
                         fechaInicio,
                         fechaFin,
-                        tipoDocumento,
-                        puntaje
+                        puntaje,
+                        tipoDocumento
                     );
                     entregas.add(entrega);
                 }
