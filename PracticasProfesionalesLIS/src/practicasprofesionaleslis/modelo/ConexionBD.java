@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConexionBD {
     private static final String IP = "localhost";
     private static final String PUERTO = "3306";
-    private static final String NOMBRE_BD = "pplis";
+    private static final String NOMBRE_BD = "ppl";
     private static final String USUARIO = "pplisAdmin";
     private static final String PASSWORD = "pplis-15811";
     private static final String DRIVER = "com.mysql.jdbc.Driver";

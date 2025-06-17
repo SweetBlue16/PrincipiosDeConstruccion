@@ -81,10 +81,12 @@ public class FXMLBuscarEstudianteSinProyectoController implements Initializable 
     private void cargarInformacionTabla(){
           
         try { 
+            tvEstudiantesSinProyecto.getItems().clear();
+
             estudiantes = FXCollections.observableArrayList();
             List<Estudiante> estudiantesDAO = EstudianteDAO.obtenerEstudiantesSinProyecto();
             
-            
+            //tvEstudiantesSinProyecto.getItems();
             //PRE-01 Para verificar que haya estudiantes sin proyecto
             if (estudiantesDAO.isEmpty()) {
                 VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
@@ -119,6 +121,7 @@ public class FXMLBuscarEstudianteSinProyectoController implements Initializable 
             escenarioCalificarPresentacion.initModality(Modality.APPLICATION_MODAL);
             escenarioCalificarPresentacion.showAndWait();
             escenarioCalificarPresentacion.centerOnScreen();
+            cargarInformacionTabla();
         } catch (IOException e) {
             e.printStackTrace();
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,

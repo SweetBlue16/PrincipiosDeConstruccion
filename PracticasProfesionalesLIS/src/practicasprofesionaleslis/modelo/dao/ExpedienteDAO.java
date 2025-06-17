@@ -227,27 +227,36 @@ public class ExpedienteDAO {
     public static boolean registrarExpedienteEstudiante(int idEstudiante) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
+        ResultSet rs = null;
         boolean registrado = false;
 
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
-                String consulta = "INSERT INTO expediente " +
-                        "(fechaCreacion, estado, idEstudiante) " +
-                        "VALUES (?, 'Activo', ?)";
+                String verificar = "SELECT COUNT(*) FROM expediente WHERE idEstudiante = ? AND estado = 'Activo'";
+                sentencia = conexionBD.prepareStatement(verificar);
+                sentencia.setInt(1, idEstudiante);
+                rs = sentencia.executeQuery();
 
-                sentencia = conexionBD.prepareStatement(consulta);
+                if (rs.next() && rs.getInt(1) == 0) {
+                    String consulta = "INSERT INTO expediente " +
+                            "(fechaCreacion, estado, idEstudiante) " +
+                            "VALUES (?, 'Activo', ?)";
 
-                sentencia.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
-                sentencia.setInt(2, idEstudiante);
+                    BaseDeDatosUtils.cerrarRecursos(null, sentencia, rs);
 
-                int filasAfectadas = sentencia.executeUpdate();
-                registrado = filasAfectadas > 0;
+                    sentencia = conexionBD.prepareStatement(consulta);
+                    sentencia.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+                    sentencia.setInt(2, idEstudiante);
+
+                    int filasAfectadas = sentencia.executeUpdate();
+                    registrado = filasAfectadas > 0;
+                }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
         } finally {
-            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, rs);
         }
         return registrado;
     }

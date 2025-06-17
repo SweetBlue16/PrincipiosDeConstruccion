@@ -71,17 +71,31 @@ public class FXMLBuscarEstudianteController implements Initializable {
 
     private void manejarEstudianteEncontrado() {
         try {
-            if (!EstudianteDAO.tieneExpediente(estudianteEncontrado.getId())) {
-                if (!confirmarCreacionExpediente()) return;
+            boolean tieneExpediente = EstudianteDAO.tieneExpediente(estudianteEncontrado.getId());
 
-                if (!ExpedienteDAO.registrarExpedienteEstudiante(estudianteEncontrado.getId())) {
+            if (!tieneExpediente) {
+                if (!confirmarCreacionExpediente()) {
+                    return; 
+                }
+
+                boolean expedienteCreado = ExpedienteDAO.registrarExpedienteEstudiante(estudianteEncontrado.getId());
+
+                if (!expedienteCreado) {
                     mostrarError("No se pudo crear el expediente del estudiante.");
                     return;
                 }
+
+                tieneExpediente = EstudianteDAO.tieneExpediente(estudianteEncontrado.getId());
             }
-            abrirVentanaDocumentos(estudianteEncontrado);
+
+            if (tieneExpediente) {
+                abrirVentanaDocumentos(estudianteEncontrado);
+            } else {
+                mostrarError("El expediente no pudo ser creado o verificado.");
+            }
         } catch (SQLException e) {
             mostrarErrorBD();
+            e.printStackTrace(); 
         }
     }
 
