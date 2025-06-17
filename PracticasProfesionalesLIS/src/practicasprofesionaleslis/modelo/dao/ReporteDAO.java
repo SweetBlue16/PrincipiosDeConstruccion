@@ -76,45 +76,45 @@ public class ReporteDAO {
     }
     
     public static Reporte obtenerReporte(int idExpediente, int idEntregaReporte) throws SQLException {
-    Connection conexionBD = null;
-    PreparedStatement sentencia = null;
-    ResultSet resultado = null;
-    Reporte reporte = null;
-    
-    try {
-        conexionBD = ConexionBD.abrirConexion();
-        if (conexionBD != null) {
-            String consulta = "SELECT r.id, r.nombreArchivo, r.fechaEntregado, r.fechaRevisado, "
-                    + "r.puntajeObtenido, r.comentario, r.archivo, r.horasCubiertas, er.numeroReporte "
-                    + "FROM reporte r "
-                    + "JOIN entregareporte er ON r.idEntregaReporte = er.idEntregaReporte "
-                    + "WHERE r.idExpediente = ? AND r.idEntregaReporte = ?";
-            sentencia = conexionBD.prepareStatement(consulta);
-            sentencia.setInt(1, idExpediente);
-            sentencia.setInt(2, idEntregaReporte);
-            
-            resultado = sentencia.executeQuery();
-            if (resultado.next()) {
-                reporte = new Reporte();
-                reporte.setId(resultado.getInt("id"));
-                reporte.setNombreArchivo(resultado.getString("nombreArchivo"));
-                reporte.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
-                if (resultado.getDate("fechaRevisado") != null) {
-                    reporte.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        Reporte reporte = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT r.id, r.nombreArchivo, r.fechaEntregado, r.fechaRevisado, "
+                        + "r.puntajeObtenido, r.comentario, r.archivo, r.horasCubiertas, er.numeroReporte "
+                        + "FROM reporte r "
+                        + "JOIN entregareporte er ON r.idEntregaReporte = er.idEntregaReporte "
+                        + "WHERE r.idExpediente = ? AND r.idEntregaReporte = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idEntregaReporte);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    reporte = new Reporte();
+                    reporte.setId(resultado.getInt("id"));
+                    reporte.setNombreArchivo(resultado.getString("nombreArchivo"));
+                    reporte.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
+                    if (resultado.getDate("fechaRevisado") != null) {
+                        reporte.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+                    }
+                    reporte.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
+                    reporte.setComentario(resultado.getString("comentario"));
+                    reporte.setArchivo(resultado.getBytes("archivo"));
+                    reporte.setHorasCubiertas(resultado.getInt("horasCubiertas"));
+                    reporte.setNumeroReporte(resultado.getInt("numeroReporte"));
                 }
-                reporte.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
-                reporte.setComentario(resultado.getString("comentario"));
-                reporte.setArchivo(resultado.getBytes("archivo"));
-                reporte.setHorasCubiertas(resultado.getInt("horasCubiertas"));
-                reporte.setNumeroReporte(resultado.getInt("numeroReporte"));
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
-        } else {
-            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-    } finally {
-        BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
-    }
-    return reporte;
+        return reporte;
     }
     
     public static boolean actualizarRevisionReporte(int idReporte, int puntajeObtenido, String comentario) throws SQLException {

@@ -172,4 +172,87 @@ public class EntregaReporteDAO {
         }
         return entregasDisponibles;
     }
+    
+    public static List<EntregaReporte> obtenerTodasLasEntregasReporte() throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<EntregaReporte> entregas = new ArrayList<>();
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT idEntregaReporte, fechaInicio, fechaFin, puntaje, numeroReporte " 
+                               + "FROM entregareporte";
+                sentencia = conexionBD.prepareStatement(consulta);
+
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    EntregaReporte entrega = new EntregaReporte();
+                    entrega.setId(resultado.getInt("idEntregaReporte"));
+                    entrega.setFechaInicio(resultado.getDate("fechaInicio").toLocalDate());
+                    entrega.setFechaFin(resultado.getDate("fechaFin").toLocalDate());
+                    entrega.setPuntaje(resultado.getInt("puntaje"));
+                    entrega.setNumeroReporte(resultado.getInt("numeroReporte"));
+                    
+                    entregas.add(entrega);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return entregas;
+    }
+    
+    public static boolean actualizarFechaFinPorNumeroReporte(int numeroReporte, LocalDate nuevaFechaFin) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        boolean actualizado = false;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE entregareporte SET fechaFin = ? WHERE numeroReporte = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setDate(1, Date.valueOf(nuevaFechaFin));
+                sentencia.setInt(2, numeroReporte);
+
+                int filasAfectadas = sentencia.executeUpdate();
+                actualizado = filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, null);
+        }
+        return actualizado;
+    }
+    
+    public static LocalDate obtenerFechaInicioPorNumeroReporte(int numeroReporte) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        LocalDate fechaInicio = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT fechaInicio FROM entregareporte WHERE numeroReporte = ? LIMIT 1";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, numeroReporte);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    fechaInicio = resultado.getDate("fechaInicio").toLocalDate();
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return fechaInicio;
+    }
 }

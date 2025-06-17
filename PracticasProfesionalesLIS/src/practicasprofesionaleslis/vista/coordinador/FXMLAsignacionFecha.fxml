@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.coordinador.FXMLAsignacionFechaController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="practicasprofesionaleslis.controlador.coordinador.FXMLAsignacionFechaController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="82.0" layoutX="-3.0" stroke="#18529d" strokeType="INSIDE" width="1286.0" />
+      <Label layoutX="24.0" layoutY="20.0" prefHeight="46.0" prefWidth="505.0" text="DOCUMENTOS" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblReportes" layoutX="148.0" layoutY="216.0" prefHeight="223.0" prefWidth="851.0">
+        <columns>
+          <TableColumn fx:id="colNombre" prefWidth="217.0" text="Nombre" />
+          <TableColumn fx:id="colFechaInicio" prefWidth="236.0" text="Fecha de inicio" />
+            <TableColumn fx:id="colFechaTerminacion" prefWidth="253.0" text="Fecha de terminación" />
+            <TableColumn fx:id="colValor" prefWidth="144.0" text="Valor" />
+        </columns>
+      </TableView>
+      <Label layoutX="517.0" layoutY="124.0" text="Lista de reportes">
+         <font>
+            <Font name="Gill Sans MT" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="1090.0" layoutY="557.0" mnemonicParsing="false" onAction="#clicBtnCancelar" prefHeight="55.0" prefWidth="144.0" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClicAsignarFechaUno" layoutX="1035.0" layoutY="250.0" mnemonicParsing="false" style="-fx-background-color: #28ad56;" text="Asignar fecha reporte 1" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClicAsignarFechaDos" layoutX="1035.0" layoutY="294.0" mnemonicParsing="false" style="-fx-background-color: #28ad56;" text="Asignar fecha reporte 2 " textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClicAsignarFechaTres" layoutX="1035.0" layoutY="341.0" mnemonicParsing="false" style="-fx-background-color: #28ad56;" text="Asignar fecha reporte 3" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClicAsignarFechaCuatro" layoutX="1035.0" layoutY="381.0" mnemonicParsing="false" style="-fx-background-color: #28ad56;" text="Asignar fecha reporte 4" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="15.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
