@@ -3,6 +3,7 @@ package practicasprofesionaleslis.controlador.coordinador;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import practicasprofesionaleslis.PracticasProfesionalesLIS;
 import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.Coordinador;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
+import static practicasprofesionaleslis.utilidades.ConstantesUtils.ALERTA_ERROR_BD;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLPrincipalCoordinadorController implements Initializable, IObservador {
@@ -129,8 +131,8 @@ public class FXMLPrincipalCoordinadorController implements Initializable, IObser
 
     @FXML
     private void clicBtnProgramarEntregasPracticas(ActionEvent event) {
-        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLAsignacionFecha.fxml";
-        irVentanaDesdeBoton(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
+        String rutaRecurso = "/practicasprofesionaleslis/vista/coordinador/FXMLExperienciasEducativas.fxml";
+        irVentanaDesdeBotonConObjeto(rutaRecurso, ConstantesUtils.TITULO_BUSCAR);
     }
 
     @FXML
@@ -143,6 +145,7 @@ public class FXMLPrincipalCoordinadorController implements Initializable, IObser
             Stage escenarioBase = new Stage();
             Parent vista = FXMLLoader.load(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
             Scene escenaBuscarProyecto = new Scene(vista);
+            
             
             escenarioBase.setScene(escenaBuscarProyecto);
             escenarioBase.setTitle(tituloVentana);
@@ -157,4 +160,41 @@ public class FXMLPrincipalCoordinadorController implements Initializable, IObser
             );
         }
     }
+    
+    private void irVentanaDesdeBotonConObjeto(String rutaRecurso, String tituloVentana)  {
+        try {
+            FXMLLoader cargador = new FXMLLoader(PracticasProfesionalesLIS.class.getResource(rutaRecurso));
+            Parent vista = cargador.load();
+
+
+        if (rutaRecurso.contains("FXMLExperienciasEducativas.fxml")) {
+            FXMLExperienciasEducativasController controlador = cargador.getController();
+            try {
+                controlador.inicializarDatos(coordinador);
+            } catch (SQLException e) {
+                VentanasUtils.mostrarAlertaSimple(
+                    Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ALERTA_ERROR_BD
+                );
+                return;
+            }
+        }
+
+            Stage escenarioBase = new Stage();
+            escenarioBase.setScene(new Scene(vista));
+            escenarioBase.setTitle(tituloVentana);
+            escenarioBase.initModality(Modality.APPLICATION_MODAL);
+            escenarioBase.setResizable(false);
+            escenarioBase.centerOnScreen();
+            escenarioBase.show();
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_CARGAR_VENTANA
+            );
+        }
+    }
+
+
 }
