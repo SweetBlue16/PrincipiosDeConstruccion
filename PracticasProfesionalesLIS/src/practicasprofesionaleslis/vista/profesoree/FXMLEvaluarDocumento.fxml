@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.profesoree.FXMLEvaluarDocumentoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.profesoree.FXMLEvaluarDocumentoController">
    <children>
       <AnchorPane id="innerAnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="490.0" maxWidth="700.0" minHeight="490.0" minWidth="700.0" prefHeight="490.0" prefWidth="700.0">
          <children>
@@ -47,9 +52,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="26.0" layoutY="160.0" mnemonicParsing="false" onAction="#btnDescargar" text="PDF">
+            <Button layoutX="26.0" layoutY="160.0" mnemonicParsing="false" onAction="#btnDescargar" style="-fx-background-color: #28ad56;" text="PDF" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Gill Sans MT" size="20.0" />
                </font>
             </Button>
             <Label fx:id="lblNombreEntrega" layoutX="363.0" prefHeight="46.0" prefWidth="264.0" textFill="WHITE">
@@ -57,12 +62,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtfCalificacion" layoutX="31.0" layoutY="260.0" onAction="#txtfCalificacion" prefHeight="26.0" prefWidth="258.0">
+            <TextField fx:id="txtfCalificacion" layoutX="31.0" layoutY="260.0" prefHeight="26.0" prefWidth="258.0">
                 <font>
                     <Font size="18.0" />
                 </font>
             </TextField>
-            <TextField fx:id="txtfComentario" layoutX="31.0" layoutY="348.0" onAction="#txtfComentario" prefHeight="26.0" prefWidth="258.0">
+            <TextField fx:id="txtfComentario" layoutX="31.0" layoutY="348.0" prefHeight="26.0" prefWidth="258.0">
                <font>
                   <Font size="18.0" />
                </font>
