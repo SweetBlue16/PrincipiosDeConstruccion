@@ -7,6 +7,7 @@ public class ResponsableProyecto {
     private String apellidoMaterno;
     private String puesto;
     private String correoElectronico;
+    private int idOrganizacionVinculada;
 
     public ResponsableProyecto() {
     }
@@ -66,6 +67,14 @@ public class ResponsableProyecto {
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    public int getIdOrganizacionVinculada() {
+        return idOrganizacionVinculada;
+    }
+
+    public void setIdOrganizacionVinculada(int idOrganizacionVinculada) {
+        this.idOrganizacionVinculada = idOrganizacionVinculada;
     }
     
     @Override
