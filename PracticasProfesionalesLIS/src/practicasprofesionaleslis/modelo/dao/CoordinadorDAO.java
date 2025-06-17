@@ -65,4 +65,41 @@ public class CoordinadorDAO {
         }
         return foto;
     }
+    
+        public static Coordinador obtenerCoordinadorPorCorreo(String correoInstitucional) throws SQLException {
+        Coordinador coordinador = null;
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT id, numeroPersonal, nombre, apellidoPaterno, " +
+                               "apellidoMaterno, correoInstitucional, contrasena, fotoPerfil " +
+                               "FROM coordinador " +
+                               "WHERE correoInstitucional = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setString(1, correoInstitucional);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    coordinador = new Coordinador();
+                    coordinador.setId(resultado.getInt("id"));
+                    coordinador.setNumeroPersonal(resultado.getString("numeroPersonal"));
+                    coordinador.setNombre(resultado.getString("nombre"));
+                    coordinador.setApellidoPaterno(resultado.getString("apellidoPaterno"));
+                    coordinador.setApellidoMaterno(resultado.getString("apellidoMaterno"));
+                    coordinador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    coordinador.setContraseña(resultado.getString("contrasena"));
+                    coordinador.setFotoPerfil(resultado.getBytes("fotoPerfil"));
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return coordinador;
+    }
 }

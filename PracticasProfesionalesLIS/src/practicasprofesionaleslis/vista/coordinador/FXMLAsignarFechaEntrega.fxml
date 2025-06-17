@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="practicasprofesionaleslis.controlador.coordinador.AsignarFechaEntregaController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="innerAnchorPane" layoutX="10.0" layoutY="10.0" maxHeight="490.0" maxWidth="700.0" minHeight="490.0" minWidth="700.0" prefHeight="490.0" prefWidth="700.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#18529d" height="67.0" layoutX="-18.0" layoutY="-23.0" stroke="#18529d" strokeType="INSIDE" width="718.0" />
+                  <Label layoutX="25.0" layoutY="-13.0" prefHeight="46.0" prefWidth="342.0" text="Asignar Fecha" textFill="WHITE">
+                     <font>
+                        <Font name="Gill Sans MT" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="60.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnAceptar" style="-fx-background-color: #28ad56;" text="Aceptar" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="452.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnCancelar" style="-fx-background-color: #28ad56;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Gill Sans MT" size="25.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="lblInicia" layoutX="27.0" layoutY="128.0" prefHeight="46.0" prefWidth="264.0" text="Inicia: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblValor" layoutX="395.0" layoutY="128.0" prefHeight="46.0" prefWidth="264.0" text="Valor:  ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTermina" layoutX="27.0" layoutY="174.0" prefHeight="46.0" prefWidth="264.0" text="Termina: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblNombreEntrega" layoutX="363.0" prefHeight="46.0" prefWidth="264.0" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dpInicia" layoutX="141.0" layoutY="138.0" />
+                  <DatePicker fx:id="dpTermina" layoutX="141.0" layoutY="184.0" />
+                  <Label fx:id="lblNombreEntregable" layoutX="10.0" layoutY="66.0" prefHeight="46.0" prefWidth="679.0">
+                     <font>
+                        <Font name="Gill Sans MT" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

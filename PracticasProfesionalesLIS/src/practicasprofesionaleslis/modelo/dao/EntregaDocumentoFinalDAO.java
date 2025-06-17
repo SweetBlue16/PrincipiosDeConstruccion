@@ -171,4 +171,29 @@ public class EntregaDocumentoFinalDAO {
         }
         return entregasDisponibles;
     }
+    
+    public static boolean actualizarFechasEntregaFinal(int id, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        boolean actualizado = false;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE entregadoctofinal SET fechaInicio = ?, fechaFin = ? WHERE id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setDate(1, Date.valueOf(fechaInicio));
+                sentencia.setDate(2, Date.valueOf(fechaFin));
+                sentencia.setInt(3, id);
+
+                int filasAfectadas = sentencia.executeUpdate();
+                actualizado = filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, null);
+        }
+        return actualizado;
+    }
 }

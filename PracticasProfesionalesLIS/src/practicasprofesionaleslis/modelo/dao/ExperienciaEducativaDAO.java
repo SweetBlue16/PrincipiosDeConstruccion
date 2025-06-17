@@ -112,4 +112,55 @@ public class ExperienciaEducativaDAO {
         }
         return experienciaEducativa;
     }
+    
+    public static List<ExperienciaEducativa> obtenerExperienciasPorCoordinador(int idCoordinador) throws SQLException {
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        List<ExperienciaEducativa> experiencias = new ArrayList<>();
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT ee.id, ee.nrc, ee.nombre, ee.creditos, ee.numeroHoras, "
+                        + "ee.bloque, ee.seccion, "
+                        + "c.id AS idCoordinador, c.numeroPersonal, c.nombre AS nombreCoordinador, "
+                        + "c.apellidoPaterno AS apellidoPaternoCoordinador, c.apellidoMaterno AS apellidoMaternoCoordinador, "
+                        + "c.correoInstitucional "
+                        + "FROM experienciaeducativa ee "
+                        + "JOIN coordinador c ON ee.idCoordinador = c.id "
+                        + "WHERE ee.idCoordinador = ?;";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idCoordinador);
+
+                resultado = sentencia.executeQuery();
+                while (resultado.next()) {
+                    ExperienciaEducativa experiencia = new ExperienciaEducativa();
+                    experiencia.setId(resultado.getInt("id"));
+                    experiencia.setNrc(resultado.getInt("nrc"));
+                    experiencia.setNombre(resultado.getString("nombre"));
+                    experiencia.setCreditos(resultado.getInt("creditos"));
+                    experiencia.setNumHoras(resultado.getInt("numeroHoras"));
+                    experiencia.setBloque(resultado.getString("bloque"));
+                    experiencia.setSeccion(resultado.getString("seccion"));
+
+                    Coordinador coordinador = new Coordinador();
+                    coordinador.setId(resultado.getInt("idCoordinador"));
+                    coordinador.setNumeroPersonal(resultado.getString("numeroPersonal"));
+                    coordinador.setNombre(resultado.getString("nombreCoordinador"));
+                    coordinador.setApellidoPaterno(resultado.getString("apellidoPaternoCoordinador"));
+                    coordinador.setApellidoMaterno(resultado.getString("apellidoMaternoCoordinador"));
+                    coordinador.setCorreoInstitucional(resultado.getString("correoInstitucional"));
+                    experiencia.setCoordinador(coordinador);
+
+                    experiencias.add(experiencia);
+                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
+        }
+        return experiencias;
+    }
 }
