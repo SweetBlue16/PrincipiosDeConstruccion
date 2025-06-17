@@ -2,6 +2,9 @@ package practicasprofesionaleslis.controlador.profesoree;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -26,6 +29,7 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoFinal;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
+import practicasprofesionaleslis.modelo.pojo.Entregable;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
@@ -212,6 +216,52 @@ private void btnCalificar(ActionEvent event) {
 
     @FXML
     private void btnDescargar(ActionEvent event) {
+        try {
+            Entregable documento = null;
+            String nombreArchivo = "";
+
+            if (documentoInicial != null) {
+                documento = documentoInicial;
+                nombreArchivo = documentoInicial.getNombreArchivo();
+            } else if (documentoIntermedio != null) {
+                documento = documentoIntermedio;
+                nombreArchivo = documentoIntermedio.getNombreArchivo();
+            } else if (documentoFinal != null) {
+                documento = documentoFinal;
+                nombreArchivo = documentoFinal.getNombreArchivo();
+            } else if (reporte != null) {
+                documento = reporte;
+                nombreArchivo = reporte.getNombreArchivo();
+            }
+
+            if (documento == null || documento.getArchivo() == null || documento.getArchivo().length == 0) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                    "No hay documento para descargar");
+                return;
+            }
+
+            // Get user's home directory
+            String homeDir = System.getProperty("user.home");
+            Path filePath = Paths.get(homeDir, nombreArchivo);
+
+            int counter = 1;
+            while (Files.exists(filePath)) {
+                String newName = nombreArchivo.replaceFirst("[.][^.]+$", "") 
+                               + "(" + counter + ")" 
+                               + nombreArchivo.substring(nombreArchivo.lastIndexOf('.'));
+                filePath = Paths.get(homeDir, newName);
+                counter++;
+            }
+
+            Files.write(filePath, documento.getArchivo());
+
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Éxito", 
+                "Documento descargado en: " + filePath.toString());
+
+        } catch (IOException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                "No se pudo descargar el documento: " + e.getMessage());
+        }
     }
 
     @FXML
