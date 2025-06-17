@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
@@ -41,7 +40,6 @@ public class EvaluacionPresentacionDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-        
         return evaluaciones;
     }
     
@@ -70,13 +68,12 @@ public class EvaluacionPresentacionDAO {
                         return resultado.getInt(1);
                     }
                 }
-                } else {
-                    throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
-                }
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
-        
         return -1;
     }
     

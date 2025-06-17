@@ -39,16 +39,7 @@ public class OrganizacionVinculadaDAO {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
     }
-    
-   /* public static boolean editarOrganizacionVinculada(OrganizacionVinculada organizacionVinculada) throws SQLException {
-        // TODO
-    }
-    
-    public static List<OrganizacionVinculada> obtenerOrganizacionesVinculadas() throws SQLException {
-        // TODO
-    }*/
-    
-    
+
     public static OrganizacionVinculada obtenerOrganizacionPorId(int id) throws SQLException {
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
@@ -175,24 +166,26 @@ public class OrganizacionVinculadaDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-
         return organizacion;
     }
     
     public static boolean existeAlMenosUnaOV() throws SQLException {
-        Connection conexion = null;
+        Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         
         try {
-            conexion = ConexionBD.abrirConexion();
-            String consulta = "SELECT COUNT(*) AS total FROM organizacionvinculada";
-            sentencia = conexion.prepareStatement(consulta);
-            resultado = sentencia.executeQuery();
-            
-            return resultado.next() && resultado.getInt("total") > 0;
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT COUNT(*) AS total FROM organizacionvinculada";
+                sentencia = conexionBD.prepareStatement(consulta);
+                resultado = sentencia.executeQuery();
+                return resultado.next() && resultado.getInt("total") > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
         } finally {
-            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
     }
     

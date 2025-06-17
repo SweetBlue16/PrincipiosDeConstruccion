@@ -97,16 +97,13 @@ public class EstudianteDAO {
                     estudiante.setMatricula(resultado.getString("matricula"));
                     estudiantes.add(estudiante);
                 }
-
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
-
         return estudiantes;
-
     }
 
     public static List<Estudiante> obtenerEstudiantesSinProyecto() throws SQLException {
@@ -142,7 +139,6 @@ public class EstudianteDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
-
         return estudiantes;
     }
 
@@ -151,6 +147,7 @@ public class EstudianteDAO {
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         List<Estudiante> estudiantes = new ArrayList<>();
+        
         try {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {

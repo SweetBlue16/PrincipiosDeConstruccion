@@ -92,6 +92,30 @@ public class PDFUtils {
             return false;
         }
     }
+    
+    public static boolean guardarPDFDesdeBytes(byte[] archivoBytes, String nombreArchivo) {
+        if (archivoBytes == null || archivoBytes.length == 0) {
+            return false;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar archivo PDF");
+        fileChooser.setInitialFileName(nombreArchivo + ".pdf");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
+
+        File archivoDestino = fileChooser.showSaveDialog(null);
+        if (archivoDestino == null) {
+            return false;
+        }
+
+        try (FileOutputStream salida = new FileOutputStream(archivoDestino)) {
+            salida.write(archivoBytes);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static void mostrarPaginaActual() {
         if (documentoPDF == null || renderizadorPDF == null || visorImagen == null) return;

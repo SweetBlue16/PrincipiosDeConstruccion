@@ -1,4 +1,4 @@
-package practicasprofesionaleslis.modelo.dao;
+ package practicasprofesionaleslis.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,7 +49,6 @@ public class ExpedienteDAO {
 
     public static int obtenerIdExpedientePorIdEstudiante(int idEstudiante) throws SQLException {
         int idExpediente = -1;
-
         Connection conexionBD = null;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
@@ -111,19 +110,23 @@ public class ExpedienteDAO {
     }
 
     public static boolean asignarProyectoAExpediente(int idExpediente, int idProyecto) throws SQLException {
-        Connection conexion = null;
+        Connection conexionBD = null;
         PreparedStatement sentencia = null;
 
         try {
-            conexion = ConexionBD.abrirConexion();
-            String consulta = "UPDATE expediente SET idProyecto = ? WHERE id = ?";
-            sentencia = conexion.prepareStatement(consulta);
-            sentencia.setInt(1, idProyecto);
-            sentencia.setInt(2, idExpediente);
-            int filasAfectadas = sentencia.executeUpdate();
-            return filasAfectadas > 0;
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "UPDATE expediente SET idProyecto = ? WHERE id = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idProyecto);
+                sentencia.setInt(2, idExpediente);
+                int filasAfectadas = sentencia.executeUpdate();
+                return filasAfectadas > 0;
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+            }
         } finally {
-            BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, null);
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia);
         }
     }
 
@@ -187,24 +190,20 @@ public class ExpedienteDAO {
 
                 resultado = sentencia.executeQuery();
                 if (resultado.next()) {
-                    // Create basic expediente with direct fields
                     expediente = new Expediente();
                     expediente.setId(resultado.getInt("id"));
                     expediente.setFechaCreacion(resultado.getString("fechaCreacion"));
 
-                    // Set estado (converting from String to Enum)
                     String estadoString = resultado.getString("estado");
                     expediente.setEstado(Expediente.Estado.valueOf(estadoString.toUpperCase()));
 
                     expediente.setCalificacion(resultado.getInt("calificacion"));
                     expediente.setHorasAcumuladas(resultado.getInt("horasAcumuladas"));
 
-                    // Create and set estudiante (with just the ID)
                     Estudiante estudiante = new Estudiante();
                     estudiante.setId(idEstudiante);
                     expediente.setEstudiante(estudiante);
 
-                    // Create and set proyecto (if exists)
                     int idProyecto = resultado.getInt("idProyecto");
                     if (!resultado.wasNull()) {
                         Proyecto proyecto = new Proyecto();
@@ -212,7 +211,6 @@ public class ExpedienteDAO {
                         expediente.setProyecto(proyecto);
                     }
 
-                    // Create and set experiencia educativa
                     ExperienciaEducativa experienciaEducativa = new ExperienciaEducativa();
                     experienciaEducativa.setId(resultado.getInt("idExperienciaEducativa"));
                     expediente.setExperienciaEducativa(experienciaEducativa);

@@ -12,18 +12,6 @@ import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
 public class ResponsableProyectoDAO {
-    
-    /*public static boolean registrarResponsableProyecto(ResponsableProyecto responsableProyecto) throws SQLException {
-        // TODO
-    }
-    
-    public static boolean editarResponsableProyecto(ResponsableProyecto responsableProyecto) throws SQLException {
-        // TODO
-    }
-    
-    public static ResponsableProyecto obtenerResponsablePorProyecto(String nombreProyecto) throws SQLException {
-        // TODO
-    }*/
 
     public static boolean registrarResponsableProyecto(ResponsableProyecto responsableProyecto) throws SQLException {
         Connection conexionBD = null;
@@ -33,14 +21,15 @@ public class ResponsableProyectoDAO {
             conexionBD = ConexionBD.abrirConexion();
             if (conexionBD != null) {
                 String consulta = "INSERT INTO responsableproyecto (nombre, apellidoPaterno, "
-                        + "apellidoMaterno, puesto, correoElectronico) "
-                        + "VALUES (?, ?, ?, ?, ?)";
+                        + "apellidoMaterno, puesto, correoElectronico, idOrganizacion) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
                 sentencia = conexionBD.prepareStatement(consulta);
                 sentencia.setString(1, responsableProyecto.getNombre());
                 sentencia.setString(2, responsableProyecto.getApellidoPaterno());
                 sentencia.setString(3, responsableProyecto.getApellidoMaterno());
                 sentencia.setString(4, responsableProyecto.getPuesto());
                 sentencia.setString(5, responsableProyecto.getCorreoElectronico());
+                sentencia.setInt(6, responsableProyecto.getIdOrganizacionVinculada());
                 
                 int filasAfectadas = sentencia.executeUpdate();
                 return filasAfectadas > 0;
@@ -109,7 +98,6 @@ public class ResponsableProyectoDAO {
         } finally {
             BaseDeDatosUtils.cerrarRecursos(conexion, sentencia, resultado);
         }
-
         return responsables;
     }
     

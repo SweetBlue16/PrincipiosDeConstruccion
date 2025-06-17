@@ -2,18 +2,24 @@ package practicasprofesionaleslis.controlador.coordinador;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import practicasprofesionaleslis.modelo.dao.OrganizacionVinculadaDAO;
 import practicasprofesionaleslis.modelo.dao.ResponsableProyectoDAO;
+import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLRegistrarResponsableProyectoController implements Initializable {
+    private List<OrganizacionVinculada> organizacionesVinculadas;
 
     @FXML
     private TextField txtfCorreoElectronico;
@@ -25,9 +31,22 @@ public class FXMLRegistrarResponsableProyectoController implements Initializable
     private TextField txtfApellidoPaterno;
     @FXML
     private TextField txtfNombre;
+    @FXML
+    private ComboBox<OrganizacionVinculada> cbxOrganizacionVinculada;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}    
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            organizacionesVinculadas = OrganizacionVinculadaDAO.obtenerOrganizacionesVinculadas();
+            cbxOrganizacionVinculada.getItems().addAll(organizacionesVinculadas);
+            cbxOrganizacionVinculada.getSelectionModel().select(0);
+        } catch (SQLException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                    ConstantesUtils.TITULO_ERROR,
+                    ConstantesUtils.ALERTA_ERROR_BD
+            );
+        }
+    }    
 
     @FXML
     private void clicBtnCancelar(ActionEvent event) {
@@ -46,6 +65,7 @@ public class FXMLRegistrarResponsableProyectoController implements Initializable
             responsableProyecto.setApellidoMaterno(txtfApellidoMaterno.getText().trim());
             responsableProyecto.setCorreoElectronico(txtfCorreoElectronico.getText().trim());
             responsableProyecto.setPuesto(txtfPuesto.getText().trim());
+            responsableProyecto.setIdOrganizacionVinculada(cbxOrganizacionVinculada.getSelectionModel().getSelectedItem().getId());
             
             boolean confirmacion = VentanasUtils.mostrarAlertaConfirmacion(ConstantesUtils.TITULO_CONFIRMAR,
                     ConstantesUtils.ALERTA_CONFIRMAR_OPERACION
