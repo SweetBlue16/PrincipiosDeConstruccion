@@ -240,7 +240,6 @@ private void btnCalificar(ActionEvent event) {
                 return;
             }
 
-            // Get user's home directory
             String homeDir = System.getProperty("user.home");
             Path filePath = Paths.get(homeDir, nombreArchivo);
 
