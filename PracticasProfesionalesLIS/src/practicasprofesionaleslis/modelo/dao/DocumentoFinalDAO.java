@@ -75,45 +75,45 @@ public class DocumentoFinalDAO {
     }
     
     public static DocumentoFinal obtenerDocumentoFinal(int idExpediente, int idEntregaDocumentoFinal) throws SQLException {
-    Connection conexionBD = null;
-    PreparedStatement sentencia = null;
-    ResultSet resultado = null;
-    DocumentoFinal documentoFinal = null;
-    
-    try {
-        conexionBD = ConexionBD.abrirConexion();
-        if (conexionBD != null) {
-            String consulta = "SELECT df.id, df.nombreArchivo, df.fechaEntregado, df.fechaRevisado, "
-                    + "df.puntajeObtenido, df.comentario, df.archivo, edf.tipoDoctoFinal "
-                    + "FROM documentofinal df "
-                    + "JOIN entregadoctofinal edf ON df.idEntregaDoctoFinal = edf.id "
-                    + "WHERE df.idExpediente = ? AND df.idEntregaDoctoFinal = ?";
-            sentencia = conexionBD.prepareStatement(consulta);
-            sentencia.setInt(1, idExpediente);
-            sentencia.setInt(2, idEntregaDocumentoFinal);
-            
-            resultado = sentencia.executeQuery();
-            if (resultado.next()) {
-                documentoFinal = new DocumentoFinal();
-                documentoFinal.setId(resultado.getInt("id"));
-                documentoFinal.setNombreArchivo(resultado.getString("nombreArchivo"));
-                documentoFinal.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
-                if (resultado.getDate("fechaRevisado") != null) {
-                    documentoFinal.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        DocumentoFinal documentoFinal = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT df.id, df.nombreArchivo, df.fechaEntregado, df.fechaRevisado, "
+                        + "df.puntajeObtenido, df.comentario, df.archivo, edf.tipoDoctoFinal "
+                        + "FROM documentofinal df "
+                        + "JOIN entregadoctofinal edf ON df.idEntregaDoctoFinal = edf.id "
+                        + "WHERE df.idExpediente = ? AND df.idEntregaDoctoFinal = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idEntregaDocumentoFinal);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    documentoFinal = new DocumentoFinal();
+                    documentoFinal.setId(resultado.getInt("id"));
+                    documentoFinal.setNombreArchivo(resultado.getString("nombreArchivo"));
+                    documentoFinal.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
+                    if (resultado.getDate("fechaRevisado") != null) {
+                        documentoFinal.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+                    }
+                    documentoFinal.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
+                    documentoFinal.setComentario(resultado.getString("comentario"));
+                    documentoFinal.setArchivo(resultado.getBytes("archivo"));
+                    String tipoDocumentoFinalString = resultado.getString("tipoDoctoFinal").toUpperCase();
+                    documentoFinal.setTipoDocumentoFinal(DocumentoFinal.TipoDocumentoFinal.valueOf(tipoDocumentoFinalString));
                 }
-                documentoFinal.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
-                documentoFinal.setComentario(resultado.getString("comentario"));
-                documentoFinal.setArchivo(resultado.getBytes("archivo"));
-                String tipoDocumentoFinalString = resultado.getString("tipoDoctoFinal").toUpperCase();
-                documentoFinal.setTipoDocumentoFinal(DocumentoFinal.TipoDocumentoFinal.valueOf(tipoDocumentoFinalString));
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
-        } else {
-            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-    } finally {
-        BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
-    }
-    return documentoFinal;
+        return documentoFinal;
     }
     
     public static boolean actualizarRevisionDocumentoFinal(int idDocumentoFinal, int puntajeObtenido, String comentario) throws SQLException {

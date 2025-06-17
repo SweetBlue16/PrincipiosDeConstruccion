@@ -100,45 +100,45 @@ public class DocumentoInicialDAO {
     }
     
     public static DocumentoInicial obtenerDocumentoInicial(int idExpediente, int idEntregaDocumentoInicial) throws SQLException {
-    Connection conexionBD = null;
-    PreparedStatement sentencia = null;
-    ResultSet resultado = null;
-    DocumentoInicial documentoInicial = null;
-    
-    try {
-        conexionBD = ConexionBD.abrirConexion();
-        if (conexionBD != null) {
-            String consulta = "SELECT di.id, di.nombreArchivo, di.fechaEntregado, di.fechaRevisado, "
-                    + "di.puntajeObtenido, di.comentario, di.archivo, edi.tipoDoctoInicial "
-                    + "FROM documentoinicial di "
-                    + "JOIN entregadoctoinicial edi ON di.idEntregaDoctoInicial = edi.id "
-                    + "WHERE di.idExpediente = ? AND di.idEntregaDoctoInicial = ?";
-            sentencia = conexionBD.prepareStatement(consulta);
-            sentencia.setInt(1, idExpediente);
-            sentencia.setInt(2, idEntregaDocumentoInicial);
-            
-            resultado = sentencia.executeQuery();
-            if (resultado.next()) {
-                documentoInicial = new DocumentoInicial();
-                documentoInicial.setId(resultado.getInt("id"));
-                documentoInicial.setNombreArchivo(resultado.getString("nombreArchivo"));
-                documentoInicial.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
-                if (resultado.getDate("fechaRevisado") != null) {
-                    documentoInicial.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+        Connection conexionBD = null;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        DocumentoInicial documentoInicial = null;
+
+        try {
+            conexionBD = ConexionBD.abrirConexion();
+            if (conexionBD != null) {
+                String consulta = "SELECT di.id, di.nombreArchivo, di.fechaEntregado, di.fechaRevisado, "
+                        + "di.puntajeObtenido, di.comentario, di.archivo, edi.tipoDoctoInicial "
+                        + "FROM documentoinicial di "
+                        + "JOIN entregadoctoinicial edi ON di.idEntregaDoctoInicial = edi.id "
+                        + "WHERE di.idExpediente = ? AND di.idEntregaDoctoInicial = ?";
+                sentencia = conexionBD.prepareStatement(consulta);
+                sentencia.setInt(1, idExpediente);
+                sentencia.setInt(2, idEntregaDocumentoInicial);
+
+                resultado = sentencia.executeQuery();
+                if (resultado.next()) {
+                    documentoInicial = new DocumentoInicial();
+                    documentoInicial.setId(resultado.getInt("id"));
+                    documentoInicial.setNombreArchivo(resultado.getString("nombreArchivo"));
+                    documentoInicial.setFechaEntregado(resultado.getDate("fechaEntregado").toLocalDate());
+                    if (resultado.getDate("fechaRevisado") != null) {
+                        documentoInicial.setFechaRevisado(resultado.getDate("fechaRevisado").toLocalDate());
+                    }
+                    documentoInicial.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
+                    documentoInicial.setComentario(resultado.getString("comentario"));
+                    documentoInicial.setArchivo(resultado.getBytes("archivo"));
+                    String tipoDocumentoInicialString = resultado.getString("tipoDoctoInicial").toUpperCase();
+                    documentoInicial.setTipoDocumentoInicial(DocumentoInicial.TipoDocumentoInicial.valueOf(tipoDocumentoInicialString));
                 }
-                documentoInicial.setPuntajeObtenido(resultado.getInt("puntajeObtenido"));
-                documentoInicial.setComentario(resultado.getString("comentario"));
-                documentoInicial.setArchivo(resultado.getBytes("archivo"));
-                String tipoDocumentoInicialString = resultado.getString("tipoDoctoInicial").toUpperCase();
-                documentoInicial.setTipoDocumentoInicial(DocumentoInicial.TipoDocumentoInicial.valueOf(tipoDocumentoInicialString));
+            } else {
+                throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
-        } else {
-            throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
+        } finally {
+            BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
         }
-    } finally {
-        BaseDeDatosUtils.cerrarRecursos(conexionBD, sentencia, resultado);
-    }
-    return documentoInicial;
+        return documentoInicial;
     }
     
     public static boolean actualizarRevisionDocumentoInicial(int idDocumentoInicial, int puntajeObtenido, String comentario) throws SQLException {

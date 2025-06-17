@@ -182,7 +182,7 @@ public class ProyectoDAO {
                     proyecto.setOrganizacionVinculada(organizacion);
                     
                     proyectos.add(proyecto);
-            }
+                }
             } else {
                 throw new SQLException(ConstantesUtils.ALERTA_ERROR_BD);
             }
