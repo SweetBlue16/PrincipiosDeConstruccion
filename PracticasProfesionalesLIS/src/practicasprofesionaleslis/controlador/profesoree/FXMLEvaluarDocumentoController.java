@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.pdfbox.tools.PDFBox;
 import practicasprofesionaleslis.modelo.dao.DocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.DocumentoInicialDAO;
 import practicasprofesionaleslis.modelo.dao.DocumentoIntermedioDAO;
@@ -31,19 +32,21 @@ import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
 import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
+import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 public class FXMLEvaluarDocumentoController implements Initializable {
 
-    @FXML private Label lblInicia;
-    @FXML private Label lblValor;
-    @FXML private Label lblTermina;
-    @FXML private Label lblValorMaximo;
-    @FXML private Label lblNombreEntrega;
+    @FXML
+    private Label lblInicia;
+    @FXML
+    private Label lblValor;
+    @FXML
+    private Label lblTermina;
+    @FXML
+    private Label lblValorMaximo;
     @FXML
     private TextField txtfCalificacion;
-    private Button btnGuardar;
-    private Button btnCancelar;
 
     private ExperienciaEducativa experienciaEducativa;
     private Estudiante estudiante;
@@ -61,8 +64,6 @@ public class FXMLEvaluarDocumentoController implements Initializable {
     private Reporte reporte;
     
     private int idDocumento;
-    
-    private Stage stage; 
     
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     @FXML
@@ -82,149 +83,157 @@ public class FXMLEvaluarDocumentoController implements Initializable {
         });
     }
     
-public void inicializarDatos(ExperienciaEducativa experienciaEducativa, 
-                           Estudiante estudiante, 
-                           Expediente expediente,
-                           EntregaDocumentoInicial entregaInicial,
-                           EntregaDocumentoIntermedio entregaIntermedia,
-                           EntregaDocumentoFinal entregaFinal,
-                           EntregaReporte entregaReporte,
-                           Stage stage) throws SQLException {
-    this.experienciaEducativa = experienciaEducativa;
-    this.estudiante = estudiante;
-    this.expediente = expediente;
-    this.stage = stage;
+    public void inicializarDatos(ExperienciaEducativa experienciaEducativa, 
+                               Estudiante estudiante, 
+                               Expediente expediente,
+                               EntregaDocumentoInicial entregaInicial,
+                               EntregaDocumentoIntermedio entregaIntermedia,
+                               EntregaDocumentoFinal entregaFinal,
+                               EntregaReporte entregaReporte) throws SQLException {
+        this.experienciaEducativa = experienciaEducativa;
+        this.estudiante = estudiante;
+        this.expediente = expediente;
 
-    if (entregaInicial != null) {
-        this.entregaInicial = entregaInicial;
-        this.tipoDocumento = "INICIAL";
-        this.entrega = entregaInicial;
-        this.documentoInicial = DocumentoInicialDAO.obtenerDocumentoInicial(expediente.getId(), entregaInicial.getId());
-        this.idDocumento = documentoInicial.getId();
-        
-    } else if (entregaIntermedia != null) {
-        this.entregaIntermedia = entregaIntermedia;
-        this.tipoDocumento = "INTERMEDIO";
-        this.entrega = entregaIntermedia;
-        this.documentoIntermedio = DocumentoIntermedioDAO.obtenerDocumentoIntermedio(expediente.getId(), entregaIntermedia.getId());
-        this.idDocumento = documentoIntermedio.getId();
-        
-    } else if (entregaFinal != null) {
-        this.entregaFinal = entregaFinal;
-        this.tipoDocumento = "FINAL";
-        this.entrega = entregaFinal;
-        this.documentoFinal = DocumentoFinalDAO.obtenerDocumentoFinal(expediente.getId(), entregaFinal.getId());
-        this.idDocumento = documentoFinal.getId();
-        
-    } else if (entregaReporte != null) {
-        this.entregaReporte = entregaReporte;
-        this.tipoDocumento = "REPORTE";
-        this.entrega = entregaReporte;
-        this.reporte = ReporteDAO.obtenerReporte(expediente.getId(), entregaReporte.getId());
-        this.idDocumento = reporte.getId();
-        
-    } else {
-        throw new IllegalArgumentException("At least one type of Entrega must be provided");
+        if (entregaInicial != null) {
+            this.entregaInicial = entregaInicial;
+            this.tipoDocumento = "INICIAL";
+            this.entrega = entregaInicial;
+            this.documentoInicial = DocumentoInicialDAO.obtenerDocumentoInicial(expediente.getId(), entregaInicial.getId());
+            this.idDocumento = documentoInicial.getId();
+
+        } else if (entregaIntermedia != null) {
+            this.entregaIntermedia = entregaIntermedia;
+            this.tipoDocumento = "INTERMEDIO";
+            this.entrega = entregaIntermedia;
+            this.documentoIntermedio = DocumentoIntermedioDAO.obtenerDocumentoIntermedio(expediente.getId(), entregaIntermedia.getId());
+            this.idDocumento = documentoIntermedio.getId();
+
+        } else if (entregaFinal != null) {
+            this.entregaFinal = entregaFinal;
+            this.tipoDocumento = "FINAL";
+            this.entrega = entregaFinal;
+            this.documentoFinal = DocumentoFinalDAO.obtenerDocumentoFinal(expediente.getId(), entregaFinal.getId());
+            this.idDocumento = documentoFinal.getId();
+
+        } else if (entregaReporte != null) {
+            this.entregaReporte = entregaReporte;
+            this.tipoDocumento = "REPORTE";
+            this.entrega = entregaReporte;
+            this.reporte = ReporteDAO.obtenerReporte(expediente.getId(), entregaReporte.getId());
+            this.idDocumento = reporte.getId();
+
+        } else {
+            throw new IllegalArgumentException("At least one type of Entrega must be provided");
+        }
+
+        mostrarDetallesDocumento();
     }
 
-    mostrarDetallesDocumento();
-}
-
     private void mostrarDetallesDocumento() {
-        lblNombreEntrega.setText(tipoDocumento);
         lblInicia.setText(entrega.getFechaInicio().format(DATE_FORMATTER));
         lblTermina.setText(entrega.getFechaFin().format(DATE_FORMATTER));
         lblValorMaximo.setText(String.valueOf(entrega.getPuntaje()));
-
-
-        }
-
-@FXML
-private void btnCalificar(ActionEvent event) {
-      try {
-        // Validate input
-        if (txtfCalificacion.getText().isEmpty()) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "Debe ingresar una calificación");
-            return;
-        }
-        
-        int puntaje = Integer.parseInt(txtfCalificacion.getText());
-        String comentario = txtfComentario.getText();
-        
-        // Validate the score doesn't exceed maximum
-        if (puntaje > entrega.getPuntaje()) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-                "La calificación no puede ser mayor al valor máximo (" + entrega.getPuntaje() + ")"
-                );
-            return;
-        }
-        
-        boolean resultado;
-        
-        // Update the appropriate document type
-        switch (tipoDocumento) {
-            case "INICIAL":
-                resultado = DocumentoInicialDAO.actualizarRevisionDocumentoInicial(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "INTERMEDIO":
-                resultado = DocumentoIntermedioDAO.actualizarRevisionDocumentoIntermedio(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "FINAL":
-                resultado = DocumentoFinalDAO.actualizarRevisionDocumentoFinal(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "REPORTE":
-                resultado = ReporteDAO.actualizarRevisionReporte(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            default:
-                throw new IllegalStateException("Tipo de documento desconocido: " + tipoDocumento);
-        }
-        
-        if (resultado) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Exito", 
-                "La evaluación se ha guardado correctamente"
-                );
-            stage.close();
-        } else {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-                "No se pudo guardar la evaluación"
-                );
-        }
-        
-    } catch (NumberFormatException e) {
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-            "La calificación debe ser un número válido"
-            );
-    } catch (SQLException e) {
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-            "Error al guardar la evaluación: " + e.getMessage()
-            );
     }
-}
 
+    @FXML
+    private void btnCalificar(ActionEvent event) {
+          try {
+            // Validate input
+            if (txtfCalificacion.getText().isEmpty()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "Debe ingresar una calificación");
+                return;
+            }
+
+            int puntaje = Integer.parseInt(txtfCalificacion.getText());
+            String comentario = txtfComentario.getText();
+
+            // Validate the score doesn't exceed maximum
+            if (puntaje > entrega.getPuntaje()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                    "La calificación no puede ser mayor al valor máximo (" + entrega.getPuntaje() + ")"
+                    );
+                return;
+            }
+
+            boolean resultado;
+
+            // Update the appropriate document type
+            switch (tipoDocumento) {
+                case "INICIAL":
+                    resultado = DocumentoInicialDAO.actualizarRevisionDocumentoInicial(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "INTERMEDIO":
+                    resultado = DocumentoIntermedioDAO.actualizarRevisionDocumentoIntermedio(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "FINAL":
+                    resultado = DocumentoFinalDAO.actualizarRevisionDocumentoFinal(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "REPORTE":
+                    resultado = ReporteDAO.actualizarRevisionReporte(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                default:
+                    throw new IllegalStateException("Tipo de documento desconocido: " + tipoDocumento);
+            }
+
+            if (resultado) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Exito", 
+                    "La evaluación se ha guardado correctamente"
+                    );
+                VentanasUtils.cerrarVentana(lblInicia);
+            } else {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                    "No se pudo guardar la evaluación"
+                    );
+            }
+
+        } catch (NumberFormatException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                "La calificación debe ser un número válido"
+                );
+        } catch (SQLException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                "Error al guardar la evaluación: " + e.getMessage()
+                );
+        }
+    }
 
     @FXML
     private void btnDescargar(ActionEvent event) {
-    }
-
-    @FXML
-    private void txtfCalificacion(ActionEvent event) {
-    }
-
-    @FXML
-    private void txtfComentario(ActionEvent event) {
+        try {
+            switch (tipoDocumento) {
+            case "INICIAL":
+                PDFUtils.guardarPDFDesdeBytes(documentoInicial.getArchivo(), documentoInicial.getNombreArchivo());
+            case "INTERMEDIO":
+                PDFUtils.guardarPDFDesdeBytes(documentoIntermedio.getArchivo(), documentoIntermedio.getNombreArchivo());
+            case "FINAL":
+                PDFUtils.guardarPDFDesdeBytes(documentoFinal.getArchivo(), documentoFinal.getNombreArchivo());
+            case "REPORTE":
+                PDFUtils.guardarPDFDesdeBytes(reporte.getArchivo(), reporte.getNombreArchivo());
+            default:
+                throw new IllegalStateException("Tipo de documento desconocido: " + tipoDocumento);
+            }
+        } catch (NullPointerException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, ConstantesUtils.TITULO_ERROR, 
+                ConstantesUtils.ALERTA_DESCARGA_ARCHIVO_FALLIDA
+            );
+        } catch (IllegalStateException e) {
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, ConstantesUtils.TITULO_ERROR, 
+                e.getMessage()
+            );
+        }
     }
 
     @FXML
     private void btnCancelar(ActionEvent event) {
-                VentanasUtils.cerrarVentana(lblInicia);
+        VentanasUtils.cerrarVentana(lblInicia);
     }
 }
     
