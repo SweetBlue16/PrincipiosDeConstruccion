@@ -163,7 +163,7 @@ public class FXMLEntregasController implements Initializable {
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.setResizable(false);
 
-                AsignarFechaEntregaController controller = loader.getController();
+                FXMLAsignarFechaEntregaController controller = loader.getController();
                 controller.inicializarDatos(
                     coordinador,
                     experienciaEducativa,

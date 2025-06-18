@@ -16,6 +16,13 @@ import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para consultar el
+ * detalle de una evaluación de la presentación que hace
+ * un profesor evaluador.
+ */
 public class FXMLDetallePresentacionController implements Initializable {
     private EvaluacionPresentacion evaluacionPresentacion;
     private List<Criterio> criteriosEvaluacion;

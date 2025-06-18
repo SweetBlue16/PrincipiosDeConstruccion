@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Clase abstracta que representa las
+ * propiedades comunes de las diferentes entregas de documentos
+ * que hay en el sistema.
+ */
 public abstract class Entrega {
     protected int id;
     protected LocalDate fechaInicio;

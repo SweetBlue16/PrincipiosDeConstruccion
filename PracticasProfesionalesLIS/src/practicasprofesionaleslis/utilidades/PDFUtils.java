@@ -18,6 +18,12 @@ import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 12/06/2025
+ * Descripción: Proporciona métodos auxiliares para
+ * guardar y leer archivos PDF dentro del sistema.
+ */
 public class PDFUtils {
     private static PDDocument documentoPDF;
     private static PDFRenderer renderizadorPDF;

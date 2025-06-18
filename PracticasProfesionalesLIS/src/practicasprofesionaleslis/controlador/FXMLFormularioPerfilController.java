@@ -31,6 +31,13 @@ import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 07/06/2025
+ * Descripción: Controla la ventana para llenar el
+ * formulario del perfil del actor, ya sea el Coordinador,
+ * Estudiante, Profesor EE o Evaluador.
+ */
 public class FXMLFormularioPerfilController implements Initializable {
     private Estudiante estudiante;
     private Coordinador coordinador;

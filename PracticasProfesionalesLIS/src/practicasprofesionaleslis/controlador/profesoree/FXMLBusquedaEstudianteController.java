@@ -21,6 +21,13 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.ValidacionUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar un
+ * estudiante inscrito en la experiencia educativa
+ * mediante la matrícula.
+ */
 public class FXMLBusquedaEstudianteController implements Initializable {
 
     @FXML

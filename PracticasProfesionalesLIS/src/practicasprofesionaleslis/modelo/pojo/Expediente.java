@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa al expediente
+ * asociado a un estudiante dentro del sistema.
+ */
 public class Expediente {
     
     public enum Estado { ACTIVO, BAJA, CONCLUIDO }

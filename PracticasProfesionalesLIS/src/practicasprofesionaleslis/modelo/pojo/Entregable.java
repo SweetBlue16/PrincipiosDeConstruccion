@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Clase abstracta que representa las
+ * propiedades comunes de los diferentes archivos que
+ * sube el estudiante.
+ */
 public abstract class Entregable {
     protected int id;
     protected String nombreArchivo;

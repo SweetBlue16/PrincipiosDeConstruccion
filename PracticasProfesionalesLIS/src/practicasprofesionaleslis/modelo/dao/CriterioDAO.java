@@ -11,6 +11,12 @@ import practicasprofesionaleslis.modelo.pojo.Criterio;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 15/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Criterio.
+ */
 public class CriterioDAO {
     
     public static boolean registrarCriterio(Criterio criterio) throws SQLException {

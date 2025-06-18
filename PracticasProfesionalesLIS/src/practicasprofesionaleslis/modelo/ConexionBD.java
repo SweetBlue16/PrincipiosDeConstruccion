@@ -4,10 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 05/05/2025
+ * Descripción: Gestiona la conexión a la base
+ * de datos en MySQL.
+ */
 public class ConexionBD {
     private static final String IP = "localhost";
     private static final String PUERTO = "3306";
-    private static final String NOMBRE_BD = "ppl";
+    private static final String NOMBRE_BD = "pplis";
     private static final String USUARIO = "pplisAdmin";
     private static final String PASSWORD = "pplis-15811";
     private static final String DRIVER = "com.mysql.jdbc.Driver";

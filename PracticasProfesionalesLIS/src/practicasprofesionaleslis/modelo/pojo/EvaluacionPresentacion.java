@@ -1,14 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
 /**
- *
- * @author acrca
+ * Autor: Todos
+ * Fecha de creación: 14/06/2025
+ * Descripción: Representa las evaluaciones que
+ * hacen los profesores evaluadores o del cuerpo
+ * colegiado a las presentaciones de los estudiantes.
  */
 public class EvaluacionPresentacion {
     

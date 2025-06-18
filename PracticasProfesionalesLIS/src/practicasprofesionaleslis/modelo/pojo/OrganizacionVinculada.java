@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa la organización vinculada
+ * donde el estudiante realiza sus prácticas profesionales.
+ */
 public class OrganizacionVinculada {
     private int id;
     private int numProyectos;

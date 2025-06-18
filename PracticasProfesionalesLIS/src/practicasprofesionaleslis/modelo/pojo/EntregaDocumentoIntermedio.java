@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Representa las entregas de
+ * documentos intermedios a las que sube el estudiante
+ * sus archivos dentro del sistema.
+ */
 public class EntregaDocumentoIntermedio extends Entrega {
     private String tipoDocumentoIntermedio;
 

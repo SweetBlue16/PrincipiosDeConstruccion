@@ -1,5 +1,12 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa la experiencia
+ * educativa que cursa el estudiante al momento
+ * de realizar sus prácticas profesionales.
+ */
 public class ExperienciaEducativa {
     private int id;
     private int nrc;

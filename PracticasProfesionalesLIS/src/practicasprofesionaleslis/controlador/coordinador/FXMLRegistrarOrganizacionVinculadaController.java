@@ -13,6 +13,12 @@ import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para registrar
+ * una organización vinculada dentro del sistema.
+ */
 public class FXMLRegistrarOrganizacionVinculadaController implements Initializable {
     private static final int NUMERO_PROYECTOS_INICIAL = 0;
 

@@ -1,5 +1,12 @@
 package practicasprofesionaleslis.utilidades;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 29/05/2025
+ * Descripción: Proporciona constantes para mensajes
+ * títulos de ventana y expresiones regulares, reutilizables
+ * a lo largo de todo el sistema.
+ */
 public class ConstantesUtils {
     public static final String TITULO_ERROR = "ERROR";
     public static final String TITULO_ADVERTENCIA = "ADVERTENCIA";

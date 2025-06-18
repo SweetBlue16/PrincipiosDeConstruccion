@@ -11,6 +11,12 @@ import javafx.scene.image.ImageView;
 import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 15/06/2025
+ * Descripción: Controla la ventana para consultar el
+ * PDF cargado por un estudiante en las entregas.
+ */
 public class FXMLDocumentoController implements Initializable {
 
     @FXML

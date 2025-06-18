@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 15/06/2025
+ * Descripción: Representa los criterios a evaluar
+ * de una presentación en el sistema.
+ */
 public class Criterio {
     
     private int id;

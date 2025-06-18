@@ -13,6 +13,12 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para actualizar
+ * un responsable de proyecto en el sistema.
+ */
 public class FXMLModificarDatosDelResponsableController implements Initializable {
     private ResponsableProyecto responsableProyecto;
     

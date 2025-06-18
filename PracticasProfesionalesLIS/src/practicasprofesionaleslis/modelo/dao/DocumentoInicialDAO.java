@@ -1,11 +1,9 @@
 package practicasprofesionaleslis.modelo.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import practicasprofesionaleslis.modelo.ConexionBD;
@@ -13,6 +11,12 @@ import practicasprofesionaleslis.modelo.pojo.DocumentoInicial;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 14/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Documento Inicial.
+ */
 public class DocumentoInicialDAO {
     
     public static boolean subirDocumentoInicial(DocumentoInicial documento, int idEntregaDocumentoInicial, int idExpediente) throws SQLException {

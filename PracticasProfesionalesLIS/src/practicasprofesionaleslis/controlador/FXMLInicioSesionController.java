@@ -30,6 +30,12 @@ import practicasprofesionaleslis.utilidades.VentanasUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.ValidacionUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 05/05/2025
+ * Descripción: Controla la ventana para iniciar sesión
+ * dentro del sistema de prácticas profesionales.
+ */
 public class FXMLInicioSesionController implements Initializable {
     @FXML
     private TextField txtfUsuario;

@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa al actor Evaluador
+ * dentro del sistema de prácticas.
+ */
 public class Evaluador {
     private int id;
     private String numeroPersonal;

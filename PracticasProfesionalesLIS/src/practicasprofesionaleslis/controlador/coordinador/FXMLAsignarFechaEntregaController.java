@@ -27,7 +27,7 @@ import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
-public class AsignarFechaEntregaController implements Initializable {
+public class FXMLAsignarFechaEntregaController implements Initializable {
 
     @FXML 
     private Label lblNombreEntrega;

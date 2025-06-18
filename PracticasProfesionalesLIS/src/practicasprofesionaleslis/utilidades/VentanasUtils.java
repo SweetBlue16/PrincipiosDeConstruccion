@@ -17,6 +17,12 @@ import practicasprofesionaleslis.controlador.FXMLFormularioPerfilController;
 import practicasprofesionaleslis.interfaz.IObservador;
 import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 05/05/2025
+ * Descripción: Proporciona métodos auxiliares para
+ * el manejo de ventanas con JavaFX.
+ */
 public class VentanasUtils {
     public static void mostrarAlertaSimple(Alert.AlertType tipo, String titulo, String contenido) {
         Alert alerta = new Alert(tipo);

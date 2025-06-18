@@ -8,6 +8,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 05/05/2025
+ * Descripción: Clase principal de la aplicación
+ * Prácticas Profesionales LIS. Inicia la interfaz
+ * gráfica y muestra la ventana de inicio de
+ * sesión.
+ */
 public class PracticasProfesionalesLIS extends Application {
     
     @Override

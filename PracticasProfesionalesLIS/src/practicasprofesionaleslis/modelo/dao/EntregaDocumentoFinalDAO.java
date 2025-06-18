@@ -14,6 +14,12 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoFinal;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 07/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Entrega Documento Final.
+ */
 public class EntregaDocumentoFinalDAO {
     
     public static EntregaDocumentoFinal registrarDocumentoFinal(LocalDate fechaInicio, LocalDate fechaFin,

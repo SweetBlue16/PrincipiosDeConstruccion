@@ -11,6 +11,12 @@ import practicasprofesionaleslis.modelo.pojo.DocumentoFinal;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 14/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Documento Final.
+ */
 public class DocumentoFinalDAO {
     
     public static boolean subirDocumentoFinal(DocumentoFinal documento, int idEntregaDocumentoFinal, int idExpediente) throws SQLException {

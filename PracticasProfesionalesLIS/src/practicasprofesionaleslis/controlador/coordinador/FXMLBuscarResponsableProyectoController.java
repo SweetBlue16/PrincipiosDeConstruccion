@@ -21,6 +21,13 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar
+ * un responsable de proyecto asociado a un proyecto y
+ * una organización vinculada.
+ */
 public class FXMLBuscarResponsableProyectoController implements Initializable {
 
     @FXML

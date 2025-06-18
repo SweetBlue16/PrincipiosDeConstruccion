@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Representa los documentos
+ * iniciales que sube el estudiante a su expediente
+ * dentro del sistema.
+ */
 public class DocumentoInicial extends Entregable {
     
     public enum TipoDocumentoInicial { CARTAACEPTACION, CONSTANCIASEGURO, CRONOGRAMA, HORARIOUV, OFICIOASIGNACION }

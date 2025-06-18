@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Representa los documentos
+ * intermedios que sube el estudiante a su expediente
+ * dentro del sistema.
+ */
 public class DocumentoIntermedio extends Entregable {
     
     public enum TipoDocumentoIntermedio { REPORTEPARCIAL, PRESENTACION210HORAS, EVALUACIONPARCIALOV }

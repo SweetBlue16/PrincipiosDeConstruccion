@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa el actor Coordinador
+ * dentro del sistema de prácticas.
+ */
 public class Coordinador {
     private int id;
     private String numeroPersonal;

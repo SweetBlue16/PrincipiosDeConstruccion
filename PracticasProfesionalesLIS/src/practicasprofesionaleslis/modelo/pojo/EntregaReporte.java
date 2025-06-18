@@ -2,6 +2,13 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Representa las entregas de
+ * reportes mensuales a las que sube el estudiante
+ * sus archivos dentro del sistema.
+ */
 public class EntregaReporte extends Entrega {
     private int numeroReporte;
 

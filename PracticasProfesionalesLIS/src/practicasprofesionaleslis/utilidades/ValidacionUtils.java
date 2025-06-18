@@ -2,6 +2,13 @@ package practicasprofesionaleslis.utilidades;
 
 import java.util.regex.Pattern;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Proporciona métodos auxiliares y
+ * constantes para validar las credenciales de los
+ * diferentes actores del sistema.
+ */
 public class ValidacionUtils {
     private static final String REGEX_ESTUDIANTE = "^S\\d{8}$";
     private static final String REGEX_COORDINADOR = "^C\\d{3}$";

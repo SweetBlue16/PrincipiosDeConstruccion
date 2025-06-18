@@ -34,6 +34,12 @@ import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Mauricio Noriega
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para consultar los
+ * avances de prácticas profesionales de un estudiante.
+ */
 public class FXMLAvancePracticasProfesionalesController implements Initializable {
     private Estudiante estudiante;
     private Expediente expediente;
