@@ -17,6 +17,12 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para registrar un
+ * responsable de proyecto.
+ */
 public class FXMLRegistrarResponsableProyectoController implements Initializable {
     private List<OrganizacionVinculada> organizacionesVinculadas;
 

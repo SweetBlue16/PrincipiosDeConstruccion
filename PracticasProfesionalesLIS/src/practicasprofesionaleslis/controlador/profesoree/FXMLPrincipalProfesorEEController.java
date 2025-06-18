@@ -24,6 +24,12 @@ import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Controla la ventana principal
+ * del Profesor EE.
+ */
 public class FXMLPrincipalProfesorEEController implements Initializable, IObservador {
     private ProfesorEE profesorEE;
 

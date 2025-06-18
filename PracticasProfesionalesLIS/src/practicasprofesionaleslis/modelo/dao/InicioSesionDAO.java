@@ -12,6 +12,14 @@ import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 05/05/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla de los actores
+ * (Coordinador, Estudiante, Profesor y Evaluador)
+ * para el login del sistema.
+ */
 public class InicioSesionDAO {
 
     public static Estudiante verificarCredencialesEstudiante(String matricula, String contraseña) throws SQLException {

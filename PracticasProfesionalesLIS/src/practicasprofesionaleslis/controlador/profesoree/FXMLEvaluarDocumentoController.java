@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.modelo.dao.DocumentoFinalDAO;
@@ -34,9 +33,15 @@ import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
 import practicasprofesionaleslis.modelo.pojo.Reporte;
-import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para asignar
+ * una calificación a un documento entregado por
+ * un estudiante.
+ */
 public class FXMLEvaluarDocumentoController implements Initializable {
 
     @FXML private Label lblInicia;

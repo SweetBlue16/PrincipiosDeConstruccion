@@ -1,5 +1,12 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa al actor Profesor de
+ * la experiencia educativa dentro del sistema
+ * de prácticas.
+ */
 public class ProfesorEE {
     private int id;
     private String numeroPersonal;

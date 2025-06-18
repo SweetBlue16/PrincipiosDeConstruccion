@@ -20,6 +20,12 @@ import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 15/06/2025
+ * Descripción: Controla la ventana para buscar
+ * un proyecto por nombre.
+ */
 public class FXMLBuscadorProyectoController implements Initializable {
 
     @FXML

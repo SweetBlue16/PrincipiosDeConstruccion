@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa al responsable de proyecto
+ * asociado a una organización vinculada.
+ */
 public class ResponsableProyecto {
     private int id;
     private String nombre;

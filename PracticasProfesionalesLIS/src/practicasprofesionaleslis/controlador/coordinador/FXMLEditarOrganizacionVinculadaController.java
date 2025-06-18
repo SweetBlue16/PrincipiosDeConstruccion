@@ -13,6 +13,12 @@ import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para editar
+ * una organización vinculada.
+ */
 public class FXMLEditarOrganizacionVinculadaController implements Initializable {
     private OrganizacionVinculada organizacionVinculada;
 

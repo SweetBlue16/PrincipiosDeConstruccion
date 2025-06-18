@@ -15,6 +15,12 @@ import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Expediente.
+ */
 public class ExpedienteDAO {
 
     public static String obtenerNombreProyectoPorMatricula(String matricula) throws SQLException {

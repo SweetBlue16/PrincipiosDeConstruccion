@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package practicasprofesionaleslis.controlador.coordinador;
 
 import java.io.IOException;
@@ -9,7 +5,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +26,10 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
 /**
- * FXML Controller class
- *
- * @author yael
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 17/06/2025
+ * Descripción: Controla la ventana para recuperar
+ * las experiencias educativas.
  */
 public class FXMLExperienciasEducativasController implements Initializable {    
     
@@ -71,17 +67,17 @@ public class FXMLExperienciasEducativasController implements Initializable {
 
     }
     
-private void cargarExperienciasEducativas() {
-    try {
-        List<ExperienciaEducativa> experiencias = 
-            ExperienciaEducativaDAO.obtenerExperienciasPorCoordinador(coordinador.getId());
-        tableViewExperiencias.getItems().clear(); 
-        tableViewExperiencias.getItems().addAll(experiencias); 
-    } catch (SQLException e) {
-        e.printStackTrace();
-        mostrarErrorBD();
+    private void cargarExperienciasEducativas() {
+        try {
+            List<ExperienciaEducativa> experiencias = 
+                ExperienciaEducativaDAO.obtenerExperienciasPorCoordinador(coordinador.getId());
+            tableViewExperiencias.getItems().clear(); 
+            tableViewExperiencias.getItems().addAll(experiencias); 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarErrorBD();
+        }
     }
-}
     
     private void mostrarErrorBD() {
         VentanasUtils.mostrarAlertaSimple(

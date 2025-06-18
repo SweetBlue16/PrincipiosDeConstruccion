@@ -11,6 +11,12 @@ import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 14/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Reporte.
+ */
 public class ReporteDAO {
     
     public static boolean subirReporte(Reporte reporte, int idEntregaReporte, int idExpediente) throws SQLException {

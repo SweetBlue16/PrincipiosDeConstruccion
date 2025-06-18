@@ -24,6 +24,12 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import static practicasprofesionaleslis.utilidades.ConstantesUtils.ALERTA_ERROR_BD;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Controla la ventana principal
+ * del Coordinador.
+ */
 public class FXMLPrincipalCoordinadorController implements Initializable, IObservador {
     private Coordinador coordinador;
 

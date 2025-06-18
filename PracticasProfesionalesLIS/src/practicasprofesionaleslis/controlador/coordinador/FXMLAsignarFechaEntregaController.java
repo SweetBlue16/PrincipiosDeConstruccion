@@ -1,6 +1,5 @@
 package practicasprofesionaleslis.controlador.coordinador;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -24,9 +22,14 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
-import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 17/06/2025
+ * Descripción: Controla la ventana para asignar
+ * el rango de fechas de las entregas.
+ */
 public class FXMLAsignarFechaEntregaController implements Initializable {
 
     @FXML 

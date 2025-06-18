@@ -2,6 +2,12 @@ package practicasprofesionaleslis.modelo.pojo;
 
 import java.time.LocalDate;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Representa los reportes que
+ * sube el estudiante a su expediente dentro del sistema.
+ */
 public class Reporte extends Entregable {
     private int horasCubiertas;
     private int numeroReporte;

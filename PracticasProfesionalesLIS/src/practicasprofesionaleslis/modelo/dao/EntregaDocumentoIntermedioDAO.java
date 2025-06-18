@@ -14,6 +14,13 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Entrega Documento
+ * Intermedio.
+ */
 public class EntregaDocumentoIntermedioDAO {
     
     public static EntregaDocumentoIntermedio registrarDocumentoIntermedio(LocalDate fechaInicio, LocalDate fechaFin, 

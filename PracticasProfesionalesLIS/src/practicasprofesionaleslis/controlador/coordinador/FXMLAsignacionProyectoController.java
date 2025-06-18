@@ -22,6 +22,12 @@ import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para
+ * asignar un proyecto disponible a un estudiante.
+ */
 public class FXMLAsignacionProyectoController implements Initializable {
 
     @FXML

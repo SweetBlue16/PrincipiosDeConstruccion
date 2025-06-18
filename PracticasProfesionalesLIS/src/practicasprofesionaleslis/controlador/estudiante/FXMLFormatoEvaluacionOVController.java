@@ -11,6 +11,13 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para descargar
+ * el formato de autoevaluación como parte de los documentos
+ * del expediente del estudiante.
+ */
 public class FXMLFormatoEvaluacionOVController implements Initializable {
     private final String RUTA_RELATIVA = "/practicasprofesionaleslis/recursos/pdf/PRAIS-03-Autoevaluacion-del-alumno.pdf";
     private final String NOMBRE_ARCHIVO = "FormatoAutoevaluacionOV";

@@ -19,14 +19,18 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import practicasprofesionaleslis.controlador.evaluador.FXMLCalificarPresentacionController;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
-import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para recuperar
+ * los estudiantes sin un proyecto asignado.
+ */
 public class FXMLBuscarEstudianteSinProyectoController implements Initializable {
 
     @FXML

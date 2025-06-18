@@ -9,6 +9,12 @@ import practicasprofesionaleslis.modelo.pojo.Evaluador;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 07/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Evaluador.
+ */
 public class EvaluadorDAO {
     
     public static boolean editarEvaluador(Evaluador evaluador) throws SQLException {

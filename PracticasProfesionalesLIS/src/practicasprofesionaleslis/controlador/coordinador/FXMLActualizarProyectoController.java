@@ -1,8 +1,6 @@
 package practicasprofesionaleslis.controlador.coordinador;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,13 +9,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import practicasprofesionaleslis.modelo.ConexionBD;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
-import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 15/06/2025
+ * Descripción: Controla la ventana para actualizar
+ * los datos de un proyecto.
+ */
 public class FXMLActualizarProyectoController implements Initializable {
 
     @FXML

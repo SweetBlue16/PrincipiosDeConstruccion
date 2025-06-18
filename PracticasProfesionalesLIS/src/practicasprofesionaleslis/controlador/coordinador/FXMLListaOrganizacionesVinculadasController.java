@@ -33,6 +33,13 @@ import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para recuperar
+ * la lista de organizaciones vinculadas disponibles en
+ * el sistema.
+ */
 public class FXMLListaOrganizacionesVinculadasController implements Initializable {
 
     @FXML

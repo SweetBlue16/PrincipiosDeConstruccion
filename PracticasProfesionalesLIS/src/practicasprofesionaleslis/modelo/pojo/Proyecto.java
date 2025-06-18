@@ -1,5 +1,11 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa el proyecto que
+ * desarrolla un estudiante dentro de una organización vinculada.
+ */
 public class Proyecto {
     private int id;
     private String nombre;

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -21,15 +20,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-//import javafx.scene.control.cell.PropertyValueFactory;
-//import practicasprofesionaleslis.modelo.dao.EntregaDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoFinalDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoInicialDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaDocumentoIntermedioDAO;
 import practicasprofesionaleslis.modelo.dao.EntregaReporteDAO;
 
-
-import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
@@ -38,9 +33,14 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoFinal;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
-import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para consultar
+ * los documentos entregados por parte del estudiante.
+ */
 public class FXMLDocumentosEntregadosController implements Initializable {
 
     private TableView<Entrega> tbldocumentosEntregados;

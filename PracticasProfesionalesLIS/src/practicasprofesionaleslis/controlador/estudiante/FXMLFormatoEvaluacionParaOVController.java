@@ -9,18 +9,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
-import practicasprofesionaleslis.modelo.dao.OrganizacionVinculadaDAO;
 import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
-import practicasprofesionaleslis.modelo.dao.ResponsableProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.Expediente;
-import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
-import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para
+ * descargar el formato de evaluación para la
+ * organización vinculada.
+ */
 public class FXMLFormatoEvaluacionParaOVController implements Initializable {
    
     @FXML

@@ -13,6 +13,12 @@ import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.PDFUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para generar
+ * los documentos de asignación de prácticas.
+ */
 public class FXMLGenerarDocumentosAsignacionController implements Initializable {
 
     @FXML

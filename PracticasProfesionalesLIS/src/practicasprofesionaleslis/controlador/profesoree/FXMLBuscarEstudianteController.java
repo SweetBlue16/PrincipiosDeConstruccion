@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,6 +28,12 @@ import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar
+ * un estudiante por su matrícula.
+ */
 public class FXMLBuscarEstudianteController implements Initializable {
 
     private AnchorPane apBuscarEstudiante;

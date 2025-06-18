@@ -13,6 +13,12 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 10/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Proyecto.
+ */
 public class ProyectoDAO {
     
     public static boolean registrarProyecto(Proyecto proyecto) throws SQLException {

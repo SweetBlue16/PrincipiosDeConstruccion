@@ -19,11 +19,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import practicasprofesionaleslis.modelo.dao.EstudianteDAO;
 import practicasprofesionaleslis.modelo.dao.ExpedienteDAO;
-import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar
+ * un estudiante mediante su matrícula.
+ */
 public class FXMLBuscarEstudianteController implements Initializable {
 
     private Estudiante estudianteEncontrado;

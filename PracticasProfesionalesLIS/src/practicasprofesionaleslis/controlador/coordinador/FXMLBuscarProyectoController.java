@@ -20,6 +20,12 @@ import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar
+ * un proyecto por su nombre.
+ */
 public class FXMLBuscarProyectoController implements Initializable {
 
     @FXML
@@ -57,42 +63,42 @@ public class FXMLBuscarProyectoController implements Initializable {
         }
     }
     
-private void irRegistrarDatos(Proyecto proyecto) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/practicasprofesionaleslis/vista/coordinador/FXMLActualizarProyecto.fxml"));
-        Parent vista = loader.load();
-        
-        FXMLActualizarProyectoController controller = loader.getController();
-        
-        boolean integrantesAsignados = false;
+    private void irRegistrarDatos(Proyecto proyecto) {
         try {
-            integrantesAsignados = ProyectoDAO.tieneIntegrantesAsignados(proyecto.getId());
-        } catch (SQLException e) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/practicasprofesionaleslis/vista/coordinador/FXMLActualizarProyecto.fxml"));
+            Parent vista = loader.load();
+
+            FXMLActualizarProyectoController controller = loader.getController();
+
+            boolean integrantesAsignados = false;
+            try {
+                integrantesAsignados = ProyectoDAO.tieneIntegrantesAsignados(proyecto.getId());
+            } catch (SQLException e) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR,
+                        ConstantesUtils.TITULO_ERROR,
+                        ConstantesUtils.ALERTA_ERROR_BD);
+                e.printStackTrace();
+                return;
+            }
+
+            controller.inicializarDatosProyecto(proyecto, integrantesAsignados);
+
+            Scene escena = new Scene(vista);
+            Stage escenarioActualizar = new Stage();
+            escenarioActualizar.setScene(escena);
+            escenarioActualizar.setTitle("ACTUALIZAR PROYECTO");
+            escenarioActualizar.initModality(Modality.APPLICATION_MODAL);
+            escenarioActualizar.showAndWait();
+            escenarioActualizar.centerOnScreen();
+            txtfNombreProyecto.clear();
+            lbProyectoNoEncontrado.setText("");
+        } catch (IOException e) {
+            e.printStackTrace();
+            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
                     ConstantesUtils.TITULO_ERROR,
                     ConstantesUtils.ALERTA_ERROR_BD);
-            e.printStackTrace();
-            return;
         }
-        
-        controller.inicializarDatosProyecto(proyecto, integrantesAsignados);
-        
-        Scene escena = new Scene(vista);
-        Stage escenarioActualizar = new Stage();
-        escenarioActualizar.setScene(escena);
-        escenarioActualizar.setTitle("ACTUALIZAR PROYECTO");
-        escenarioActualizar.initModality(Modality.APPLICATION_MODAL);
-        escenarioActualizar.showAndWait();
-        escenarioActualizar.centerOnScreen();
-        txtfNombreProyecto.clear();
-        lbProyectoNoEncontrado.setText("");
-    } catch (IOException e) {
-        e.printStackTrace();
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.WARNING,
-                ConstantesUtils.TITULO_ERROR,
-                ConstantesUtils.ALERTA_ERROR_BD);
     }
-}
     
     @FXML
     private void clicBtnBuscar(ActionEvent event) {

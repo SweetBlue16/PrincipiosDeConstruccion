@@ -1,6 +1,5 @@
 package practicasprofesionaleslis.modelo.dao;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +11,12 @@ import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 07/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Estudiante.
+ */
 public class EstudianteDAO {
 
     public static boolean editarEstudiante(Estudiante estudiante) throws SQLException {

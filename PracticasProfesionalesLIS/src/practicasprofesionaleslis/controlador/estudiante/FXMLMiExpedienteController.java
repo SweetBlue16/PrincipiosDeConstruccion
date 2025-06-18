@@ -21,6 +21,13 @@ import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para mostrar
+ * los datos generales del expediente del estudiante que
+ * inició sesión.
+ */
 public class FXMLMiExpedienteController implements Initializable {
     private Estudiante estudiante;
     private Expediente expediente;

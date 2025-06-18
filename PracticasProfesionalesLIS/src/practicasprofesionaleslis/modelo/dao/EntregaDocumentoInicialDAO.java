@@ -14,6 +14,12 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 03/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Entrega Documento Inicial.
+ */
 public class EntregaDocumentoInicialDAO {
     
     public static EntregaDocumentoInicial registrarDocumentoInicial(LocalDate fechaInicio, LocalDate fechaFin, 

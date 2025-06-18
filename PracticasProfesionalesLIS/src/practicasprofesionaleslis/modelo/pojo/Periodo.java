@@ -1,5 +1,12 @@
 package practicasprofesionaleslis.modelo.pojo;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Representa el periodo escolar
+ * de las prácticas profesionales (FEB-JUL o
+ * AGO-ENE)
+ */
 public class Periodo {
     private int id;
     private String nombrePeriodo;

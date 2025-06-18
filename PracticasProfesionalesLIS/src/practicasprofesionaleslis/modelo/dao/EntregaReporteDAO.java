@@ -14,6 +14,12 @@ import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 07/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Entrega Reporte.
+ */
 public class EntregaReporteDAO {
     
     public static EntregaReporte registrarReporte(LocalDate fechaInicio, LocalDate fechaFin,

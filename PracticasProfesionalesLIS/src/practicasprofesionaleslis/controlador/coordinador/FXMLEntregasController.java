@@ -31,9 +31,15 @@ import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoInicial;
 import practicasprofesionaleslis.modelo.pojo.EntregaDocumentoIntermedio;
 import practicasprofesionaleslis.modelo.pojo.EntregaReporte;
 import practicasprofesionaleslis.modelo.pojo.ExperienciaEducativa;
-import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 17/06/2025
+ * Descripción: Controla la ventana para recuperar
+ * y visualizar las entregas a programar en el periodo
+ * escolar.
+ */
 public class FXMLEntregasController implements Initializable {
 
     @FXML private TableView<EntregaDocumentoInicial> tblDocumentosIniciales;

@@ -9,6 +9,12 @@ import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.BaseDeDatosUtils;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 07/06/2025
+ * Descripción: Gestiona las operaciones de bases de
+ * datos relacionadas con la tabla Profesor EE.
+ */
 public class ProfesorEEDAO {
     
     public static boolean editarProfesorEE(ProfesorEE profesorEE) throws SQLException {

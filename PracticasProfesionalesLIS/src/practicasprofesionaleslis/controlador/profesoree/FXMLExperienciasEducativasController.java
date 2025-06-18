@@ -25,6 +25,13 @@ import practicasprofesionaleslis.modelo.pojo.ProfesorEE;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Yael A. Castillo
+ * Fecha de creación: 15/06/2025
+ * Descripción: Controla la ventana para seleccionar
+ * una experiencia educativa asociada al curso que imparte
+ * el Profesor EE.
+ */
 public class FXMLExperienciasEducativasController implements Initializable {
 
     @FXML

@@ -5,8 +5,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +24,13 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para buscar
+ * una organización vinculada y un responsable de
+ * proyecto.
+ */
 public class FXMLBuscarOrganizacionYResponsableController implements Initializable {
 
     @FXML

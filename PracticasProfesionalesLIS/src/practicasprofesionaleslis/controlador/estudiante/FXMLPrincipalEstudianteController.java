@@ -23,6 +23,12 @@ import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 05/05/2025
+ * Descripción: Controla la ventana principal
+ * del Estudiante.
+ */
 public class FXMLPrincipalEstudianteController implements Initializable, IObservador {
     private Estudiante estudiante;
     

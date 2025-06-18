@@ -22,6 +22,12 @@ import practicasprofesionaleslis.modelo.pojo.Evaluador;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Todos
+ * Fecha de creación: 27/05/2025
+ * Descripción: Controla la ventana principal
+ * del Evaluador.
+ */
 public class FXMLPrincipalEvaluadorController implements Initializable, IObservador {
     
     private Evaluador evaluador;

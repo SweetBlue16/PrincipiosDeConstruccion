@@ -15,6 +15,12 @@ import practicasprofesionaleslis.modelo.pojo.ResponsableProyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para registrar
+ * un nuevo proyecto.
+ */
 public class FXMLRegistrarProyectoController implements Initializable {
 
     @FXML

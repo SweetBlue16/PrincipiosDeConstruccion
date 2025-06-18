@@ -3,7 +3,6 @@ package practicasprofesionaleslis.controlador.evaluador;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,12 +18,17 @@ import practicasprofesionaleslis.modelo.dao.ProyectoDAO;
 import practicasprofesionaleslis.modelo.pojo.Criterio;
 import practicasprofesionaleslis.modelo.pojo.Estudiante;
 import practicasprofesionaleslis.modelo.pojo.EvaluacionPresentacion;
-import practicasprofesionaleslis.modelo.pojo.Expediente;
 import practicasprofesionaleslis.modelo.pojo.OrganizacionVinculada;
 import practicasprofesionaleslis.modelo.pojo.Proyecto;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Abraham Cano
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para calificar
+ * la presentación de un estudiante.
+ */
 public class FXMLCalificarPresentacionController implements Initializable {
 
     @FXML

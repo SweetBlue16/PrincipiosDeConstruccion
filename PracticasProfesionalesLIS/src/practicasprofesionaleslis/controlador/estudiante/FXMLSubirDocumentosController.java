@@ -45,6 +45,13 @@ import practicasprofesionaleslis.modelo.pojo.Reporte;
 import practicasprofesionaleslis.utilidades.ConstantesUtils;
 import practicasprofesionaleslis.utilidades.VentanasUtils;
 
+/**
+ * Autor: Rodrigo Ivan Ahumada
+ * Fecha de creación: 09/06/2025
+ * Descripción: Controla la ventana para habilitar
+ * la carga de archivos dentro de las entregas
+ * correspondientes.
+ */
 public class FXMLSubirDocumentosController implements Initializable {
     private Expediente expediente;
     private File archivoSeleccionado;
