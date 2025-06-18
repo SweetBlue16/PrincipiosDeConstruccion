@@ -240,8 +240,8 @@ public class ExpedienteDAO {
 
                 if (rs.next() && rs.getInt(1) == 0) {
                     String consulta = "INSERT INTO expediente " +
-                            "(fechaCreacion, estado, idEstudiante) " +
-                            "VALUES (?, 'Activo', ?)";
+                            "(fechaCreacion, estado, idEstudiante, idExperienciaEducativa) " +
+                            "VALUES (?, 'Activo', ?, 1)";
 
                     BaseDeDatosUtils.cerrarRecursos(null, sentencia, rs);
 
