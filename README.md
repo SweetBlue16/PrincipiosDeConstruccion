@@ -23,4 +23,4 @@ en una sola plataforma digital, evitando tener que controlar una basta cantidad 
 - Mauricio
 
 ## 🗓️ Estado del Proyecto
-En desarrollo.
+Concluido.
