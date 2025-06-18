@@ -83,7 +83,6 @@ public class FXMLEvaluarDocumentoController implements Initializable {
     }
     
     private void configurarValidaciones() {
-        // Only allow numbers in the grade field
         txtfCalificacion.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 txtfCalificacion.setText(newValue.replaceAll("[^\\d]", ""));
@@ -91,53 +90,53 @@ public class FXMLEvaluarDocumentoController implements Initializable {
         });
     }
     
-public void inicializarDatos(ExperienciaEducativa experienciaEducativa, 
-                           Estudiante estudiante, 
-                           Expediente expediente,
-                           EntregaDocumentoInicial entregaInicial,
-                           EntregaDocumentoIntermedio entregaIntermedia,
-                           EntregaDocumentoFinal entregaFinal,
-                           EntregaReporte entregaReporte,
-                           Stage stage) throws SQLException {
-    this.experienciaEducativa = experienciaEducativa;
-    this.estudiante = estudiante;
-    this.expediente = expediente;
-    this.stage = stage;
+    public void inicializarDatos(ExperienciaEducativa experienciaEducativa, 
+                               Estudiante estudiante, 
+                               Expediente expediente,
+                               EntregaDocumentoInicial entregaInicial,
+                               EntregaDocumentoIntermedio entregaIntermedia,
+                               EntregaDocumentoFinal entregaFinal,
+                               EntregaReporte entregaReporte,
+                               Stage stage) throws SQLException {
+        this.experienciaEducativa = experienciaEducativa;
+        this.estudiante = estudiante;
+        this.expediente = expediente;
+        this.stage = stage;
 
-    if (entregaInicial != null) {
-        this.entregaInicial = entregaInicial;
-        this.tipoDocumento = "INICIAL";
-        this.entrega = entregaInicial;
-        this.documentoInicial = DocumentoInicialDAO.obtenerDocumentoInicial(expediente.getId(), entregaInicial.getId());
-        this.idDocumento = documentoInicial.getId();
-        
-    } else if (entregaIntermedia != null) {
-        this.entregaIntermedia = entregaIntermedia;
-        this.tipoDocumento = "INTERMEDIO";
-        this.entrega = entregaIntermedia;
-        this.documentoIntermedio = DocumentoIntermedioDAO.obtenerDocumentoIntermedio(expediente.getId(), entregaIntermedia.getId());
-        this.idDocumento = documentoIntermedio.getId();
-        
-    } else if (entregaFinal != null) {
-        this.entregaFinal = entregaFinal;
-        this.tipoDocumento = "FINAL";
-        this.entrega = entregaFinal;
-        this.documentoFinal = DocumentoFinalDAO.obtenerDocumentoFinal(expediente.getId(), entregaFinal.getId());
-        this.idDocumento = documentoFinal.getId();
-        
-    } else if (entregaReporte != null) {
-        this.entregaReporte = entregaReporte;
-        this.tipoDocumento = "REPORTE";
-        this.entrega = entregaReporte;
-        this.reporte = ReporteDAO.obtenerReporte(expediente.getId(), entregaReporte.getId());
-        this.idDocumento = reporte.getId();
-        
-    } else {
-        throw new IllegalArgumentException("At least one type of Entrega must be provided");
+        if (entregaInicial != null) {
+            this.entregaInicial = entregaInicial;
+            this.tipoDocumento = "INICIAL";
+            this.entrega = entregaInicial;
+            this.documentoInicial = DocumentoInicialDAO.obtenerDocumentoInicial(expediente.getId(), entregaInicial.getId());
+            this.idDocumento = documentoInicial.getId();
+
+        } else if (entregaIntermedia != null) {
+            this.entregaIntermedia = entregaIntermedia;
+            this.tipoDocumento = "INTERMEDIO";
+            this.entrega = entregaIntermedia;
+            this.documentoIntermedio = DocumentoIntermedioDAO.obtenerDocumentoIntermedio(expediente.getId(), entregaIntermedia.getId());
+            this.idDocumento = documentoIntermedio.getId();
+
+        } else if (entregaFinal != null) {
+            this.entregaFinal = entregaFinal;
+            this.tipoDocumento = "FINAL";
+            this.entrega = entregaFinal;
+            this.documentoFinal = DocumentoFinalDAO.obtenerDocumentoFinal(expediente.getId(), entregaFinal.getId());
+            this.idDocumento = documentoFinal.getId();
+
+        } else if (entregaReporte != null) {
+            this.entregaReporte = entregaReporte;
+            this.tipoDocumento = "REPORTE";
+            this.entrega = entregaReporte;
+            this.reporte = ReporteDAO.obtenerReporte(expediente.getId(), entregaReporte.getId());
+            this.idDocumento = reporte.getId();
+
+        } else {
+            throw new IllegalArgumentException("At least one type of Entrega must be provided");
+        }
+
+        mostrarDetallesDocumento();
     }
-
-    mostrarDetallesDocumento();
-}
 
     private void mostrarDetallesDocumento() {
         lblNombreEntrega.setText(tipoDocumento);
@@ -148,75 +147,72 @@ public void inicializarDatos(ExperienciaEducativa experienciaEducativa,
 
         }
 
-@FXML
-private void btnCalificar(ActionEvent event) {
-      try {
-        // Validate input
-        if (txtfCalificacion.getText().isEmpty()) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "Debe ingresar una calificación");
-            return;
-        }
-        
-        int puntaje = Integer.parseInt(txtfCalificacion.getText());
-        String comentario = txtfComentario.getText();
-        
-        // Validate the score doesn't exceed maximum
-        if (puntaje > entrega.getPuntaje()) {
+    @FXML
+    private void btnCalificar(ActionEvent event) {
+          try {
+            if (txtfCalificacion.getText().isEmpty()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", "Debe ingresar una calificación");
+                return;
+            }
+
+            int puntaje = Integer.parseInt(txtfCalificacion.getText());
+            String comentario = txtfComentario.getText();
+
+            if (puntaje > entrega.getPuntaje()) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                    "La calificación no puede ser mayor al valor máximo (" + entrega.getPuntaje() + ")"
+                    );
+                return;
+            }
+
+            boolean resultado;
+
+            switch (tipoDocumento) {
+                case "INICIAL":
+                    resultado = DocumentoInicialDAO.actualizarRevisionDocumentoInicial(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "INTERMEDIO":
+                    resultado = DocumentoIntermedioDAO.actualizarRevisionDocumentoIntermedio(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "FINAL":
+                    resultado = DocumentoFinalDAO.actualizarRevisionDocumentoFinal(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                case "REPORTE":
+                    resultado = ReporteDAO.actualizarRevisionReporte(
+                        idDocumento, puntaje, comentario);
+                    break;
+
+                default:
+                    throw new IllegalStateException("Tipo de documento desconocido: " + tipoDocumento);
+            }
+
+            if (resultado) {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Exito", 
+                    "La evaluación se ha guardado correctamente"
+                    );
+                stage.close();
+            } else {
+                VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
+                    "No se pudo guardar la evaluación"
+                    );
+            }
+
+        } catch (NumberFormatException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-                "La calificación no puede ser mayor al valor máximo (" + entrega.getPuntaje() + ")"
+                "La calificación debe ser un número válido"
                 );
-            return;
-        }
-        
-        boolean resultado;
-        
-        // Update the appropriate document type
-        switch (tipoDocumento) {
-            case "INICIAL":
-                resultado = DocumentoInicialDAO.actualizarRevisionDocumentoInicial(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "INTERMEDIO":
-                resultado = DocumentoIntermedioDAO.actualizarRevisionDocumentoIntermedio(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "FINAL":
-                resultado = DocumentoFinalDAO.actualizarRevisionDocumentoFinal(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            case "REPORTE":
-                resultado = ReporteDAO.actualizarRevisionReporte(
-                    idDocumento, puntaje, comentario);
-                break;
-                
-            default:
-                throw new IllegalStateException("Tipo de documento desconocido: " + tipoDocumento);
-        }
-        
-        if (resultado) {
-            VentanasUtils.mostrarAlertaSimple(Alert.AlertType.INFORMATION, "Exito", 
-                "La evaluación se ha guardado correctamente"
-                );
-            stage.close();
-        } else {
+        } catch (SQLException e) {
             VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-                "No se pudo guardar la evaluación"
+                "Error al guardar la evaluación: " + e.getMessage()
                 );
         }
-        
-    } catch (NumberFormatException e) {
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-            "La calificación debe ser un número válido"
-            );
-    } catch (SQLException e) {
-        VentanasUtils.mostrarAlertaSimple(Alert.AlertType.ERROR, "Error", 
-            "Error al guardar la evaluación: " + e.getMessage()
-            );
     }
-}
 
 
     @FXML

@@ -115,7 +115,6 @@ public class FXMLCalificarPresentacionController implements Initializable {
         slider.setValue(5.0);  
         label.setText(String.format("%.1f", slider.getValue()));
         slider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            // Para solo plasmar a un decimal
             label.setText(String.format("%.1f", newVal.doubleValue()));
         });
     } 

@@ -97,11 +97,9 @@ public class FXMLBuscarEstudianteController implements Initializable {
 
         if (estudianteSeleccionado != null) {
             try {
-                // Get the active expediente for the selected student
                 Expediente expediente = ExpedienteDAO.obtenerExpedienteActivoPorEstudiante(estudianteSeleccionado.getId());
 
                 if (expediente != null) {
-                    // Load the DocumentosEntregados view
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(
                         "/practicasprofesionaleslis/vista/profesoree/FXMLDocumentosEntregados.fxml"));
                     Parent vista = loader.load();
